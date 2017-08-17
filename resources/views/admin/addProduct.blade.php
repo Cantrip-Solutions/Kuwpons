@@ -6,14 +6,14 @@
         <div class="panel-body">
             <div class="pull-right" id="hbreadcrumb">
                 <ol class="hbreadcrumb breadcrumb">
-                    <li> Product Management </li>
-                    <li> Product </li>
+                    <li> Coupon Management </li>
+                    <li> Coupon </li>
                     <li class="active">
-                        <span> Add Product </span>
+                        <span> Add Coupon </span>
                     </li>
                 </ol>
             </div>
-            <h2 class="font-light m-b-xs"> Add Product </h2>
+            <h2 class="font-light m-b-xs"> Add Coupon </h2>
         </div>
     </div>
 </div>
@@ -30,9 +30,9 @@
                     {{Form::open(array('files'=>true,'id'=>'formdata','class'=>'form-horizontal','action' => 'ProductController@createProduct', 'method'=>'POST', 'enctype'=>"multipart/form-data"))}}
 
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label">Product Name*:</label>
+                            <label for="name" class="col-sm-2 control-label">Coupon Name*:</label>
                             <div class="col-sm-10">
-                                {!! Form::text('name', '',array('placeholder'=>'Product Name','class'=>'form-control')) !!}
+                                {!! Form::text('name', '',array('placeholder'=>'Coupon Name','class'=>'form-control')) !!}
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -77,7 +77,10 @@
                         <div class="form-group">
                             <label for="original_price" class="col-sm-2 control-label">Original Price*:</label>
                             <div class="col-sm-10">
+                                <div class="input-group m-b">
+                                <span class="input-group-addon">KD</span>
                                 {!! Form::number('original_price', '',array('placeholder'=>'Original Price','class'=>'form-control')) !!}
+                                </div>
                                 @if ($errors->has('original_price'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('original_price') }}</strong>
@@ -87,9 +90,12 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="saling_price" class="col-sm-2 control-label">Saling Price*:</label>
+                            <label for="saling_price" class="col-sm-2 control-label">Selling Price*:</label>
                             <div class="col-sm-10">
-                                {!! Form::number('saling_price', '',array('placeholder'=>'Saling Price','class'=>'form-control')) !!}
+                                <div class="input-group m-b">
+                                <span class="input-group-addon">KD</span>
+                                {!! Form::number('saling_price', '',array('placeholder'=>'Selling Price','class'=>'form-control')) !!}
+                                </div>
                                 @if ($errors->has('saling_price'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('saling_price') }}</strong>
@@ -125,7 +131,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="image" class="col-sm-2 control-label">Product Default Image*:</label>
+                            <label for="image" class="col-sm-2 control-label">Coupon Default Image*:</label>
                             <div class="col-sm-10">
                                 {!! Form::file('image',array('class'=>'btn-primary2')) !!}
                                 @if ($errors->has('image'))
@@ -137,7 +143,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="image" class="col-sm-2 control-label">Product Other Images:</label>
+                            <label for="image" class="col-sm-2 control-label">Coupon Other Images:</label>
                             <div class="col-sm-10">
                                 {!! Form::file('otherImage[]',array('class'=>'btn-primary2','multiple')) !!}
                                 @if ($errors->has('image'))

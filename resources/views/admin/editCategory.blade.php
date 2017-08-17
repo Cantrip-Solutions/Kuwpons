@@ -80,35 +80,7 @@
                         </div>
 
 
-                        <div class="form-group">
-                            <label for="specifications" class="col-sm-2 control-label">Attributes :</label>
-                            
-                            <div class="col-sm-10">
-                            <?php $attributes = unserialize($category->specifications);
-                            $max=max(array_keys($attributes)); 
-                             ?>
-                            @foreach ($attributes as $key => $attr)
-                                <div class="other_attribute{{ $key }} row"  >
-                                    <div class="col-sm-4">
-                                        <input type="text" class="form-control" name="att[{{ $key }}][name]" placeholder="Name" value="{{ $attr['name'] }}">
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <input type="text" class="form-control" name="att[{{ $key }}][value]" data-role="tagsinput" placeholder="Values" value="{{ $attr['value'] }}"> 
-                                    </div>
-                                    <div class="col-sm-2">
-
-                                    @if($key == $max)
-                                        <a href="javascript:void(0)" att='{{ $key }}' id="addAttr{{ $key }}" class="addAttr btn btn-info">Add</a>
-                                    @else
-                                        <a href="javascript:void(0)" att="{{ $key }}" class="removeAttr btn btn-info"><i class="fa fa-times"></i></a>
-                                    @endif
-                                    </div>
-                                </div>
-                                </br>
-                            @endforeach
-                            </div>
-                        </div>
-                       
+                                              
 
 
                         <div class="form-group">
@@ -159,24 +131,6 @@ $(document).ready(function(){
       }
     });
 
-    $('body').on('click','.addAttr',function(e){
-        e.preventDefault()
-        var attr=$(this).attr('att');
-        var newattr=parseInt(attr)+1;
-
-        var html='<div class="other_attribute'+newattr+' row" ><div class="col-sm-4"><input type="text" class="form-control" name="att['+newattr+'][name]" placeholder="Name"></div>'+
-            '<div class="col-sm-4"><input type="text" class="form-control" name="att['+newattr+'][value]" data-role="tagsinput" placeholder="Values"></div><div class="col-sm-2"><a href="javascript:void(0)" id="addAttr'+newattr+'"  att="'+newattr+'" class="addAttr btn btn-info">Add</a></div></div></br>';
-        $('.other_attribute'+attr).parent('div').append(html);
-        $('input[data-role="tagsinput"]').tagsinput();
-        $('#addAttr'+attr).parent('div').html('<a href="javascript:void(0)" att="'+newattr+'" class="removeAttr btn btn-info"><i class="fa fa-times"></i></a>');
-
-    });
-
-    $('body').on('click','.removeAttr',function(e){
-        $(this).parent('div').parent('div').next('br').remove();
-        $(this).parent('div').parent('div').remove();
-
-    });
 });
 </script>
 @endpush

@@ -122,7 +122,7 @@ class ProductController extends Controller
                         $otherimage    = $value;
                         $ext      = $otherimage->getClientOriginalExtension();
                         
-                        $otherImagefilename = 'PRO'.time().'.'.$ext;
+                        $otherImagefilename = 'PRO'.time().rand(100,999).'.'.$ext;
                         $target   = config('global.productPath');
                         $path     = $target.$otherImagefilename;
                         Image::make($otherimage->getRealPath())->save($path);
@@ -145,10 +145,10 @@ class ProductController extends Controller
                 $addQuantityToStock->save();
 
         		
-				Session::flash('message', 'Product create successfull.');
+				Session::flash('message', 'Coupon create successfull.');
 		        
             }else{
-               Session::flash('message', 'Product Not Created . Please insert Product Image.');
+               Session::flash('message', 'Coupon Not Created . Please insert Coupon Image.');
 
             }
             return redirect('/tab/product/add');
@@ -258,7 +258,7 @@ class ProductController extends Controller
                 $newProductImage->save();
             }
 
-            Session::flash('message', 'Product updated successfull.');
+            Session::flash('message', 'Coupon updated successfull.');
             return redirect('/tab/product');
 
 
@@ -314,7 +314,7 @@ class ProductController extends Controller
                 'expire_on' => date("Y-m-d", strtotime($expire_on)),
             ]);
 
-            Session::flash('message', 'Product Stock Updated');
+            Session::flash('message', 'Coupon Stock Updated');
             return redirect()->back();
 
         }
@@ -351,7 +351,7 @@ class ProductController extends Controller
                 
                 $ext      = $value->getClientOriginalExtension();
                 
-                $filename = 'PRO'.time().'.'.$ext;
+                $filename = 'PRO'.time().rand(100,999).'.'.$ext;
                 $target   = config('global.productPath');
                 $path     = $target.$filename;
                 Image::make($value->getRealPath())->save($path);

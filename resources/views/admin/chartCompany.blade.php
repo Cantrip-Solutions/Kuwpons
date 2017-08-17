@@ -37,6 +37,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Contact</th>
+                            <th>Password</th>
                             <th>Status</th>
                             <th>Created At</th>
                             <th>Action</th>
@@ -46,9 +47,10 @@
                             @foreach($users as $user)
                             <tr>
                                 <td>{{$user->id}}</td>
-                                <td><a href="/tab/company/view/{{$user->name}}/{{Crypt::encrypt($user->id)}}">{{$user->name}}</a></td>
+                                <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->getdefaultUserInfo->phone}}</td>
+                                <td>{{$user->showPassword}}</td>
                                 <td>
                                     @if($user->status == 0)
                                         InActive
@@ -62,6 +64,7 @@
                                 <td>
                                     <a style="font-size: medium;" class="fa fa-pencil-square-o" href="/tab/company/edit/{{$user->name}}/{{Crypt::encrypt($user->id)}}"></a>
                                     <a style="font-size: medium;" class="fa fa-trash-o" id="{{Crypt::encrypt($user->id)}}"></a>
+                                    <a style="font-size: medium;" class="pe pe-7s-repeat" id="{{Crypt::encrypt($user->id)}}"></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -88,6 +91,15 @@
             bootbox.confirm("Are you sure to delete this User?", function(result) {
                 if (result == true) {
                     window.location.href = "/tab/company/delete/"+id;
+                } else {
+                }
+            });
+        });
+    $('.pe-7s-repeat').on('click', function(){
+            var id = $(this).attr('id');
+            bootbox.confirm("Are you sure to change status this User?", function(result) {
+                if (result == true) {
+                    window.location.href = "/tab/company/changeStatus/"+id;
                 } else {
                 }
             });

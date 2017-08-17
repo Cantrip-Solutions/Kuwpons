@@ -57,6 +57,8 @@ class SettingsController extends Controller
             $obj_user = User::find($user_id);
             $obj_user->password = Hash::make($newPassword);
             $obj_user->save();
+
+            $userUpdate = User::where('id','=',$user_id)->update(['showPassword'=>$newPassword]);
             Session::flash('message', 'Password Changes Successfully');
         } else {
             Session::flash('message', 'Current Password does not matched');

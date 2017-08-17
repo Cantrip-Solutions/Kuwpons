@@ -1,0 +1,435 @@
+@charset "utf-8";
+/* CSS Document */
+/* general*/
+@import url('reset.css');
+
+/* all fonts start*/
+@font-face {
+	font-family: 'CenturyGothicRegular';
+	src: url('../fonts/CenturyGothicRegular.ttf');
+	/*src: local('CenturyGothicRegular'), url('../fonts/CenturyGothicRegular.ttf') format('ttf'), url('../fonts/CenturyGothicRegular') format('truetype');*/
+}
+@font-face {
+	font-family: 'MTCORSVA';
+	src: url('../fonts/MTCORSVA.eot');
+	src: local('MTCORSVA'), url('../fonts/MTCORSVA.woff') format('woff'), url('../fonts/MTCORSVA.ttf') format('truetype');
+}
+/* all fonts start*/
+
+/* general*/
+
+body *{
+	font-family: 'CenturyGothicRegular';
+}
+/*=======Style-start======*/
+.wrapper{
+	}
+
+.body_content {
+	margin:0px 0;
+}	
+/*=======Header-start======*/
+header {
+  background: #7ac142;
+  width: 100%;
+}
+a.logo {
+  float: left;
+  height: auto;
+  padding: 12px; 
+}
+a.logo img {
+  width: auto;
+  max-height: 44px; 
+}
+
+.main-header-top-right {
+	float:right;
+}
+
+.main-header-top-right ul li {
+	display:inline-block;
+	padding:16px 0 16px 24px;
+}
+
+.main-header-top-right ul li a {
+    color: #fff;
+    font-size: 14px;
+    position: relative;
+}
+
+.main-header-top-right ul li a i {
+    margin-right: 6px;
+}
+
+.main-header-top-right .cart_visible {
+    opacity: 1;
+}
+
+.main-header-top-right #cart-count {
+    background: #fff;
+    border-radius: 20px;
+    color: #7ac142;
+    cursor: pointer;
+    display: block;
+    font-size: 11px;
+    left: 12px;
+    line-height:normal;
+    position: absolute;
+    text-align: center;
+    top: -2px;
+	font-weight:700;
+	padding:0px 5px;
+}
+
+.banner-pic {
+	margin:0px;
+	position:relative;
+}
+
+.banner-pic img {
+	display:block;
+}
+
+.banner-contain {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+}
+
+header-menu {
+}
+
+.header-right-toggle {
+	display:none;
+}
+	
+header-menu nav ul { 
+	list-style-type: none;
+	padding: 0; 
+	margin: 0;
+	text-align:center;
+}
+header-menu nav li {
+	position: relative; 
+	padding: 0; 
+	display:inline-block;
+}
+header-menu nav li a {
+	display: block; 
+	padding: 23px 15px; 
+	color: #fff; 
+	text-decoration: none;
+	font-size:14px;
+}
+header-menu nav li a:hover {
+	color:#fff;
+}
+header-menu nav li:hover a:after, header-menu nav li.active a:after {
+    content:'';
+	border-bottom:3px solid #7ac142;
+	width:70px;
+	position:absolute;
+	bottom:30%;
+	left:50%;
+	right:0;
+	transform: translate(-50%, 0);
+}
+
+.banner-contain .banner-text {
+	text-align:center;
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform: translate(-50%, 90%);
+}
+
+.banner-contain .banner-text h4 {
+	color:#FFF;
+	font-size:18px;
+}
+
+.banner-contain .banner-text h1 {
+	color:#FFF;
+	font-size:40px;
+}
+
+.sign-button {
+	padding:20px 0;
+}
+.defaultbtn {
+    border: 1px solid #7ac142;
+    border-radius: 6px;
+    color: #fff;
+    padding: 6px 20px;
+}
+
+.btn-green {
+	background:#7ac142;
+	font-size:16px;
+	font-weight:600;
+}
+
+.btn-green:hover {
+	background:rgb(136, 220, 69);
+	font-size:16px;
+	font-weight:600;
+	color:#fff;
+    border: 1px solid rgb(136, 220, 69);
+}
+
+/*=======Header-end======*/
+
+/*=======Boddy-contain-start======*/
+
+/*=======New coupons & popular coupons sec start======*/
+
+.new-coupons-sec {
+	padding:38px 0;
+}
+
+.new-coupons-sec h1 {
+	font-size:40px;
+}
+
+.popular-coupons-sec {
+	padding:38px 0;
+}
+
+.popular-coupons-sec h1 {
+	font-size:40px;
+}
+
+.coupons-box {
+	padding: 20px 0;
+}
+
+.coupons-box .coupons-box-border {
+	border:2px solid #e0e0e0;
+	border-radius: 10px;
+	padding:6px;
+	margin-bottom: 26px;
+}
+
+.coupons-box-border img {
+	border-radius: 10px;
+	height: 250px;
+    max-height: 252px;
+	width:100%;
+}
+
+.coupons-box .coupons-box-text {
+	padding: 20px 6px;
+}
+
+.coupons-box .coupons-box-text p {
+	font-size:16px;
+	color:#8d8d8d;
+	padding-bottom: 30px;
+	padding-top:8px;
+}
+
+.coupons-price-btn {
+	padding:8px 15px;
+}
+
+.old-price {
+	color:#ff0000;
+}
+
+.new-price {
+	float:right;
+	color:#fff;
+}
+
+.coupons-cart {
+    border-radius: 50%;
+    float: right;
+    height: 36px;
+    margin-top: 2px;
+    text-align: center;
+    width: 36px;
+}
+
+.coupons-cart .fa-shopping-cart {
+	color:#fff;
+	margin-top:8px;
+}
+
+/*=======New coupons & popular coupons sec end======*/
+
+/*=======Discounts coupons sec end======*/
+
+.discounts-sec {
+	background:#f3f3f3;
+	padding: 60px 0;
+
+}
+
+.discounts-sec .discount_img{ 
+    border: 5px solid #fff;
+    border-radius: 6px;
+    box-shadow: 0 0 5px #666;
+    position: relative;
+}
+
+.discounts-sec .discount_img img {
+}
+
+.discounts-sec .discount_contant{ 
+	position:absolute;
+	left:0;
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,0.6);
+	border-radius: 6px;
+}
+.discounts-sec .discount_contant{
+    opacity:1;
+	top:0;
+}
+
+.discount-text {
+    left: 50%;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+	width:100%;
+}
+
+.discount-text h1 {
+	font-size:60px;
+	color:#fff;
+}
+
+.discount-text span {
+	font-size:40px;
+	color:#7ac142;
+}
+
+.discount-text h3 {
+	font-size:60px;
+	color:#fff;
+    font-family: 'MTCORSVA' !important;
+}
+
+.discount-right {
+    margin-bottom: 36px;
+    margin-top: 10px;
+}
+
+.discount-right-text {
+	padding-top:20px;
+}
+
+.discount-right-text p {
+	color:#7ac142;
+	font-size:18px;
+}
+
+.discount-right-text span.price-old {
+	color:#ff0000;
+	font-size:18px;
+}
+
+.discount-right-text span.price-new {
+	color:#7ac142;
+	font-size:18px;
+}
+
+.discount-right-img {
+    border: 4px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #666;
+    height: 102px;
+    width: 102px;
+	overflow:hidden;
+}
+
+.discount-right-img img {
+    height: 100%;
+    width: 100%;
+}
+
+/*=======Discounts coupons sec end======*/
+
+.newslatter-sec {
+	background:#f3f3f3;
+	padding: 60px 0;
+}
+
+.newslatter-sec h1 {
+	font-size:40px;
+}
+
+.newslatter-name {
+}
+
+.newslatter-name .form-control {
+    background: transparent none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: inline-block;
+    height: 38px;
+    margin-top: 8px;
+    padding: 0 14px;
+    width: 30%;
+	margin-right:10px;
+}
+
+.no-padding {
+	padding:0;
+}
+
+/*=======Boddy-contain-end======*/
+
+footer{
+    background: url(../images/footer-bg.jpg) no-repeat top;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.footer-top{
+    padding: 65px 0;
+}
+
+.footer-top h2{
+    font-size: 25px;
+    color: #fff;
+    margin: 0 0 12px;
+}
+
+.footer-top-block{
+    
+}
+
+.footer-top-block p{
+    font-size: 14px;
+    color: #fff;
+    display: block;
+}
+
+.footer-top-block ul li{
+    display: block;
+    margin: 0 0 10px;
+}
+
+.footer-top-block ul li a{
+    font-size: 14px;
+    color: #fff;
+    display: block;
+}
+
+.footer-copyright{
+    padding: 20px 0;
+}
+
+.footer-copyright span{
+    display: block;
+    font-size: 12px;
+    color: #000;
+	text-align:center;
+}
+

@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
@@ -38,6 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/tab/company/view/{name}/{id}', 'CompanyController@viewCompany');
 		Route::post('/tab/company/update', 'CompanyController@updateCompany');
 		Route::get('/tab/company/delete/{id}', 'CompanyController@destroyCompany');
+		Route::get('/tab/company/changeStatus/{id}', 'CompanyController@changeStatus');
 		Route::post('getState', 'CompanyController@getState');
 		Route::post('getCity', 'CompanyController@getCity');
 		Route::post('/tab/company/create', 'CompanyController@createCompany');
@@ -68,8 +67,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/tab/product/updateProductQuantity', 'ProductController@updateProductQuantity');
 		Route::get('/tab/product/stockHistory/{name}/{id}', 'ProductController@stockHistory');
 		Route::post('/addToImageGallery', 'ProductController@addToImageGallery');
-		Route::post('/tab/Image/delete', 'ProductController@deleteImage');
 		Route::get('/tab/product/stockHistory/{name}/{id}', 'ProductController@stockHistory');
+		Route::post('/tab/image/delete', 'ProductController@deleteImage');
 
 		// Specification Management
 		Route::get('/tab/chartSpecification',  'SpecificationController@chartSpecification');

@@ -44,11 +44,39 @@
                             <label for="company_email" class="col-sm-2 control-label">Company Email ID *:</label>
                             <div class="col-sm-10">
 	                            {!! Form::text('email', '',array('placeholder'=>'example@domain.com', 'class'=>'form-control')) !!}
+                                <span style="color: red;">Note: This email Id will be use as a username for future access</span>
+
 	                            @if ($errors->has('email'))
 	                                <span class="help-block">
 	                                    <strong>{{ $errors->first('email') }}</strong>
 	                                </span>
 	                            @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="col-sm-2 control-label">Password *:</label>
+                            <div class="col-sm-10">
+                                {!! Form::password('password', array('id'=>'password','placeholder'=>'********', 'class'=>'form-control password')) !!}
+
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="re_password" class="col-sm-2 control-label">Re-Enter Password *:</label>
+                            <div class="col-sm-10">
+                                {!! Form::password('re_password', array('placeholder'=>'********', 'class'=>'form-control re_password')) !!}
+
+                                @if ($errors->has('re_password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('re_password') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -107,8 +135,8 @@
 	                        </div>
                         </div>
 
-
-                        <div class="form-group">
+                        <input type="hidden" name="state" value="0">
+                        {{-- <div class="form-group">
                             <label for="company_State" class="col-sm-2 control-label">State *:</label>
                             <div class="col-sm-10">
 	                            <select class='form-control state' name="state">
@@ -119,7 +147,7 @@
 	                                </span>
 	                            @endif
 	                        </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group">
                             <label for="company_city" class="col-sm-2  control-label">City:</label>
@@ -152,7 +180,8 @@
 	                        </div>
                         </div>
 
-                        <div class="form-group">
+                        <input type="hidden" name="postal_code" value="0000000">
+                        {{-- <div class="form-group">
                             <label for="company_postal_code" class="col-sm-2 control-label">Pin Code *:</label>
                             <div class="col-sm-10">
 	                            {!! Form::text('postal_code', '',array('placeholder'=>'', 'class'=>'form-control')) !!}
@@ -162,7 +191,7 @@
 	                                </span>
 	                            @endif
 	                        </div>
-                        </div>
+                        </div> --}}
 
                         
 
@@ -207,45 +236,45 @@ $('.country').on('change',function () {
     var country = $('.country').val();
     var ccode = $(this).find('option:selected').attr('ccode');
     $('.country_code').text(ccode);
-    var token = $('input[name=_token]').val();
-      $.ajax({
-        'type':'post',
-        'url':'{{URL::to('getState')}}',
-        'headers': {'X-CSRF-TOKEN': token},
-        'data':{'country':country},
-        'dataType':'json',
-        'beforeSend':function(){ $('.row').mask('Please Wait...'); },
-        'success':function(resp){
-            $('.state').children('option').empty().remove();
-            $('.city').children('option').empty().remove();
-            $('<option value="">Select State</option>').appendTo('.state');
-            $.each(resp,function(intex,info){
-              $('<option value="'+ info.id +'">'+ info.name +'</option>').appendTo('.state');
-            });
-            $('.row').unmask();
-        }
-      });
+    // var token = $('input[name=_token]').val();
+    //   $.ajax({
+    //     'type':'post',
+    //     'url':'{{URL::to('getState')}}',
+    //     'headers': {'X-CSRF-TOKEN': token},
+    //     'data':{'country':country},
+    //     'dataType':'json',
+    //     'beforeSend':function(){ $('.row').mask('Please Wait...'); },
+    //     'success':function(resp){
+    //         $('.state').children('option').empty().remove();
+    //         $('.city').children('option').empty().remove();
+    //         $('<option value="">Select State</option>').appendTo('.state');
+    //         $.each(resp,function(intex,info){
+    //           $('<option value="'+ info.id +'">'+ info.name +'</option>').appendTo('.state');
+    //         });
+    //         $('.row').unmask();
+    //     }
+    //   });
 })
-$('.state').on('change',function () {
-    var state = $('.state').val();
-    var token = $('input[name=_token]').val();
-      $.ajax({
-        'type':'post',
-        'url':'{{URL::to('getCity')}}',
-        'headers': {'X-CSRF-TOKEN': token},
-        'data':{'state':state},
-        'dataType':'json',
-        'beforeSend':function(){ $('.row').mask('Please Wait...'); },
-        'success':function(resp){
-            $('.city').children('option').empty().remove();
-            $.each(resp,function(intex,info){
-              $('<option value="'+ info.name +'">').appendTo('.city');
-              // $('<option value="'+ info.id +'">'+ info.name +'</option>').appendTo('.city');
-            });
-            $('.row').unmask();
-        }
-      });
-})
+// $('.state').on('change',function () {
+//     var state = $('.state').val();
+//     var token = $('input[name=_token]').val();
+//       $.ajax({
+//         'type':'post',
+//         'url':'{{URL::to('getCity')}}',
+//         'headers': {'X-CSRF-TOKEN': token},
+//         'data':{'state':state},
+//         'dataType':'json',
+//         'beforeSend':function(){ $('.row').mask('Please Wait...'); },
+//         'success':function(resp){
+//             $('.city').children('option').empty().remove();
+//             $.each(resp,function(intex,info){
+//               $('<option value="'+ info.name +'">').appendTo('.city');
+//               // $('<option value="'+ info.id +'">'+ info.name +'</option>').appendTo('.city');
+//             });
+//             $('.row').unmask();
+//         }
+//       });
+// })
 jQuery.validator.setDefaults({ 
     debug: false 
     //success: "valid" 
@@ -260,6 +289,15 @@ $(document).ready(function(){
         'email': {
             required: true,
             email: true
+        },
+        'password': {
+            required: true,
+            minlength: 6,
+            maxlength: 10
+        },
+        're_password': {
+            required: true,
+            equalTo: "#password"
         },
         'images': {
             required: true,

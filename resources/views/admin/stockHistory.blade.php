@@ -25,8 +25,8 @@
                 <div class="panel-body"> 
                     <h2 class="font-light m-b-xs"> In Stock: {{$productInfo->quantity}}</h2>
                     <p align="right">
-                        {{-- {{link_to_route('stockAdjust', $title = 'Add Product', $parameters = array(), $attributes = array('type'=>'button', 'class'=>'btn w-xs btn-info'))}} --}}
-                        <a href="/tab/product/stockAdjust/{{$productInfo->name}}/{{Crypt::encrypt($productInfo->id)}}" class="btn w-xs btn-info" > Stock Adjustment</a>
+                        
+                        <a href="/tab/product/stockAdjust/{{urlencode($productInfo->name)}}/{{Crypt::encrypt($productInfo->id)}}" class="btn w-xs btn-info" > Stock Adjustment</a>
                     </p> 
                     @if (Session::has('message'))
                        <div class="alert alert-info"><i class="pe-7s-gleam"></i>{{ Session::get('message') }}</div>

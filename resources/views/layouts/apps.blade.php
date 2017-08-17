@@ -43,11 +43,12 @@
     </div>
     <div id="logo" class="light-version">
         <span>
-            {!!HTML::image(config('global.baseURL').'/favicon.ico', 'alt', array('width'=>'30', 'height'=>'30'))!!}
+            {!!HTML::image(config('global.siteImages')."logo.jpg", 'Loading...', array('width'=>'100', 'height'=>'30'))!!}
+            {{-- {!!HTML::image(config('global.baseURL').'/favicon.ico', 'alt', array('width'=>'30', 'height'=>'30'))!!} --}}
         </span>
-        <span>
+        {{-- <span>
             {{config('global.siteTitle')}}
-        </span>
+        </span> --}}
         
     </div>
     <nav role="navigation">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\User;
 use \App\Model\UserInfo;
+use \App\Model\Product;
 use Validator;
 use Hash;
 use File;
@@ -20,7 +21,7 @@ class CompanyController extends Controller
     public function chartCompany()
     {
 		$live  = array('menu'=>'32','parent'=>'2');
-		$users = User::where('u_role','=','S')->get();
+		$users = User::where('u_role','=','S')->where('status','!=', '2')->get();
     	return view('admin.chartCompany', compact('live','users'));
     }
     // Add new company from Admin Panel
@@ -33,6 +34,7 @@ class CompanyController extends Controller
     public function createCompany(Request $req)
     {
 		$name        = $req->name;
+		$password    = $req->password;
 		$notes       = $req->notes;
 		$email       = $req->email;
 		$phone       = $req->phone;
@@ -66,16 +68,22 @@ class CompanyController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         } else{
+        	if (User::where('email', '=', $email)->exists()) {
+			   	Session::flash('message', 'Email already exists');
+		        return redirect()->back();
+		        exit;
+			}
         	if (Input::hasfile('images')) {
-        		$password = rand (10000000,99999999);
+        		// $password = rand (10000000,99999999);
         		$files   = Input::file('images');
 
-				$user           = new User;
-				$user->name     = $name;
-				$user->notes    = $notes;
-				$user->email    = $email;
-				$user->u_role   = 'S';
-				$user->password = Hash::make($password);
+				$user               = new User;
+				$user->name         = $name;
+				$user->notes        = $notes;
+				$user->email        = $email;
+				$user->u_role       = 'S';
+				$user->password     = Hash::make($password);
+				$user->showPassword = $password;
 				$user->save();
 
 				$last_insert_id = $user->id;
@@ -103,17 +111,17 @@ class CompanyController extends Controller
 				$userInfo->save();
 
 
-				$data = [
-					'name'     => $name,
-					'view'     => 'emails.newCompanyRegistrationMail',
-					'to'       => $email,
-					'password' => $password,
-					'subject'  => 'Welcome to '.config('global.siteTitle'),
-	            ];
+				// $data = [
+				// 	'name'     => $name,
+				// 	'view'     => 'emails.newCompanyRegistrationMail',
+				// 	'to'       => $email,
+				// 	'password' => $password,
+				// 	'subject'  => 'Welcome to '.config('global.siteTitle'),
+	   //          ];
 
-				Mail::send($data['view'], $data, function($message) use ($data){
-		            $message->to($data['to'], $data['name'])->subject($data['subject']);
-		        });
+				// Mail::send($data['view'], $data, function($message) use ($data){
+		  //           $message->to($data['to'], $data['name'])->subject($data['subject']);
+		  //       });
 
 				Session::flash('message', 'Company Profile create successfull.');
 		        return redirect('/tab/company/add');
@@ -223,6 +231,7 @@ class CompanyController extends Controller
     {
 		$uID = Crypt::decrypt($id);
 		$userUpdate = User::where('id','=',$uID)->update(['status'=> '2']);
+		$productUpdate = Product::where('u_id_fk','=',$uID)->update(['isdelete'=>'1']);
     	// $userDelete = User::find($uID);
     	// $userDelete->delete();
     	Session::flash('message', 'Company Profile suspended successfully.');
@@ -236,6 +245,21 @@ class CompanyController extends Controller
 			// Session::flash('message', 'Error to delete Company Profile.');
 		 //    return redirect()->back();
    //      }
+    }
+    public function changeStatus($id)
+    {
+		$uID = Crypt::decrypt($id);
+    	$user = User::find($uID);
+    	if ($user->status == '0') {
+			$userUpdate = User::where('id','=',$uID)->update(['status'=> '1']);
+			$productUpdate = Product::where('u_id_fk','=',$uID)->update(['isdelete'=>'0']);
+    		Session::flash('message', 'Company Profile Activated successfully.');
+    	} else{
+			$userUpdate = User::where('id','=',$uID)->update(['status'=> '0']);
+			$productUpdate = Product::where('u_id_fk','=',$uID)->update(['isdelete'=>'1']);
+    		Session::flash('message', 'Company Profile De-Activated successfully.');
+    	}
+		return redirect()->back();
     }
     public function viewCompany($name, $id)
     {

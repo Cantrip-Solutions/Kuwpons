@@ -90,7 +90,10 @@
                         <div class="form-group">
                             <label for="original_price" class="col-sm-2 control-label">Original Price*:</label>
                             <div class="col-sm-10">
+                                <div class="input-group m-b">
+                                <span class="input-group-addon">KD</span>
                                 {!! Form::number('original_price', $productInfo->original_price,array('placeholder'=>'Original Price','class'=>'form-control')) !!}
+                                </div>
                                 @if ($errors->has('original_price'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('original_price') }}</strong>
@@ -100,9 +103,12 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="saling_price" class="col-sm-2 control-label">Saling Price*:</label>
+                            <label for="saling_price" class="col-sm-2 control-label">Selling Price*:</label>
                             <div class="col-sm-10">
-                                {!! Form::number('saling_price', $productInfo->saling_price,array('placeholder'=>'Saling Price','class'=>'form-control')) !!}
+                                <div class="input-group m-b">
+                                <span class="input-group-addon">KD</span>
+                                {!! Form::number('saling_price', $productInfo->saling_price,array('placeholder'=>'Selling Price','class'=>'form-control')) !!}
+                                </div>
                                 @if ($errors->has('saling_price'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('saling_price') }}</strong>

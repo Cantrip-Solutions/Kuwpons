@@ -72,7 +72,7 @@
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
                                 <button type="submit" class="btn w-xs btn-success" name="submit">Submit</button>
-                                <a class="btn w-xs btn-info" href="{{url('/tab/product')}}">Back</a>
+                                <a class="btn w-xs btn-info" href="{{url('tab/product/stockHistory/'.urlencode($productInfo->name).'/'.Crypt::encrypt($productInfo->id))}}">Back</a>
                             </div>
                         </div>
 

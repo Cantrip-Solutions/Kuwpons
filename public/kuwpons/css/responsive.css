@@ -1,0 +1,178 @@
+
+@charset "utf-8";
+
+
+@media only screen and (max-width:1200px){
+	
+	header-menu nav li a {
+		font-size: 10px;
+		padding: 15px 6px;
+	}
+	
+	.banner-contain .banner-text {
+		transform: translate(-50%, 42%);
+		width:100%;
+	}
+
+}
+
+@media only screen and (max-width: 1024px){
+	
+	header-menu nav li a {
+		font-size: 10px;
+		padding: 15px 6px;
+	}
+	
+	.banner-contain .banner-text {
+		transform: translate(-50%, 42%);
+		width:100%;
+	}
+	
+}
+
+@media only screen and (max-width: 991px){
+	
+	header-menu nav li a {
+		font-size: 10px;
+		padding: 18px 6px;
+	}
+	
+	.banner-contain .banner-text {
+		transform: translate(-50%, 42%);
+		width:100%;
+	}
+	
+	.banner-contain .banner-text h1 {
+		font-size: 30px;
+	}
+	
+	.banner-contain .banner-text h4 {
+		font-size: 16px;
+	}
+}
+
+@media only screen and (max-width: 767px){
+     .main-header-top-left ul li::after{
+        display: none;
+    }
+	 .header-right-toggle{
+        text-align: right;
+        display:inline-block;
+        font-size: 20px;
+        color:#fff; 
+    }
+
+    header-menu nav ul li{
+        background:rgb(122, 193, 66);
+        display: block;
+        position: relative;
+		border-bottom: 1px dashed #fff;
+		z-index:99;
+    }
+	
+    header-menu nav ul li a{
+        color: #fff;
+		display: block;
+		font-size: 13px;
+		padding: 5px 0px;
+		text-decoration: none;
+    }
+	header-menu nav li:hover a:after, header-menu nav li.active a:after {
+		display:none;
+	}
+	.header-right-tog-content {
+		display:none;
+	}
+	
+    
+	.banner-contain .banner-text {
+		left: 50%;
+		position: absolute;
+		text-align: center;
+		top: 50%;
+		transform: translate(-50%, 26%);
+		width: 100%;
+	}	
+	
+	.banner-contain .banner-text h4 {
+		color: #fff;
+		font-size: 14px;
+	}
+	
+	.banner-contain .banner-text h1 {
+		color: #fff;
+		font-size: 24px;
+	}
+	
+	.sign-button {
+		padding: 10px 0;
+	}
+	
+	.defaultbtn {
+		border: 1px solid #7ac142;
+		border-radius: 6px;
+		color: #fff;
+		padding: 4px 12px;
+	}
+	
+}
+
+@media only screen and (max-width: 585px){
+
+	a.logo {
+		display: block;
+		text-align: center;
+		width: 100%;
+		padding-bottom:0;
+		padding-top:10px;
+    }
+	
+	.main-header-top-right {
+		text-align:center;
+		float:none;
+    }
+	.main-header-top-right ul li {
+		display: inline-block;
+		padding: 10px 0 12px 22px;
+	}
+	
+	.banner-contain .banner-text {
+		top: 23%;
+		width:100%
+	}
+	
+	.banner-contain .banner-text h4 {
+		font-size: 13px;
+	}
+	
+	.banner-contain .banner-text h1 {
+		font-size: 20px;
+	}
+}
+
+@media screen and (max-width: 479px){
+	
+	.banner-contain .banner-text {
+		transform: translate(-50%, 17%);
+		width:100%
+	}
+	
+	.banner-contain .banner-text h4 {
+		font-size: 11px;
+	}
+	
+	.banner-contain .banner-text h1 {
+		font-size: 16px;
+	}
+	
+	.sign-button {
+		padding: 5px 0;
+	}
+	
+	.btn-green {
+		font-size: 12px;
+	}
+	.btn-green:hover {
+		font-size:12px;
+	}
+}

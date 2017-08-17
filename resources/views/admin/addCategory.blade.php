@@ -77,7 +77,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="specifications" class="col-sm-2 control-label">Attributes :</label>
                             
                             <div class="col-sm-10">
@@ -94,7 +94,7 @@
                                 </div>
 
                             </div>
-                        </div>
+                        </div> -->
                        
 
                         <div class="form-group">
@@ -144,7 +144,7 @@ $(document).ready(function(){
       }
     });
 
-    $('body').on('click','.addAttr',function(e){
+   /* $('body').on('click','.addAttr',function(e){
         e.preventDefault()
         var attr=$(this).attr('att');
         var newattr=parseInt(attr)+1;
@@ -160,7 +160,7 @@ $(document).ready(function(){
     $('body').on('click','.removeAttr',function(e){
 
         $(this).parent('div').parent('div').remove();
-    });
+    });*/
 });
 </script>
 @endpush

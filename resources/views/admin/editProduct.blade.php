@@ -23,9 +23,7 @@
 
             <div class="hpanel">
                 <div class="panel-body">  
-                    <p align="right">
-                        <a href="/tab/product/editSpec/{{$productInfo->name}}/{{Crypt::encrypt($productInfo->id)}}" class="btn w-xs btn-info">Edit Specification</a>             
-                    </p>
+                    
                     @if (Session::has('message'))
                        <div class="alert alert-info"><i class="pe-7s-gleam"></i>{{ Session::get('message') }}</div>
                     @endif
@@ -112,6 +110,18 @@
                                 @if ($errors->has('saling_price'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('saling_price') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quantity" class="col-sm-2 control-label">Stock Adjustment*:</label>
+                            <div class="col-sm-10">
+                                {!! Form::number('quantity', $productInfo->quantity,array('placeholder'=>'Quantity','class'=>'form-control')) !!}
+                                @if ($errors->has('quantity'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('quantity') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -240,9 +250,10 @@ $(document).ready(function(){
         'saling_price': {
             required: true
         },
-        // 'quantity': {
-        //     required: true
-        // },
+        'quantity': {
+            required: true,
+            number:true
+        },
         'tag': {
             required: true
         },

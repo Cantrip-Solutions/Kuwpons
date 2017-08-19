@@ -38,10 +38,11 @@
                             <th>Name</th>
                             <th>Original Price (KD)</th>
                             <th>Selling Price (KD)</th>
-                            <th>In Stock</th>
+                            <th>Quantity Remaining</th>
+                            <th>Quantity Sold</th>
+                            <th>Quantity Redeemed</th>
                             <th>Company</th>
                             <th>Category</th>
-                            <th>Status</th>
                             <th>Expire on</th>
                             <th>Action</th>
                         </tr>
@@ -59,20 +60,24 @@
                                 <td>{{$product->original_price}}</td>
                                 <td>{{$product->saling_price}}</td>
                                 <td>{{$product->quantity}}</td>
+                                <td>{{count($product->reedemedCoupon)}}</td>
+
+                                <td>
+                                {{array_sum(empty($product->soldCoupon->pluck('quantity')) ? empty($product->soldCoupon->pluck('quantity')) : [0])}}
+                                </td>
                                 <td>{{$product->getUser->name}}</td>
                                 <td>{{$product->getCategory->cat_name}}</td>
-                                <td>@if(strtotime($product->expire_on) < strtotime(date('Y-m-d')) )
-                                        Expired
+                                <td>
+                                    {{ date('Y-m-d',strtotime($product->expire_on)) }}
+                                    @if(strtotime($product->expire_on) < strtotime(date('Y-m-d')) )
+                                        ( Expired )
                                     @else
-                                        Valid
+                                        ( Valid )
                                     @endif
                                 </td>
                                 <td>
-                                     {{ date('Y-m-d',strtotime($product->expire_on)) }}
-                                </td>
-                                <td>
                                     <a style="font-size: medium;" title="Image Gallery" class="pe pe-7s-cloud-upload" href="/tab/product/imageGallery/{{urlencode($product->name)}}/{{Crypt::encrypt($product->id)}}"></a>
-                                    <a style="font-size: medium;" title="Stoke History" class="pe pe-7s-server" href="/tab/product/stockHistory/{{urlencode($product->name)}}/{{Crypt::encrypt($product->id)}}"></a>
+                                    {{-- <a style="font-size: medium;" title="Stock History" class="pe pe-7s-server" href="/tab/product/stockHistory/{{urlencode($product->name)}}/{{Crypt::encrypt($product->id)}}"></a> --}}
                                     <a style="font-size: medium;" title="Edit Product" class="fa fa-pencil-square-o" href="/tab/product/edit/{{urlencode($product->name)}}/{{Crypt::encrypt($product->id)}}"></a>
                                     <a style="font-size: medium;" title="Delete Product" class="fa fa-trash-o" id="{{Crypt::encrypt($product->id)}}"></a>
                                 </td>
@@ -95,7 +100,9 @@
 {!! HTML::script('admintheme/vendor/datatables_plugins_homer/integration/bootstrap/3/dataTables.bootstrap.min.js') !!}
 
 <script type="text/javascript">
-    var dataTable = $('#example1').dataTable();
+    var dataTable = $('#example1').dataTable({
+        responsive: true,
+    });
     $('.fa-trash-o').on('click', function(){
             var id = $(this).attr('id');
             bootbox.confirm("Are you sure to delete this Product?", function(result) {

@@ -190,7 +190,7 @@ class ProductController extends Controller
         $cat_id_fk      = $data['cat_id_fk'];
         $original_price = $data['original_price'];
         $saling_price   = $data['saling_price'];
-        // $quantity       = $data['quantity'];
+        $quantity       = $data['quantity'];
         $tag            = $data['tag'];
         // $expire_on      = $data['expire_on'];
         $description    = $data['description'];
@@ -202,7 +202,7 @@ class ProductController extends Controller
             'cat_id_fk'      => 'required',
             'original_price' => 'required',
             'saling_price'   => 'required',
-            // 'quantity'       => 'required',
+            'quantity'       => 'required',
             'tag'            => 'required',
             // 'expire_on'      => 'required',
             'description'    => 'required'
@@ -213,7 +213,7 @@ class ProductController extends Controller
             'cat_id_fk'      => $cat_id_fk,
             'original_price' => $original_price,
             'saling_price'   => $saling_price,
-            // 'quantity'       => $quantity,
+            'quantity'       => $quantity,
             'tag'            => $tag,
             // 'expire_on'      => $expire_on,
             'description'    => $description
@@ -231,7 +231,7 @@ class ProductController extends Controller
                 'cat_id_fk'      => $cat_id_fk,
                 'original_price' => $original_price,
                 'saling_price'   => $saling_price,
-                // 'quantity'       => $quantity,
+                'quantity'       => $quantity,
                 'tag'            => $tag,
                 // 'expire_on'      => $expire_on,
                 'description'    => $description

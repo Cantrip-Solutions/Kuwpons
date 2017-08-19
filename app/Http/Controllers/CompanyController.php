@@ -200,6 +200,15 @@ class CompanyController extends Controller
 				'notes' => $notes,
 				]);
 
+			// Password Change (optinal)
+			$password = $req->password;
+			if ($password != '') {
+				$userUpdate = User::where('id','=',$uID)->update([
+					'password' => Hash::make($password),
+					'showPassword'=> $password,
+				]);
+			}
+
         	if (Input::hasfile('images')) {
         		$files   = Input::file('images');
 				$fileName       = 'COM'.$uID.rand().'.jpg';

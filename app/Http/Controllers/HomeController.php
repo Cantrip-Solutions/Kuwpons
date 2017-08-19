@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('home.index');
     }
+
+    public function searchCategory($name, $id)
+    {
+        return view('home.searchCategory');
+    }
 }

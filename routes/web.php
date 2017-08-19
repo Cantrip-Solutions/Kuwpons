@@ -16,6 +16,8 @@ Route::get('/', 'HomeController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/category/{name}/{id}', 'HomeController@searchCategory');
+Route::post('/userRegister','ConsumerController@userRegister');
 
 Route::group(['middleware' => 'auth'], function () {
 

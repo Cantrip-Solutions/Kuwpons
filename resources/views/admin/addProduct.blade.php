@@ -246,7 +246,8 @@ $(document).ready(function(){
             required: true
         },
         'quantity': {
-            required: true
+            required: true,
+            number:true
         },
         'tag': {
             required: true

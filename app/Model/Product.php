@@ -18,6 +18,16 @@ class Product extends Model
         return $this->hasOne('\App\Model\ProductImage','pro_id_fk')->where('default_image','=','1');
     }
 
+    public function reedemedCoupon()
+    {
+        return $this->hasMany('\App\Model\Redeems','pro_id_fk')->where('status','=','1');
+    }
+
+    public function soldCoupon()
+    {
+        return $this->hasMany('\App\Model\Orders','pro_id_fk')->where('status','=','1');
+    }
+
     public function getUser()
     {
         return $this->belongsTo('\App\User','u_id_fk');

@@ -56,8 +56,35 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="password" class="col-sm-2 control-label">Password :</label>
+                            <div class="col-sm-10">
+                                {!! Form::password('password', array('id'=>'password','placeholder'=>'********', 'class'=>'form-control password')) !!}
+                                <span style="color: red;">Note: Leave blank if you don't want to change password</span>
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="re_password" class="col-sm-2 control-label">Re-Enter Password :</label>
+                            <div class="col-sm-10">
+                                {!! Form::password('re_password', array('placeholder'=>'********', 'class'=>'form-control re_password')) !!}
+
+                                @if ($errors->has('re_password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('re_password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="company_logo" class="col-sm-2 control-label">Company Logo *:</label>
                             <div class="col-sm-10">
+                                {!! HTML::image(config('global.uploadPath').$user->image, 'alt', array('class'=>'', 'width'=>'70', 'height'=>'70')) !!}
                                 {!! Form::file('images') !!}
                                 @if ($errors->has('images'))
                                     <span class="help-block">
@@ -297,6 +324,13 @@ $(document).ready(function(){
         'email': {
             required: true,
             email: true
+        },
+        'password': {
+            minlength: 6,
+            maxlength: 10
+        },
+        're_password': {
+            equalTo: "#password"
         },
         'images': {
             // required: true,

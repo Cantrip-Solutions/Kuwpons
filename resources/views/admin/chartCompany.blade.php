@@ -34,6 +34,7 @@
                         <thead>
                         <tr>
                             <th>Id</th>
+                            <th>Image</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Contact</th>
@@ -47,6 +48,7 @@
                             @foreach($users as $user)
                             <tr>
                                 <td>{{$user->id}}</td>
+                                <td> {!!HTML::image(config('global.uploadPath').'/'.$user->image, 'alt', array('width'=>'30', 'height'=>'30'))!!}</td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->getdefaultUserInfo->phone}}</td>

@@ -18,6 +18,7 @@
     {!!HTML::style('kuwpons/css/bootstrap.css')!!}
     {!!HTML::style('kuwpons/css/style.css')!!}
     {!!HTML::style('kuwpons/source/jquery.fancybox.css')!!}
+
     {!!HTML::style('kuwpons/css/responsive.css')!!}
     {!!HTML::style('admintheme/vendor/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.min.css')!!}
     {!!HTML::style('admintheme/vendor/sweetalert/lib/sweet-alert.css')!!}
@@ -284,6 +285,7 @@
 {!!HTML::script('https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js')!!}
 {!!HTML::script('kuwpons/js/bootstrap.js')!!}
 {!!HTML::script('kuwpons/source/jquery.fancybox.js')!!}
+
 {!! HTML::script('admintheme/vendor/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js') !!}
 {!! HTML::script('admintheme/vendor/sweetalert/lib/sweet-alert.min.js') !!}
 {!! HTML::script('plugins/jquery-validation-1.15.0/dist/jquery.validate.min.js') !!}

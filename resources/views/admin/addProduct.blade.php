@@ -169,7 +169,7 @@
                         <div class="form-group">
                             <label for="description" class="col-sm-2 control-label">Description :</label>
                             <div class="col-sm-10">
-                                {{ Form::textarea('description','',array('id'=>"description", 'name'=>"description",'class'=>'form-control summernote1')) }}
+                                {{ Form::textarea('description','',array('id'=>"description", 'name'=>"description",'class'=>'form-control summernote1','size' => '30x5')) }}
                                 @if ($errors->has('description'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('description') }}</strong>
@@ -196,9 +196,10 @@
     {!!HTML::style('admintheme/styles/static_custom.css')!!}
     {!!HTML::style('admintheme/vendor/select2-3.5.2/select2.css')!!}
     {!!HTML::style('admintheme/vendor/select2-bootstrap/select2-bootstrap.css')!!}
-    {!!HTML::style('admintheme/vendor/summernote/dist/summernote.css')!!}
-    {!!HTML::style('admintheme/vendor/summernote/dist/summernote-bs3.css')!!}
-    {!!HTML::style('admintheme/vendor/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.min.css')!!}
+    {!!HTML::style('http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.7/summernote.css')!!}
+<!--     {!!HTML::style('admintheme/vendor/summernote/dist/summernote-bs3.css')!!}
+ -->  
+   {!!HTML::style('admintheme/vendor/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.min.css')!!}
     {!!HTML::style('css/bootstrap-tagsinput.css')!!}
     <style type="text/css">
 
@@ -213,7 +214,7 @@
 {!! HTML::script('plugins/jquery-validation-1.15.0/dist/jquery.validate.min.js') !!}
 {!! HTML::script('plugins/jquery-validation-1.15.0/dist/additional-methods.min.js') !!}
 {!! HTML::script('admintheme/vendor/select2-3.5.2/select2.min.js') !!}
-{!! HTML::script('admintheme/vendor/summernote/dist/summernote.min.js') !!}
+{!! HTML::script('http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.7/summernote.js') !!}
 {!! HTML::script('admintheme/vendor/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js') !!}
 {!! HTML::script('js/bootstrap-tagsinput.min.js')!!}
 
@@ -273,14 +274,18 @@ $(document).ready(function(){
         startDate: new Date(),
     });
 
-    $('#description').summernote({ 
-        toolbar: [
-               ['headline', ['style']],
-               ['style', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],
-               ['textsize', ['fontsize']],
-               ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
-           ]
-    });
+    /*$('#description').summernote({
+      toolbar: [
+        // [groupName, [list of button]]
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['strikethrough', 'superscript', 'subscript']],
+        ['fontsize', ['fontsize']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']]
+      ]
+    });*/
+
 
     /*$('.cat_id_fk').on('change',function(){
         var cat_id=$(this).val();

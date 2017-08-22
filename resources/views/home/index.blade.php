@@ -6,126 +6,29 @@
         <h1>NEW COUPONS</h1>
         <div class="coupons-box">
           <div class="row">
-            <div class="col-md-4">
-              <div class="coupons-box-border">
-                <figure>
-
-                  {!!HTML::image('kuwpons/images/coupons-img-1.jpg', 'Loading...')!!}
-                 <!-- <img src="images/coupons-img-1.jpg" alt="" class=""/> -->
-                </figure>
-                <div class="coupons-box-text">
-                  <p>Lorem Ipsum has been the industry's standard dummy text ever sincunknown printer scrambled a type specimen book.</p>
-                  <div class="row">
-                    <div class="col-md-8">
-                      <div class="defaultbtn btn-green coupons-price-btn"> <span class="old-price">$250.00</span> <span class="new-price">$200.00</span> </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="coupons-cart btn-green"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="coupons-box-border">
-                <figure>
-
-                  {!!HTML::image('kuwpons/images/coupons-img-2.jpg', 'Loading...')!!}
-                <!-- <img src="images/coupons-img-2.jpg" alt="" class=""/>  -->
-                </figure>
-                <div class="coupons-box-text">
-                  <p>Lorem Ipsum has been the industry's standard dummy text ever sincunknown printer scrambled a type specimen book.</p>
-                  <div class="row">
-                    <div class="col-md-8">
-                      <div class="defaultbtn btn-green coupons-price-btn"> <span class="old-price">$250.00</span> <span class="new-price">$200.00</span> </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="coupons-cart btn-green"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
+          {{-- {{$newCoupons}} --}}
+            @foreach($newCoupons as $newCoupon)
+              <div class="col-md-4">
+                <div class="coupons-box-border">
+                  <figure>
+                    <a href="/coupon/{{urlencode($newCoupon->name)}}/{{Crypt::encrypt($newCoupon->id)}}">
+                      {!!HTML::image(config('global.productPath').$newCoupon->defaultImage->image, 'Loading...')!!}
+                    </a>
+                  </figure>
+                  <div class="coupons-box-text">
+                    <p>{{$newCoupon->description}}</p>
+                    <div class="row">
+                      <div class="col-md-8">
+                        <div class="defaultbtn btn-green coupons-price-btn"> <span class="old-price">KD {{$newCoupon->original_price}}</span> <span class="new-price">KD {{$newCoupon->saling_price}}</span> </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="coupons-cart btn-green"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-4">
-              <div class="coupons-box-border">
-                <figure>
-
-                  {!!HTML::image('kuwpons/images/coupons-img-3.jpg', 'Loading...')!!}
-                <!-- <img src="images/coupons-img-2.jpg" alt="" class=""/>  -->
-                </figure>
-                <div class="coupons-box-text">
-                  <p>Lorem Ipsum has been the industry's standard dummy text ever sincunknown printer scrambled a type specimen book.</p>
-                  <div class="row">
-                    <div class="col-md-8">
-                      <div class="defaultbtn btn-green coupons-price-btn"> <span class="old-price">$250.00</span> <span class="new-price">$200.00</span> </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="coupons-cart btn-green"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="coupons-box-border">
-                <figure>
-
-                  {!!HTML::image('kuwpons/images/coupons-img-1.jpg', 'Loading...')!!}
-                <!-- <img src="images/coupons-img-2.jpg" alt="" class=""/>  -->
-                </figure>
-                <div class="coupons-box-text">
-                  <p>Lorem Ipsum has been the industry's standard dummy text ever sincunknown printer scrambled a type specimen book.</p>
-                  <div class="row">
-                    <div class="col-md-8">
-                      <div class="defaultbtn btn-green coupons-price-btn"> <span class="old-price">$250.00</span> <span class="new-price">$200.00</span> </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="coupons-cart btn-green"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="coupons-box-border">
-                <figure>
-
-                  {!!HTML::image('kuwpons/images/coupons-img-2.jpg', 'Loading...')!!}
-                <!-- <img src="images/coupons-img-2.jpg" alt="" class=""/>  -->
-                </figure>
-                <div class="coupons-box-text">
-                  <p>Lorem Ipsum has been the industry's standard dummy text ever sincunknown printer scrambled a type specimen book.</p>
-                  <div class="row">
-                    <div class="col-md-8">
-                      <div class="defaultbtn btn-green coupons-price-btn"> <span class="old-price">$250.00</span> <span class="new-price">$200.00</span> </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="coupons-cart btn-green"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="coupons-box-border">
-                <figure>
-
-                  {!!HTML::image('kuwpons/images/coupons-img-3.jpg', 'Loading...')!!}
-                <!-- <img src="images/coupons-img-2.jpg" alt="" class=""/>  -->
-                </figure>
-                <div class="coupons-box-text">
-                  <p>Lorem Ipsum has been the industry's standard dummy text ever sincunknown printer scrambled a type specimen book.</p>
-                  <div class="row">
-                    <div class="col-md-8">
-                      <div class="defaultbtn btn-green coupons-price-btn"> <span class="old-price">$250.00</span> <span class="new-price">$200.00</span> </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="coupons-cart btn-green"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            @endforeach
           </div>
         </div>
       </div>

@@ -18,7 +18,6 @@
     {!!HTML::style('admintheme/vendor/animate.css/animate.css')!!}
     {!!HTML::style('admintheme/vendor/bootstrap/dist/css/bootstrap.css')!!}
 
-
     <!-- App styles -->
     {!!HTML::style('admintheme/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css')!!}
     {!!HTML::style('admintheme/fonts/pe-icon-7-stroke/css/helper.css')!!}
@@ -43,8 +42,10 @@
     </div>
     <div id="logo" class="light-version">
         <span>
-            {!!HTML::image(config('global.siteImages')."logo.jpg", 'Loading...', array('width'=>'100', 'height'=>'30'))!!}
+            <a href="{{URL::to('/')}}">
+                {!!HTML::image(config('global.siteImages')."logo.jpg", 'Loading...', array('width'=>'100', 'height'=>'30'))!!}
             {{-- {!!HTML::image(config('global.baseURL').'/favicon.ico', 'alt', array('width'=>'30', 'height'=>'30'))!!} --}}
+            </a>
         </span>
         {{-- <span>
             {{config('global.siteTitle')}}

@@ -16,7 +16,6 @@ Route::get('/', 'HomeController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/category/{name}/{id}', 'HomeController@searchCategory');
 Route::post('/userRegister','ConsumerController@userRegister');
 
 Route::group(['middleware' => 'auth'], function () {
@@ -106,4 +105,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('updatePassword', 'SettingsController@updatePassword');
 
 });
+
+
+// Categories
+Route::get('/category/{name}/{id}', 'HomeController@searchCategory');
+
+// Products
+Route::get('/coupon/{name}/{id}', 'HomeController@couponDetails');
 

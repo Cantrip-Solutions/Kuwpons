@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\Product;
 use App\Model\Category;
 use Crypt;
+use Cookie;
 
 class HomeController extends Controller
 {
@@ -42,5 +43,15 @@ class HomeController extends Controller
         $pdID = Crypt::decrypt($id);
         $productDetails = Product::find($pdID);
         return view('home.couponDetails',compact('productDetails'));
+    }
+    public function searchProduct(Request $req)
+    {
+        $reqSearch = $req->searchItem;
+        $searchedProducts = Product::where('name', 'like', '%' . $reqSearch . '%')
+                ->orWhere('tag', 'like', '%' . $reqSearch . '%')
+                ->get();
+        $categories = Category::where('id','!=','1')->get();
+        return view('home.searchProduct', compact('categories','reqSearch','searchedProducts'));
+        
     }
 }

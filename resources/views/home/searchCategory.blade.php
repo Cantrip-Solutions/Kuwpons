@@ -28,12 +28,14 @@
               <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="product-list-border">
                   <figure> 
+                  <a href="/coupon/{{urlencode($product->name)}}/{{Crypt::encrypt($product->id)}}">
                   {!!HTML::image(config('global.productPath').$product->defaultImage->image, 'Loading...')!!}
+                  </a>
                   {{-- <img src="images/product-list-1.jpg" alt="" class=""/>  --}}
                   </figure>
                   <div class="product-list-text">
                     <h3>{{$product->name}}</h3>
-                     <p>{{$product->description}}</p>
+                     <p>{{$product->shortDescription}}</p>
                      <h2>Price <span> KD {{$product->original_price}} </span> </h2>
                      <h2>Discount Price <span> KD {{$product->saling_price}} </span> </h2>
                      <div class="mid-deals">

@@ -7,7 +7,12 @@ $(document).ready(function(){
 
     $('.header-right-toggle').click(function(){
         $('.header-right-tog-content').slideToggle(150);
-    })     
+    });
+
+
+   
+
+        
      
 
 });

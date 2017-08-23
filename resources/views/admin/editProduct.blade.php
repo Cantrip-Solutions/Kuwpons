@@ -139,7 +139,7 @@
                             </div>
                         </div> --}}
 
-                        {{-- <div class="form-group">
+                        <div class="form-group">
                             <label for="expire_on" class="col-sm-2 control-label">Expire Date*:</label>
                             <div class="col-sm-10">
                             
@@ -152,7 +152,7 @@
                                     </span>
                                 @endif
                             </div>
-                        </div> --}}
+                        </div>
 
                         <div class="form-group">
                             <label for="image" class="col-sm-2 control-label">Product Image*:</label>
@@ -173,6 +173,19 @@
                                 @if ($errors->has('tag'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('tag') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shortDescription" class="col-sm-2 control-label">Short Description :</label>
+                            <div class="col-sm-10">
+                                {{ Form::textarea('shortDescription',$productInfo->shortDescription,array('class'=>'form-control shortDescription','size' => '30x4','maxlength'=>'330')) }}
+                                <span style="color:red;">Note: You can enter maximum <span class="count">{{ strlen($productInfo->shortDescription) }} </span>/330 Characters</span>
+                                @if ($errors->has('shortDescription'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('shortDescription') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -257,14 +270,16 @@ $(document).ready(function(){
         'tag': {
             required: true
         },
-        // 'expire_on': {
-        //     required: true
-        // },
+        'expire_on': {
+            required: true
+        },
         'image': {
             extension: "PNG|JPEG|JPG"
-            
         },
         'description': {
+            required: true
+        },
+        'shortDescription': {
             required: true
         },
       }
@@ -276,14 +291,24 @@ $(document).ready(function(){
         startDate: new Date(),
     });
 
-    /*$('#description').summernote({ 
-        toolbar: [
-               ['headline', ['style']],
-               ['style', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],
-               ['textsize', ['fontsize']],
-               ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
-           ]
-    });*/
+   $('#description').summernote({
+       height: 150,
+      toolbar: [
+        // [groupName, [list of button]]
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['strikethrough', 'superscript', 'subscript']],
+        ['fontsize', ['fontsize']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']]
+      ]
+    });
+
+   $(".shortDescription").on('keyup', function() {
+        var count=$(this).val();
+        $('.count').text(count.length);
+    });
+
 
 });
 </script>

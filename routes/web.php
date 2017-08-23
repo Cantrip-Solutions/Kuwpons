@@ -112,4 +112,8 @@ Route::get('/category/{name}/{id}', 'HomeController@searchCategory');
 
 // Products
 Route::get('/coupon/{name}/{id}', 'HomeController@couponDetails');
+Route::post('/searchedProduct', 'HomeController@searchProduct');
+
+// Add to Cart
+Route::post('/addToCart/{id}', 'OrdersController@addToCart');
 

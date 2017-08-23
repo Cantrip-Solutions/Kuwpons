@@ -6,6 +6,12 @@
         <h1>NEW COUPONS</h1>
         <div class="coupons-box">
           <div class="row">
+          @if (Cookie::get('bucket') !== false) {
+          {{-- @php
+            $bucket = Cookie::get('bucket');
+          @endphp --}}
+             <div class="alert alert-info"><i class="pe-7s-gleam"></i>{{Cookie::get('bucket')}}</div>
+          @endif
           {{-- {{$newCoupons}} --}}
             @foreach($newCoupons as $newCoupon)
               <div class="col-md-4">
@@ -16,13 +22,13 @@
                     </a>
                   </figure>
                   <div class="coupons-box-text">
-                    <p>{{$newCoupon->description}}</p>
+                    <p>{{$newCoupon->shortDescription}}</p>
                     <div class="row">
                       <div class="col-md-8">
                         <div class="defaultbtn btn-green coupons-price-btn"> <span class="old-price">KD {{$newCoupon->original_price}}</span> <span class="new-price">KD {{$newCoupon->saling_price}}</span> </div>
                       </div>
                       <div class="col-md-4">
-                        <div class="coupons-cart btn-green"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
+                        <div class="coupons-cart btn-green" proID="{{Crypt::encrypt($newCoupon->id)}}" style="cursor: pointer;"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
                       </div>
                     </div>
                   </div>
@@ -211,5 +217,24 @@
 
     
   </div>
+@push('scripts')
+<script type="text/javascript">
+  $('.coupons-cart').on('click', function () {
+    var id = $(this).attr('proID');
+    var token = $('input[name=_token]').val();
+    $.ajax({
+      'type':'post',
+      'url':'{{URL::to('addToCart')}}/'+id,
+      'headers': {'X-CSRF-TOKEN': token},
+      // 'data':{'user_id':user_id},
+      'dataType':'json',
+      // 'beforeSend':function(){ $('.row').mask('Please Wait...'); },
+      'success':function(resp){
+
+      }
+    }); 
+  })
+</script>
+@endpush
 @endsection
 

@@ -15,15 +15,18 @@
 <!-- plugin css links -->
 
 <!-- website custom css -->
-    {!!HTML::style('kuwpons/css/bootstrap.css')!!}
-    {!!HTML::style('kuwpons/css/style.css')!!}
+   
     {!!HTML::style('kuwpons/source/jquery.fancybox.css')!!}
-
-    {!!HTML::style('kuwpons/css/responsive.css')!!}
-    {!!HTML::style('admintheme/vendor/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.min.css')!!}
+    {!!HTML::style('kuwpons/css/cloud-zoom.css')!!}
+    {!!HTML::style('kuwpons/css/slick.css')!!}
     {!!HTML::style('admintheme/vendor/sweetalert/lib/sweet-alert.css')!!}
+    {!!HTML::style('admintheme/vendor/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.min.css')!!}
+    
 <!-- website custom css -->
     @stack('css')
+    {!!HTML::style('kuwpons/css/bootstrap.css')!!}
+    {!!HTML::style('kuwpons/css/style.css')!!}
+    {!!HTML::style('kuwpons/css/responsive.css')!!}
 
 </head>
 <body>
@@ -65,11 +68,11 @@
               
                <li>
                   <div class="search-sec">
-                      
-                      
-                  <input class="search-cont" type="text" name="" value="" placeholder="Search...">
-                  
-                  <button class="search-icon"><i class="fa fa-search" aria-hidden="true"></i></button></div>
+                  {{Form::open(array('id'=>'formdata','action' => 'HomeController@searchProduct', 'method'=>'POST', 'enctype'=>"multipart/form-data"))}}
+                    <input class="search-cont" type="text" name="searchItem" value="" placeholder="Search..."> 
+                    <a class="search-icon"><i class="fa fa-search" aria-hidden="true"></i></a>
+                  {{Form::close()}}
+                  </div>
                   
                 </li>
 
@@ -101,14 +104,6 @@
                   <li><a href="/category/{{urlencode(str_replace('/', '&#47;',$cat->cat_name))}}/{{Crypt::encrypt($cat->id)}}">{{$cat->cat_name}}</a></li>
                 @endforeach
                
-                <!-- <li class="active"><a href="#">EVENT/SHOWS</a></li>
-                <li><a href="#">FOOD</a></li>
-                <li><a href="#">BEAUTY/HEALTH</a></li>
-                <li><a href="#">SHOPPING</a></li>
-                <li><a href="#">TRAVEL/ACTIVITIES</a></li>
-                <li><a href="#">LOCAL DEALS</a></li>
-                <li><a href="#">VOUCHER</a></li>
-                <li><a href="#">CONTACT US</a></li> -->
               </ul>
             </nav>
           </header-menu>
@@ -282,9 +277,12 @@
 
 
 
-{!!HTML::script('https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js')!!}
+{!!HTML::script('https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')!!}
+{!!HTML::script('kuwpons/js/slick.js')!!}
 {!!HTML::script('kuwpons/js/bootstrap.js')!!}
 {!!HTML::script('kuwpons/source/jquery.fancybox.js')!!}
+
+
 
 {!! HTML::script('admintheme/vendor/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js') !!}
 {!! HTML::script('admintheme/vendor/sweetalert/lib/sweet-alert.min.js') !!}

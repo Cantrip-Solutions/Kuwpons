@@ -167,9 +167,23 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="shortDescription" class="col-sm-2 control-label">Short Description :</label>
+                            <div class="col-sm-10">
+                                {{ Form::textarea('shortDescription','',array('class'=>'form-control shortDescription','size' => '30x4','maxlength'=>'330')) }}
+                                <span style="color:red;">Note: You can enter maximum <span class="count">0</span>/330 Characters</span>
+                                @if ($errors->has('shortDescription'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('shortDescription') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
                             <label for="description" class="col-sm-2 control-label">Description :</label>
                             <div class="col-sm-10">
-                                {{ Form::textarea('description','',array('id'=>"description", 'name'=>"description",'class'=>'form-control summernote1','size' => '30x5')) }}
+                                {{ Form::textarea('description','',array('id'=>"description", 'class'=>'form-control summernote1','size' => '30x8')) }}
                                 @if ($errors->has('description'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('description') }}</strong>
@@ -266,6 +280,9 @@ $(document).ready(function(){
         'description': {
             required: true
         },
+        'shortDescription': {
+            required: true
+        },
       }
     });
     $(".js-source-states").select2();
@@ -274,17 +291,25 @@ $(document).ready(function(){
         startDate: new Date(),
     });
 
-    /*$('#description').summernote({
-      toolbar: [
-        // [groupName, [list of button]]
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['font', ['strikethrough', 'superscript', 'subscript']],
-        ['fontsize', ['fontsize']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['height', ['height']]
-      ]
-    });*/
+    $('#description').summernote({
+        height: 150,
+        toolbar: [
+            // [groupName, [list of button]]
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']]
+        ]
+    });
+
+    $(".shortDescription").on('keyup', function() {
+        var count=$(this).val();
+        $('.count').text(count.length);
+    });
+   
+    
 
 
     /*$('.cat_id_fk').on('change',function(){

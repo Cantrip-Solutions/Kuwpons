@@ -39,11 +39,11 @@
 		            <div class="col-lg-6 col-md-6 col-sm-12">
 			            <div class="prod-top-dt-right">
 			                <h3>{{ $productDetails->name }}</h3>
-			                <p>{{ $productDetails->shortDescription }} <a href="#description_tab" style="color:red;">more...</a></p>   
+			                <p>{{ substr($productDetails->description,0,500) }}</p>
+			                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>       
 			                <div class="p-details-price">
-                      
-			                   <h2>Price <span class="old-price"> KD {{ $productDetails->original_price }} </span> <span > KD {{ $productDetails->saling_price }} </span>  </h2>
-			                   {{-- <h2>Discount Price <span> $ 200.00 </span> </h2> --}}
+			                   <h2>Price <span> $ 220.00 </span> </h2>
+			                   <h2>Discount Price <span> $ 200.00 </span> </h2>
 			                   <h3>Category | Product | Food</h3>
 			                </div>
 			                <div class="qty-wrap">
@@ -58,7 +58,7 @@
 		            </div>
 		        </div>
 	          
-	          	<div class="tab-wrap" id="description_tab">
+	          	<div class="tab-wrap">
 		            <div class="tab-main">
 		                <ul class="tabs">
 		                  <li class="tablinks tab col s2" onclick="registrationtab(event, 'Description')" id="defaultOpen">Description</li>  |
@@ -67,39 +67,12 @@
 		            </div>
 		            <div class="tab-content-wrap">
 		                <div id="Description" class="tabcontent">
-		                  <p>{{ $productDetails->description }}</p>
+		                  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce luctus pulvinar efficitur. Duis eleifend nibh id leo pretium condimentum. Curabitur dignissim massa quis nisi dictum, in congue quam ultrices. Mauris sagittis mi vitae arcu fringilla, a congue lacus molestie. Quisque venenatis urna nisi, sit amet feugiat urna imperdiet nec. Nunc eros ante, dictum eget ornare at, elementum eget odio. Sed hendrerit turpis ut orci mattis dictum. Pellentesque eros lorem, tempor a pellentesque nec, dapibus sit amet felis. Mauris ut molestie risus, at laoreet urna. Curabitur porttitor pharetra sapien nec scelerisque. Nam in turpis tincidunt, cursus nibh eget, hendrerit orci. Suspendisse pharetra eleifend turpis, sit amet bibendum velit lacinia ac. Duis interdum eros velit, quis mattis sem lobortis et. Quisque consectetur risus velit, non vehicula arcu varius in.</p>
+
+							<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras ornare augue eget diam elementum, sed egestas nibh vestibulum. Praesent tristique leo purus, vel efficitur lorem eleifend vel. Mauris tincidunt pharetra leo, in euismod dui auctor eu. Ut purus neque, rutrum quis lorem quis, dictum varius enim. Donec tempor sagittis tortor eget volutpat. </p>
 		                </div>
 		                <div id="Enquiry" class="tabcontent">
-  		                  <div class="row">
-                            <div class="col-offset-4 col-lg-8 col-md-8 col-sm-8 no-padding">
-
-                              <div class="newslatter-name enquiry-tab">
-
-                                <div class="row">
-                                  <div class="col-lg-6">
-                                  <input class="form-control" type="text" placeholder="Name"/>
-                                  </div>
-                                  <div class="col-lg-6">
-                                  <input class="form-control" type="text" placeholder="Email"/>
-                                  </div>
-                                  </div>
-
-
-                                  <div class="row">  
-                                  <div class="col-lg-12">
-                                  <textarea class="form-control" ></textarea> 
-                                  </div>
-                                  </div>
-
-                                   <enq-btn> 
-                                  <button class="defaultbtn btn-green">Subscribe!</button>
-                                  </enq-btn>
-                              </div>
-
-
-
-                            </div>
-                        </div>
+		                  <p> World is There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. </p>
 		                </div>
 		            </div>
 	          	</div>

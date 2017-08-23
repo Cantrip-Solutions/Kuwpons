@@ -9,20 +9,14 @@
 		        <div class="row">
 		            <div class="col-lg-6 col-md-6 col-sm-12">
 			            <div class="prod-top-dt-left">
-			              <div class="zoom-wrap">
-                        <div class="zoom-small-image">
+			                <div class="zoom-wrap">
+			                	<div class="zoom-small-image">
                           <a href='{{URL('/').'/'.config('global.productPath').$productDetails->defaultImage->image}}' class = 'cloud-zoom' id='zoom1' rel="adjustX:10, adjustY:-4">
                             {!!HTML::image(config('global.productPath').$productDetails->defaultImage->image)!!}
                           </a>
                         </div>
-                        <div class="zoom-desc">
-                             <ul class="responsive-zoom slider">
-                              <li class="thumbAc sdasdsdsad">
-                                <a href='{{URL('/').'/'.config('global.productPath').$productDetails->defaultImage->image}}' class='cloud-zoom-gallery' title='Red' rel="useZoom: 'zoom1', smallImage: '{{URL('/').'/'.config('global.productPath').$productDetails->defaultImage->image}}' ">
-                                  {!!HTML::image(config('global.productPath').$productDetails->defaultImage->image, '', array('class'=>"zoom-tiny-image",'width'=>"", 'height'=>"" ))!!}
-                                  {{-- <img class="zoom-tiny-image" src="images/Product-dtl-zoom.jpg" width="" height="" alt = "Thumbnail 1"/> --}}
-                                </a>
-                              </li>
+				                <div class="zoom-desc">
+				                     <ul class="responsive-zoom slider">
                               @foreach($productDetails->getImages as $productImage)
                                 <li class="thumbAc">
                                 <a href='{{URL('/').'/'.config('global.productPath').$productImage->image}}' class='cloud-zoom-gallery' title='Red' rel="useZoom: 'zoom1', smallImage: '{{URL('/').'/'.config('global.productPath').$productImage->image}}' ">
@@ -30,20 +24,26 @@
                                   {{-- <img class="zoom-tiny-image" src="images/Product-dtl-zoom.jpg" width="" height="" alt = "Thumbnail 1"/> --}}
                                 </a> </li>
                               @endforeach
-                            </ul>
-                        </div>
-                      </div>
+				                      {{-- <li class="thumbAc"> <a href='images/Product-dtl-zoom.jpg' class='cloud-zoom-gallery' title='Red' rel="useZoom: 'zoom1', smallImage: 'images/Product-dtl-zoom.jpg' "><img class="zoom-tiny-image" src="images/Product-dtl-zoom.jpg" width="" height="" alt = "Thumbnail 1"/></a> </li>
+
+				                      <li class="thumbAc"> <a href='images/Product-dtl-zoom2.jpg' class='cloud-zoom-gallery' title='Red' rel="useZoom: 'zoom1', smallImage: 'images/Product-dtl-zoom2.jpg' "><img class="zoom-tiny-image" src="images/Product-dtl-zoom2.jpg" width="" height="" alt = "Thumbnail 1"/></a> </li>
+                              
+				                      <li class="thumbAc"> <a href='images/Product-dtl-zoom.jpg' class='cloud-zoom-gallery' title='Red' rel="useZoom: 'zoom1', smallImage: 'images/Product-dtl-zoom.jpg' "><img class="zoom-tiny-image" src="images/Product-dtl-zoom.jpg" width="" height="" alt = "Thumbnail 1"/></a> </li>
+				                      <li class="thumbAc"> <a href='images/Product-dtl-zoom3.jpg' class='cloud-zoom-gallery' title='Red' rel="useZoom: 'zoom1', smallImage: 'images/Product-dtl-zoom3.jpg' "><img class="zoom-tiny-image" src="images/Product-dtl-zoom3.jpg" width="" height="" alt = "Thumbnail 1"/></a> </li> --}}
+				                    </ul>
+				                </div>
+			                </div>
 			            </div>
 		            </div>
 		            
 		            <div class="col-lg-6 col-md-6 col-sm-12">
 			            <div class="prod-top-dt-right">
 			                <h3>{{ $productDetails->name }}</h3>
-			                <p>{{ $productDetails->shortDescription }} <a href="#description_tab" style="color:red;">more...</a></p>   
+			                <p>{{ substr($productDetails->description,0,500) }}</p>
+			                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>       
 			                <div class="p-details-price">
-                      
-			                   <h2>Price <span class="old-price"> KD {{ $productDetails->original_price }} </span> <span > KD {{ $productDetails->saling_price }} </span>  </h2>
-			                   {{-- <h2>Discount Price <span> $ 200.00 </span> </h2> --}}
+			                   <h2>Price <span> $ 220.00 </span> </h2>
+			                   <h2>Discount Price <span> $ 200.00 </span> </h2>
 			                   <h3>Category | Product | Food</h3>
 			                </div>
 			                <div class="qty-wrap">
@@ -58,7 +58,7 @@
 		            </div>
 		        </div>
 	          
-	          	<div class="tab-wrap" id="description_tab">
+	          	<div class="tab-wrap">
 		            <div class="tab-main">
 		                <ul class="tabs">
 		                  <li class="tablinks tab col s2" onclick="registrationtab(event, 'Description')" id="defaultOpen">Description</li>  |
@@ -67,39 +67,12 @@
 		            </div>
 		            <div class="tab-content-wrap">
 		                <div id="Description" class="tabcontent">
-		                  <p>{{ $productDetails->description }}</p>
+		                  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce luctus pulvinar efficitur. Duis eleifend nibh id leo pretium condimentum. Curabitur dignissim massa quis nisi dictum, in congue quam ultrices. Mauris sagittis mi vitae arcu fringilla, a congue lacus molestie. Quisque venenatis urna nisi, sit amet feugiat urna imperdiet nec. Nunc eros ante, dictum eget ornare at, elementum eget odio. Sed hendrerit turpis ut orci mattis dictum. Pellentesque eros lorem, tempor a pellentesque nec, dapibus sit amet felis. Mauris ut molestie risus, at laoreet urna. Curabitur porttitor pharetra sapien nec scelerisque. Nam in turpis tincidunt, cursus nibh eget, hendrerit orci. Suspendisse pharetra eleifend turpis, sit amet bibendum velit lacinia ac. Duis interdum eros velit, quis mattis sem lobortis et. Quisque consectetur risus velit, non vehicula arcu varius in.</p>
+
+							<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras ornare augue eget diam elementum, sed egestas nibh vestibulum. Praesent tristique leo purus, vel efficitur lorem eleifend vel. Mauris tincidunt pharetra leo, in euismod dui auctor eu. Ut purus neque, rutrum quis lorem quis, dictum varius enim. Donec tempor sagittis tortor eget volutpat. </p>
 		                </div>
 		                <div id="Enquiry" class="tabcontent">
-  		                  <div class="row">
-                            <div class="col-offset-4 col-lg-8 col-md-8 col-sm-8 no-padding">
-
-                              <div class="newslatter-name enquiry-tab">
-
-                                <div class="row">
-                                  <div class="col-lg-6">
-                                  <input class="form-control" type="text" placeholder="Name"/>
-                                  </div>
-                                  <div class="col-lg-6">
-                                  <input class="form-control" type="text" placeholder="Email"/>
-                                  </div>
-                                  </div>
-
-
-                                  <div class="row">  
-                                  <div class="col-lg-12">
-                                  <textarea class="form-control" ></textarea> 
-                                  </div>
-                                  </div>
-
-                                   <enq-btn> 
-                                  <button class="defaultbtn btn-green">Subscribe!</button>
-                                  </enq-btn>
-                              </div>
-
-
-
-                            </div>
-                        </div>
+		                  <p> World is There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. </p>
 		                </div>
 		            </div>
 	          	</div>
@@ -215,7 +188,7 @@
     @endif
 </div>
 @push('css')
-
+{!!HTML::style('kuwpons/css/cloud-zoom.css')!!}
 @endpush
 @push('scripts')
 {!!HTML::script('kuwpons/js/cloud-zoom.js')!!}
@@ -237,44 +210,6 @@ function registrationtab(evt, cityName) {
 
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
-
-$(document).ready(function(){
- $('.responsive-zoom').slick({
-      dots: false,
-      infinite: false,
-      speed: 300,
-      slidesToShow: 4,
-      slidesToScroll: 4,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 4,
-            slidesToScroll: 4,
-            infinite: true,
-            dots: false
-          }
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 4,
-            slidesToScroll: 4
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3
-          }
-        }
-        // You can unslick at a given breakpoint now by adding:
-        // settings: "unslick"
-        // instead of a settings object
-      ]
-    }); 
-});    
 </script>
 @endpush
 @endsection

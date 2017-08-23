@@ -240,6 +240,7 @@ header-menu nav li:hover a:after, header-menu nav li.active a:after {
 
 .old-price {
 	color:#ff0000;
+    text-decoration:line-through;
 }
 
 .new-price {
@@ -969,6 +970,7 @@ a.recover-pass:hover{
 
 .product-dt-holder .prod-top-dt-left .zoom-small-image img {
 	border-radius:10px;
+    max-height: 500px;
 }
 /*zoom*/
 
@@ -1194,6 +1196,58 @@ a.recover-pass:hover{
 	padding:20px 0;
 }
 
+/* >>>>>>>>>>>>>>>>>>>>>>  22-08-17 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+.product-dt-holder .zoom-wrap .slick-arrow {
+    border:0;
+    background:none;
+}
+
+.product-dt-holder .zoom-wrap .slick-prev::before, .product-dt-holder .zoom-wrap .slick-next::before {
+    color: black;
+}
+
+.product-dt-holder .zoom-wrap .slick-next::before {
+    content: '\f0a9';
+    font-family: 'FontAwesome';
+}
+
+.product-dt-holder .zoom-wrap .slick-prev::before {
+    content: '\f0a8';
+    font-family: 'FontAwesome';
+}
+
+.product-dt-holder .zoom-wrap .slick-prev::before, .product-dt-holder .zoom-wrap .slick-next::before {
+    font-size: 20px;
+    line-height: 1;
+    color: #fff;
+    background: #000;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    border-radius:50%;
+}
+
+.product-dt-holder .zoom-wrap .slick-prev, .product-dt-holder .zoom-wrap .slick-next {
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    left: 6px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    cursor: pointer;
+    border: none;
+    outline: none;
+    z-index:99;
+}
+
+.product-dt-holder .zoom-wrap .slick-next {
+    left:95%;
+}
 /* ############################### product-details End ##########################  */
 
 /* ############################### cart-details Start ##########################  */
@@ -1394,3 +1448,22 @@ a.recover-pass:hover{
 }
 /* ############################### cart-details End ##########################  */
 
+
+
+/*enquiry*/
+.newslatter-name.enquiry-tab .form-control{
+    width:100% !important;
+}
+
+.newslatter-name.enquiry-tab textarea{
+    width: 100% !important;
+    height: 90px;
+    resize: none;
+    overflow: auto;
+}
+
+.newslatter-name.enquiry-tab enq-btn{
+    display: block;
+    padding: 10px 0;
+}
+/*enquiry*/

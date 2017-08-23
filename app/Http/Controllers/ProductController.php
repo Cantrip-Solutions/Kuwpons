@@ -42,38 +42,41 @@ class ProductController extends Controller
         /*echo "<pre>";
         print_r($data);
         exit;*/
-        $name           = $data['name'];
-        $u_id_fk        = $data['u_id_fk'];
-        $cat_id_fk      = $data['cat_id_fk'];
-        $original_price = $data['original_price'];
-        $saling_price   = $data['saling_price'];
-        $quantity       = $data['quantity'];
-        $tag            = $data['tag'];
-        $expire_on      = $data['expire_on'];
-        $description    = $data['description'];
+        $name             = $data['name'];
+        $u_id_fk          = $data['u_id_fk'];
+        $cat_id_fk        = $data['cat_id_fk'];
+        $original_price   = $data['original_price'];
+        $saling_price     = $data['saling_price'];
+        $quantity         = $data['quantity'];
+        $tag              = $data['tag'];
+        $expire_on        = $data['expire_on'];
+        $shortDescription = $data['shortDescription'];
+        $description      = $data['description'];
 
 		$rules = array(
 			// 'file' => 'required|mimes:png,gif,jpeg,jpg',
-            'name'           => 'required',
-            'u_id_fk'        => 'required',
-            'cat_id_fk'      => 'required',
-            'original_price' => 'required',
-            'saling_price'   => 'required',
-            'quantity'       => 'required',
-            'tag'            => 'required',
-            'expire_on'      => 'required',
-            'description'    => 'required'
+            'name'             => 'required',
+            'u_id_fk'          => 'required',
+            'cat_id_fk'        => 'required',
+            'original_price'   => 'required',
+            'saling_price'     => 'required',
+            'quantity'         => 'required',
+            'tag'              => 'required',
+            'expire_on'        => 'required',
+            'shortDescription' => 'required',
+            'description'      => 'required'
         );
         $validator = Validator::make(array(
-            'name'           => $name,
-            'u_id_fk'        => $u_id_fk,
-            'cat_id_fk'      => $cat_id_fk,
-            'original_price' => $original_price,
-            'saling_price'   => $saling_price,
-            'quantity'       => $quantity,
-            'tag'            => $tag,
-            'expire_on'      => $expire_on,
-            'description'    => $description
+            'name'             => $name,
+            'u_id_fk'          => $u_id_fk,
+            'cat_id_fk'        => $cat_id_fk,
+            'original_price'   => $original_price,
+            'saling_price'     => $saling_price,
+            'quantity'         => $quantity,
+            'tag'              => $tag,
+            'expire_on'        => $expire_on,
+            'shortDescription' => $shortDescription,
+            'description'      => $description
         ), $rules);
         if ($validator->fails()) {
 
@@ -92,18 +95,19 @@ class ProductController extends Controller
                 $target   = config('global.productPath');
                 $path     = $target.$filename;
                 Image::make($image->getRealPath())->save($path);
-
-                $product                 = new Product;
-                $product->name           = $name;
-                $product->u_id_fk        = $u_id_fk;
-                $product->cat_id_fk      = $cat_id_fk;
-                $product->original_price = $original_price;
-                $product->saling_price   = $saling_price;
-                $product->quantity       = $quantity;
-                $product->expire_on      = date("Y-m-d", strtotime($expire_on));
-                $product->description    = $description;
-                $product->tag            = $tag;
-        		$product->save();
+                
+                $product                   = new Product;
+                $product->name             = $name;
+                $product->u_id_fk          = $u_id_fk;
+                $product->cat_id_fk        = $cat_id_fk;
+                $product->original_price   = $original_price;
+                $product->saling_price     = $saling_price;
+                $product->quantity         = $quantity;
+                $product->expire_on        = date("Y-m-d", strtotime($expire_on));
+                $product->description      = $description;
+                $product->shortDescription = $shortDescription;
+                $product->tag              = $tag;
+                $product->save();
                 
         		$last_insert_id = $product->id;
 
@@ -192,8 +196,10 @@ class ProductController extends Controller
         $saling_price   = $data['saling_price'];
         $quantity       = $data['quantity'];
         $tag            = $data['tag'];
-        // $expire_on      = $data['expire_on'];
+        $expire_on      = $data['expire_on'];
         $description    = $data['description'];
+        $shortDescription    = $data['shortDescription'];
+        
 
         $rules = array(
             // 'file' => 'required|mimes:png,gif,jpeg,jpg',
@@ -204,8 +210,10 @@ class ProductController extends Controller
             'saling_price'   => 'required',
             'quantity'       => 'required',
             'tag'            => 'required',
-            // 'expire_on'      => 'required',
-            'description'    => 'required'
+            'expire_on'      => 'required',
+            'description'    => 'required',
+            'shortDescription'    => 'required'
+            
         );
         $validator = Validator::make(array(
             'name'           => $name,
@@ -215,8 +223,9 @@ class ProductController extends Controller
             'saling_price'   => $saling_price,
             'quantity'       => $quantity,
             'tag'            => $tag,
-            // 'expire_on'      => $expire_on,
-            'description'    => $description
+            'expire_on'      => $expire_on,
+            'description'    => $description,
+            'shortDescription'    => $shortDescription
         ), $rules);
         if ($validator->fails()) {
 
@@ -233,8 +242,9 @@ class ProductController extends Controller
                 'saling_price'   => $saling_price,
                 'quantity'       => $quantity,
                 'tag'            => $tag,
-                // 'expire_on'      => $expire_on,
-                'description'    => $description
+                'expire_on'      => $expire_on,
+                'description'    => $description,
+                'shortDescription'    => $shortDescription
             ]);
 
             if (Input::hasfile('image')) {

@@ -27,226 +27,34 @@
               @foreach($products as $product)
               <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="product-list-border">
+                  <div class="discount-product">
                   <figure> 
                   <a href="/coupon/{{urlencode($product->name)}}/{{Crypt::encrypt($product->id)}}">
                   {!!HTML::image(config('global.productPath').$product->defaultImage->image, 'Loading...')!!}
                   </a>
                   {{-- <img src="images/product-list-1.jpg" alt="" class=""/>  --}}
                   </figure>
+                   <span>20% OFF</span>
+                 </div>
                   <div class="product-list-text">
                     <h3>{{$product->name}}</h3>
-                     <p>{{$product->shortDescription}}</p>
-                     <h2>Price <span> KD {{$product->original_price}} </span> </h2>
+                     <p>{{substr($product->shortDescription, 0,120) }} ...</p>
+                     <h2>Price <span class="old-price"> KD {{ $product->original_price }} </span> </h2>
                      <h2>Discount Price <span> KD {{$product->saling_price}} </span> </h2>
                      <div class="mid-deals">
-                     <h2>Deals sold <span> 1 </span> </h2>
+                     {{-- <h2>Deals sold <span> 1 </span> </h2> --}}
                      <span> Expiry Date {{date('d.m.Y',strtotime($product->expire_on))}} </span>
                      </div>
                      <div class="loc-cart">
                         <div class="map-loc"> 
                         <span><i class="fa fa-map-marker" aria-hidden="true"></i> Sydney </span>
                         </div>
-                        <div class="cart-icon">
-                         <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-                        </div>
+                       <div class="cart-icon coupons-cart" proID="{{Crypt::encrypt($product->id)}}" style="cursor: pointer;"> <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span> </div>
                       </div>
                   </div>
                 </div>
               </div>
               @endforeach
-
-              {{-- <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="product-list-border">
-                  <figure> <img src="images/product-list-2.jpg" alt="" class=""/> </figure>
-                  <div class="product-list-text">
-                    <h3>Lorem Ipsum</h3>
-                     <p>Has been the industry's standard dummy text ever.</p>
-                     <h2>Price <span> $ 220.00 </span> </h2>
-                     <h2>Discount Price <span> $ 200.00 </span> </h2>
-                     <div class="mid-deals">
-                     <h2>Deals sold <span> 1 </span> </h2>
-                     <span> Expiry Date 14.10.2017 </span>
-                     </div>
-                     <div class="loc-cart">
-                        <div class="map-loc"> 
-                        <span><i class="fa fa-map-marker" aria-hidden="true"></i> Sydney </span>
-                        </div>
-                        <div class="cart-icon">
-                         <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="product-list-border">
-                  <figure> <img src="images/product-list-3.jpg" alt="" class=""/> </figure>
-                  <div class="product-list-text">
-                    <h3>Lorem Ipsum</h3>
-                     <p>Has been the industry's standard dummy text ever.</p>
-                     <h2>Price <span> $ 220.00 </span> </h2>
-                     <h2>Discount Price <span> $ 200.00 </span> </h2>
-                     <div class="mid-deals">
-                     <h2>Deals sold <span> 1 </span> </h2>
-                     <span> Expiry Date 14.10.2017 </span>
-                     </div>
-                     <div class="loc-cart">
-                        <div class="map-loc"> 
-                        <span><i class="fa fa-map-marker" aria-hidden="true"></i> Sydney </span>
-                        </div>
-                        <div class="cart-icon">
-                         <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="product-list-border">
-                  <figure> <img src="images/product-list-4.jpg" alt="" class=""/> </figure>
-                  <div class="product-list-text">
-                    <h3>Lorem Ipsum</h3>
-                     <p>Has been the industry's standard dummy text ever.</p>
-                     <h2>Price <span> $ 220.00 </span> </h2>
-                     <h2>Discount Price <span> $ 200.00 </span> </h2>
-                     <div class="mid-deals">
-                     <h2>Deals sold <span> 1 </span> </h2>
-                     <span> Expiry Date 14.10.2017 </span>
-                     </div>
-                     <div class="loc-cart">
-                        <div class="map-loc"> 
-                        <span><i class="fa fa-map-marker" aria-hidden="true"></i> Sydney </span>
-                        </div>
-                        <div class="cart-icon">
-                         <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="product-list-border">
-                  <figure> <img src="images/product-list-5.jpg" alt="" class=""/> </figure>
-                  <div class="product-list-text">
-                    <h3>Lorem Ipsum</h3>
-                     <p>Has been the industry's standard dummy text ever.</p>
-                     <h2>Price <span> $ 220.00 </span> </h2>
-                     <h2>Discount Price <span> $ 200.00 </span> </h2>
-                     <div class="mid-deals">
-                     <h2>Deals sold <span> 1 </span> </h2>
-                     <span> Expiry Date 14.10.2017 </span>
-                     </div>
-                     <div class="loc-cart">
-                        <div class="map-loc"> 
-                        <span><i class="fa fa-map-marker" aria-hidden="true"></i> Sydney </span>
-                        </div>
-                        <div class="cart-icon">
-                         <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="product-list-border">
-                  <figure> <img src="images/product-list-6.jpg" alt="" class=""/> </figure>
-                  <div class="product-list-text">
-                    <h3>Lorem Ipsum</h3>
-                     <p>Has been the industry's standard dummy text ever.</p>
-                     <h2>Price <span> $ 220.00 </span> </h2>
-                     <h2>Discount Price <span> $ 200.00 </span> </h2>
-                     <div class="mid-deals">
-                     <h2>Deals sold <span> 1 </span> </h2>
-                     <span> Expiry Date 14.10.2017 </span>
-                     </div>
-                     <div class="loc-cart">
-                        <div class="map-loc"> 
-                        <span><i class="fa fa-map-marker" aria-hidden="true"></i> Sydney </span>
-                        </div>
-                        <div class="cart-icon">
-                         <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="product-list-border">
-                  <figure> <img src="images/product-list-7.jpg" alt="" class=""/> </figure>
-                  <div class="product-list-text">
-                    <h3>Lorem Ipsum</h3>
-                     <p>Has been the industry's standard dummy text ever.</p>
-                     <h2>Price <span> $ 220.00 </span> </h2>
-                     <h2>Discount Price <span> $ 200.00 </span> </h2>
-                     <div class="mid-deals">
-                     <h2>Deals sold <span> 1 </span> </h2>
-                     <span> Expiry Date 14.10.2017 </span>
-                     </div>
-                     <div class="loc-cart">
-                        <div class="map-loc"> 
-                        <span><i class="fa fa-map-marker" aria-hidden="true"></i> Sydney </span>
-                        </div>
-                        <div class="cart-icon">
-                         <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="product-list-border">
-                  <figure> <img src="images/product-list-8.jpg" alt="" class=""/> </figure>
-                  <div class="product-list-text">
-                    <h3>Lorem Ipsum</h3>
-                     <p>Has been the industry's standard dummy text ever.</p>
-                     <h2>Price <span> $ 220.00 </span> </h2>
-                     <h2>Discount Price <span> $ 200.00 </span> </h2>
-                     <div class="mid-deals">
-                     <h2>Deals sold <span> 1 </span> </h2>
-                     <span> Expiry Date 14.10.2017 </span>
-                     </div>
-                     <div class="loc-cart">
-                        <div class="map-loc"> 
-                        <span><i class="fa fa-map-marker" aria-hidden="true"></i> Sydney </span>
-                        </div>
-                        <div class="cart-icon">
-                         <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="product-list-border">
-                  <figure> <img src="images/product-list-9.jpg" alt="" class=""/> </figure>
-                  <div class="product-list-text">
-                    <h3>Lorem Ipsum</h3>
-                     <p>Has been the industry's standard dummy text ever.</p>
-                     <h2>Price <span> $ 220.00 </span> </h2>
-                     <h2>Discount Price <span> $ 200.00 </span> </h2>
-                     <div class="mid-deals">
-                     <h2>Deals sold <span> 1 </span> </h2>
-                     <span> Expiry Date 14.10.2017 </span>
-                     </div>
-                     <div class="loc-cart">
-                        <div class="map-loc"> 
-                        <span><i class="fa fa-map-marker" aria-hidden="true"></i> Sydney </span>
-                        </div>
-                        <div class="cart-icon">
-                         <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div> --}}
-        
             </div>
           </div>
           </div>

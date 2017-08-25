@@ -42,7 +42,9 @@ class HomeController extends Controller
     {
         $pdID = Crypt::decrypt($id);
         $productDetails = Product::find($pdID);
-        return view('home.couponDetails',compact('productDetails'));
+        $catID=$productDetails->cat_id_fk;
+        $relatedProducts = Product::where('cat_id_fk','=',$catID)->where('id','<>',$pdID)->where('isdelete','=','0')->limit(4)->inRandomOrder()->get();
+        return view('home.couponDetails',compact('productDetails','relatedProducts'));
     }
     public function searchProduct(Request $req)
     {

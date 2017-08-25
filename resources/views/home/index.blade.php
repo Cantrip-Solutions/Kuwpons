@@ -7,27 +7,27 @@
         <div class="coupons-box">
           <div class="row">
           @if (Cookie::get('bucket') !== false) {
-          {{-- @php
-            $bucket = Cookie::get('bucket');
-          @endphp --}}
              <div class="alert alert-info"><i class="pe-7s-gleam"></i>{{Cookie::get('bucket')}}</div>
           @endif
           {{-- {{$newCoupons}} --}}
             @foreach($newCoupons as $newCoupon)
-              <div class="col-md-4">
+            <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="coupons-box-border">
-                  <figure>
+                  <div class="discount-product">
+                   <figure>
                     <a href="/coupon/{{urlencode($newCoupon->name)}}/{{Crypt::encrypt($newCoupon->id)}}">
                       {!!HTML::image(config('global.productPath').$newCoupon->defaultImage->image, 'Loading...')!!}
                     </a>
-                  </figure>
+                   </figure>
+                   <span>20% OFF</span>
+                  </div>
                   <div class="coupons-box-text">
                     <p>{{$newCoupon->shortDescription}}</p>
                     <div class="row">
-                      <div class="col-md-8">
+                    <div class="col-lg-8 col-md-8 col-xs-10">
                         <div class="defaultbtn btn-green coupons-price-btn"> <span class="old-price">KD {{$newCoupon->original_price}}</span> <span class="new-price">KD {{$newCoupon->saling_price}}</span> </div>
                       </div>
-                      <div class="col-md-4">
+                    <div class="col-lg-4 col-md-4 col-xs-2">
                         <div class="coupons-cart btn-green" proID="{{Crypt::encrypt($newCoupon->id)}}" style="cursor: pointer;"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
                       </div>
                     </div>
@@ -42,7 +42,7 @@
     <section class="discounts-sec">
       <div class="container">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-lg-6 col-md-6">
             <div class="discount_img">
               <figure>
 
@@ -58,10 +58,10 @@
               </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-lg-6 col-md-6">
             <div class="discount-right">
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-3 col-xs-3">
                   <div class="discount-right-img">
                   <figure>
 
@@ -72,16 +72,16 @@
                   </div>
                 </div>
                 <div class="discount-right-text">
-                  <div class="col-md-7">
+                  <div class="col-lg-7 col-md-7 col-xs-7">
                     <p>It has roots in a piece of classical Latin literature making it over 2000 years old.</p>
                   </div>
-                  <div class="col-md-2"> <span class="price-old">$150</span> <span class="price-new">$100</span> </div>
+                  <div class="col-lg-2 col-md-2 col-xs-2"> <span class="price-old">$150</span> <span class="price-new">$100</span> </div>
                 </div>
               </div>
             </div>
             <div class="discount-right">
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-3 col-xs-3">
                   <div class="discount-right-img">
                     <figure>
 
@@ -92,16 +92,16 @@
                   </div>
                 </div>
                 <div class="discount-right-text">
-                  <div class="col-md-7">
+                  <div class="col-lg-7 col-md-7 col-xs-7">
                     <p>It has roots in a piece of classical Latin literature making it over 2000 years old.</p>
                   </div>
-                  <div class="col-md-2"> <span class="price-old">$150</span> <span class="price-new">$100</span> </div>
+                  <div class="col-lg-2 col-md-2 col-xs-2"> <span class="price-old">$150</span> <span class="price-new">$100</span> </div>
                 </div>
               </div>
             </div>
             <div class="discount-right">
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-3 col-xs-3">
                   <div class="discount-right-img">
                     <figure>
 
@@ -112,10 +112,10 @@
                   </div>
                 </div>
                 <div class="discount-right-text">
-                  <div class="col-md-7">
+                  <div class="col-lg-7 col-md-7 col-xs-7">
                     <p>It has roots in a piece of classical Latin literature making it over 2000 years old.</p>
                   </div>
-                  <div class="col-md-2"> <span class="price-old">$150</span> <span class="price-new">$100</span> </div>
+                  <div class="col-lg-2 col-md-2 col-xs-2"> <span class="price-old">$150</span> <span class="price-new">$100</span> </div>
                 </div>
               </div>
             </div>
@@ -128,7 +128,7 @@
         <h1>POPULAR COUPONS</h1>
         <div class="coupons-box">
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-lg-4 col-md-6 col-sm-6">
               <div class="coupons-box-border">
                 <figure>
 
@@ -139,17 +139,17 @@
                 <div class="coupons-box-text">
                   <p>Lorem Ipsum has been the industry's standard dummy text ever sincunknown printer scrambled a type specimen book.</p>
                   <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-lg-8 col-md-8 col-xs-10">
                       <div class="defaultbtn btn-green coupons-price-btn"> <span class="old-price">$250.00</span> <span class="new-price">$200.00</span> </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-lg-4 col-md-4 col-xs-2">
                       <div class="coupons-cart btn-green"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4 col-md-6 col-sm-6">
               <div class="coupons-box-border">
                 <figure>
 
@@ -160,17 +160,17 @@
                 <div class="coupons-box-text">
                   <p>Lorem Ipsum has been the industry's standard dummy text ever sincunknown printer scrambled a type specimen book.</p>
                   <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-lg-8 col-md-8 col-xs-10">
                       <div class="defaultbtn btn-green coupons-price-btn"> <span class="old-price">$250.00</span> <span class="new-price">$200.00</span> </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-lg-4 col-md-4 col-xs-2">
                       <div class="coupons-cart btn-green"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4 col-md-6 col-sm-6">
               <div class="coupons-box-border">
                 <figure>
 
@@ -181,10 +181,10 @@
                 <div class="coupons-box-text">
                   <p>Lorem Ipsum has been the industry's standard dummy text ever sincunknown printer scrambled a type specimen book.</p>
                   <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-lg-8 col-md-8 col-xs-10">
                       <div class="defaultbtn btn-green coupons-price-btn"> <span class="old-price">$250.00</span> <span class="new-price">$200.00</span> </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-lg-4 col-md-4 col-xs-2">
                       <div class="coupons-cart btn-green"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
                     </div>
                   </div>
@@ -197,7 +197,7 @@
     </section>
     
     @if(!\Auth::check())
-     <section class="newslatter-sec">
+     {{-- <section class="newslatter-sec">
       <div class="container">
       <div class="row">
        <div class="col-lg-5">
@@ -212,28 +212,14 @@
        </div>
        </div>
       </div>
-     </section>
+     </section> --}}
      @endif
 
     
   </div>
 @push('scripts')
 <script type="text/javascript">
-  $('.coupons-cart').on('click', function () {
-    var id = $(this).attr('proID');
-    var token = $('input[name=_token]').val();
-    $.ajax({
-      'type':'post',
-      'url':'{{URL::to('addToCart')}}/'+id,
-      'headers': {'X-CSRF-TOKEN': token},
-      // 'data':{'user_id':user_id},
-      'dataType':'json',
-      // 'beforeSend':function(){ $('.row').mask('Please Wait...'); },
-      'success':function(resp){
 
-      }
-    }); 
-  })
 </script>
 @endpush
 @endsection

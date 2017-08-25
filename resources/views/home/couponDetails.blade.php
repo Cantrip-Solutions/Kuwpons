@@ -44,16 +44,15 @@
                       
 			                   <h2>Price <span class="old-price"> KD {{ $productDetails->original_price }} </span> <span > KD {{ $productDetails->saling_price }} </span>  </h2>
 			                   {{-- <h2>Discount Price <span> $ 200.00 </span> </h2> --}}
-			                   <h3>Category | Product | Food</h3>
 			                </div>
 			                <div class="qty-wrap">
 			                  <h3>Quantity</h3>
 			                  <div class="qty-sec">
 			                    <button id="minus"><i class="fa fa-chevron-down" aria-hidden="true"></i> </button>
-			                    <input id="num" type="text" value="0">
+			                    <input id="num" type="number" value="1" min="1" class="pro_quantity">
 			                    <button id="plus"><i class="fa fa-chevron-up" aria-hidden="true"></i> </button>
 			                  </div>
-			                  <a href="#" class="addcard">Add To Cart</a> </div>
+			                  <a href="#" class="addcard" proID="{{Crypt::encrypt($productDetails->id)}}" >Add To Cart</a> </div>
 			            </div>
 		            </div>
 		        </div>
@@ -115,78 +114,29 @@
               <h1>Related Products</h1>
               <div class="product-list">
                 <div class="row">
-                  <div class="col-lg-3 col-md-3 col-sm-6">
-                    <div class="product-list-border">
-                      <figure> <img src="images/product-list-1.jpg" alt="" class=""/> </figure>
-                      <div class="product-list-text">
-                        <h3>Lorem Ipsum</h3>
-                        <p>Has been the industry's standard dummy text ever.</p>
-                        <h2>Price <span> $ 220.00 </span> </h2>
-                        <h2>Discount Price <span> $ 200.00 </span> </h2>
-                        <div class="mid-deals">
-                          <h2>Deals sold <span> 1 </span> </h2>
-                          <span> Expiry Date 14.10.2017 </span> </div>
-                        <div class="loc-cart">
-                          <div class="map-loc"> <span><i class="fa fa-map-marker" aria-hidden="true"></i> Sydney </span> </div>
-                          <div class="cart-icon"> <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span> </div>
+                  @foreach ($relatedProducts as $key => $product)
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                      <div class="product-list-border">
+                        <figure>
+                          {!!HTML::image(config('global.productPath').$product->defaultImage->image)!!}
+                        </figure>
+                        <div class="product-list-text">
+                          <h3>{{ $product->name }}</h3>
+                          <p>{{ substr($product->shortDescription, 0,130) }}</p>
+                          <h2>Price <span class="old-price"> KD {{ $product->original_price }} </span> <span > KD {{ $product->saling_price }} </span>  </h2>
+                          {{-- <h2>Discount Price <span> $ 200.00 </span> </h2> --}}
+                          <div class="mid-deals">
+                            <h2>Deals sold <span> 1 </span> </h2>
+                            <span> Expiry Date {{ date('d.m.Y',strtotime($product->expire_on)) }} </span> </div>
+                          <div class="loc-cart">
+                            <div class="map-loc"> <span><i class="fa fa-map-marker" aria-hidden="true"></i> Sydney </span> </div>
+
+                            <div class="cart-icon coupons-cart" proID="{{Crypt::encrypt($product->id)}}" style="cursor: pointer;"> <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span> </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-lg-3 col-md-3 col-sm-6">
-                    <div class="product-list-border">
-                      <figure> <img src="images/product-list-7.jpg" alt="" class=""/> </figure>
-                      <div class="product-list-text">
-                        <h3>Lorem Ipsum</h3>
-                        <p>Has been the industry's standard dummy text ever.</p>
-                        <h2>Price <span> $ 220.00 </span> </h2>
-                        <h2>Discount Price <span> $ 200.00 </span> </h2>
-                        <div class="mid-deals">
-                          <h2>Deals sold <span> 1 </span> </h2>
-                          <span> Expiry Date 14.10.2017 </span> </div>
-                        <div class="loc-cart">
-                          <div class="map-loc"> <span><i class="fa fa-map-marker" aria-hidden="true"></i> Sydney </span> </div>
-                          <div class="cart-icon"> <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span> </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-3 col-sm-6">
-                    <div class="product-list-border">
-                      <figure> <img src="images/product-list-8.jpg" alt="" class=""/> </figure>
-                      <div class="product-list-text">
-                        <h3>Lorem Ipsum</h3>
-                        <p>Has been the industry's standard dummy text ever.</p>
-                        <h2>Price <span> $ 220.00 </span> </h2>
-                        <h2>Discount Price <span> $ 200.00 </span> </h2>
-                        <div class="mid-deals">
-                          <h2>Deals sold <span> 1 </span> </h2>
-                          <span> Expiry Date 14.10.2017 </span> </div>
-                        <div class="loc-cart">
-                          <div class="map-loc"> <span><i class="fa fa-map-marker" aria-hidden="true"></i> Sydney </span> </div>
-                          <div class="cart-icon"> <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span> </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-3 col-sm-6">
-                    <div class="product-list-border">
-                      <figure> <img src="images/product-list-9.jpg" alt="" class=""/> </figure>
-                      <div class="product-list-text">
-                        <h3>Lorem Ipsum</h3>
-                        <p>Has been the industry's standard dummy text ever.</p>
-                        <h2>Price <span> $ 220.00 </span> </h2>
-                        <h2>Discount Price <span> $ 200.00 </span> </h2>
-                        <div class="mid-deals">
-                          <h2>Deals sold <span> 1 </span> </h2>
-                          <span> Expiry Date 14.10.2017 </span> </div>
-                        <div class="loc-cart">
-                          <div class="map-loc"> <span><i class="fa fa-map-marker" aria-hidden="true"></i> Sydney </span> </div>
-                          <div class="cart-icon"> <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span> </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  @endforeach
                 </div>
               </div>
             </div>
@@ -274,6 +224,24 @@ $(document).ready(function(){
         // instead of a settings object
       ]
     }); 
+  $('.addcard').on('click', function () {
+      var id = $(this).attr('proID');
+      var token = $('input[name=_token]').val();
+      var pro_quantity=$('.pro_quantity').val();
+      /*alert(pro_quantity);*/
+      $.ajax({
+        'type':'post',
+        'url':'{{URL::to('addToCart')}}/'+id+'/'+pro_quantity,
+        'headers': {'X-CSRF-TOKEN': token},
+        // 'data':{'user_id':user_id},
+        'dataType':'json',
+        // 'beforeSend':function(){ $('.row').mask('Please Wait...'); },
+        'success':function(resp){
+          swal({title: resp.type, text: resp.message, type: resp.type});
+          cartValue();
+        }
+      });
+    });
 });    
 </script>
 @endpush

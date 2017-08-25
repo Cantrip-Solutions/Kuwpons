@@ -9,13 +9,15 @@ $(document).ready(function(){
         $('.header-right-tog-content').slideToggle(150);
     });
 
-
-   
-
-        
-     
-
 });
+
+$(window).resize(function(){
+    var totalwidth = $(this).width();
+    if( totalwidth > 767){
+        $('.header-right-tog-content').removeAttr('style');
+    }
+})
+
 
 
   $(document).ready(function(){

@@ -114,6 +114,12 @@ Route::get('/category/{name}/{id}', 'HomeController@searchCategory');
 Route::get('/coupon/{name}/{id}', 'HomeController@couponDetails');
 Route::post('/searchedProduct', 'HomeController@searchProduct');
 
-// Add to Cart
-Route::post('/addToCart/{id}', 'OrdersController@addToCart');
+// Cart
+Route::post('/addToCart/{id}/{quantity}', 'OrdersController@addToCart');
+Route::get('/cartValue', 'OrdersController@cartValue');
+Route::get('/cartSync', 'OrdersController@cartSync');
+Route::get('/myCart', 'OrdersController@myCart');
+Route::get('/myOrder', 'OrdersController@myOrder');
+Route::post('/updateCartQuantity', 'OrdersController@updateCartQuantity');
+Route::post('/deleteProductFromCart', 'OrdersController@deleteProductFromCart');
 

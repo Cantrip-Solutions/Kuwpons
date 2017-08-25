@@ -54,7 +54,7 @@
                 <li><a href="#">My Profile</a></li>
                 <li><a href="#">Order History</a></li>
                 <li>
-                  <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"> <i class="pe-7s-upload pe-rotate-90"></i>Logout</a>
+                  <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="pe-7s-upload pe-rotate-90"></i>Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
@@ -63,22 +63,22 @@
               </li>
 
               @endif
-              <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span id="cart-count" class="cart_visible" data-count-unseen="0">0</span></a></li>
+              <li><a href="{{URL::to('/myCart')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span id="cart-count" class="cart_visible" data-count-unseen="0">0</span></a></li>
 
               
                <li>
+              <div class="search-bar">
                   <div class="search-sec">
                   {{Form::open(array('id'=>'formdata','action' => 'HomeController@searchProduct', 'method'=>'POST', 'enctype'=>"multipart/form-data"))}}
                     <input class="search-cont" type="text" name="searchItem" value="" placeholder="Search..."> 
                     <a class="search-icon"><i class="fa fa-search" aria-hidden="true"></i></a>
                   {{Form::close()}}
                   </div>
-                  
+                  </div>
                 </li>
-
-
-              <li><span class="header-right-toggle"><i class="fa fa-bars" aria-hidden="true"></i></span></li>  
             </ul>
+            <span class="header-right-toggle"><i class="fa fa-bars" aria-hidden="true"></i></span>
+
           </div>
         </div>
       </div>
@@ -111,7 +111,7 @@
             <h4>KUW PONS is the best of the best.</h4>
             <h1>#1 Coupon Deal Site In Kuwait</h1>
             @if(!\Auth::check())
-            <div class="sign-button"> <a class="defaultbtn btn-green" href="">SIGN UP</a> </div>
+            <div class="sign-button"> <a class="defaultbtn btn-green fancybox" href="#register">SIGN UP</a> </div>
             @endif
           </div>
         </div>
@@ -125,13 +125,13 @@
     <div class="footer-top">
       <div class="container">
         <div class="row">
-          <div class="col-lg-4 col-md-3 col-sm-2">
+          <div class="col-lg-4 col-md-3 col-sm-2 footer-respos">
             <div class="footer-top-block">
               <h2>About Us</h2>
-              <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur.</p> 
+              <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur.</p>
             </div>
           </div>
-          <div class="col-lg-2 col-md-3 col-sm-2">
+          <div class="col-lg-2 col-md-3 col-sm-4">
             <div class="footer-top-block">
               <h2>Useful Links</h2>
               <ul>
@@ -143,7 +143,7 @@
               </ul>
             </div>
           </div>
-          <div class="col-lg-4 col-md-2 col-sm-3">
+          <div class="col-lg-4 col-md-4 col-sm-5">
             <div class="footer-top-block">
               <h2>Coupop Categories</h2>
               <ul>
@@ -153,7 +153,7 @@
               </ul>
             </div>
           </div>
-          <div class="col-lg-2 col-md-4 col-sm-4">
+          <div class="col-lg-2 col-md-2 col-sm-3">
             <div class="footer-top-block">
               <h2>Follow Us</h2>
               <ul>
@@ -169,10 +169,8 @@
     </div>
   </footer>
   <div class="footer-copyright clears">
-      <div class="container"> 
-       <span>Copyrights © 2017 Kuwpons. All Rights Reserved</span>
-      </div>
-    </div>
+    <div class="container"> <span>Copyrights © 2017 Kuwpons. All Rights Reserved</span> </div>
+  </div>
 </div>
 
 
@@ -291,14 +289,35 @@
 {!! HTML::script('plugins/jquery-validation-1.15.0/dist/additional-methods.min.js') !!}
 
 {!!HTML::script('kuwpons/js/custom.js')!!}
+@stack('scripts')
 
 @if (Session::has('message'))
   <script type="text/javascript">
   var message = '{{ Session::get('message') }}';
     $(document).ready(function(){
-      swal("Error!", message, "error");
+      setTimeout(function () {
+          swal({title: 'Error!', text: message, type: 'error'});
+      }, 1000);
     });
   </script>
+@endif
+
+
+{{-- Sync Cart --}}
+@if(Auth::check())
+<script type="text/javascript">
+$(document).ready(function(){
+  var token = $('input[name=_token]').val();
+  $.ajax({
+    'type':'get',
+    'url':'{{URL::to('cartSync')}}',
+    'headers': {'X-CSRF-TOKEN': token},
+    'success':function(){
+      cartValue();
+    }
+  });
+});
+</script>
 @endif
 
 <script>
@@ -342,11 +361,39 @@
             
           }
         });
-    })
+    });
+
+    $('.coupons-cart').on('click', function () {
+      var id = $(this).attr('proID');
+      var token = $('input[name=_token]').val();
+      $.ajax({
+        'type':'post',
+        'url':'{{URL::to('addToCart')}}/'+id+'/'+1,
+        'headers': {'X-CSRF-TOKEN': token},
+        // 'data':{'user_id':user_id},
+        'dataType':'json',
+        // 'beforeSend':function(){ $('.row').mask('Please Wait...'); },
+        'success':function(resp){
+          swal({title: resp.type, text: resp.message, type: resp.type});
+          cartValue();
+        }
+      }); 
+    });
+    cartValue();
+    function cartValue() {
+      var token = $('input[name=_token]').val();
+      $.ajax({
+        'type':'get',
+        'url':'{{URL::to('cartValue')}}',
+        'headers': {'X-CSRF-TOKEN': token},
+        'success':function(resp){
+          $('.cart_visible').text(resp);
+        }
+      }); 
+    }
 </script> 
 
 
-@stack('scripts')
 
 </body>
 </html>

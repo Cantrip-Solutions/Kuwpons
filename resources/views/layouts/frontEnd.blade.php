@@ -19,6 +19,7 @@
     {!!HTML::style('kuwpons/source/jquery.fancybox.css')!!}
     {!!HTML::style('kuwpons/css/cloud-zoom.css')!!}
     {!!HTML::style('kuwpons/css/slick.css')!!}
+    {!!HTML::style('kuwpons/css/easy-responsive-tabs.css')!!}
     {!!HTML::style('admintheme/vendor/sweetalert/lib/sweet-alert.css')!!}
     {!!HTML::style('admintheme/vendor/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.min.css')!!}
     
@@ -51,8 +52,8 @@
 
               <ul>
                 
-                <li><a href="#">My Profile</a></li>
-                <li><a href="#">Order History</a></li>
+                <li><a href="{{ URL::to('/myAccount') }}">My Profile</a></li>
+                <li><a href="{{ URL::to('/orderHistory') }}">Order History</a></li>
                 <li>
                   <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="pe-7s-upload pe-rotate-90"></i>Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -63,19 +64,22 @@
               </li>
 
               @endif
-              <li><a href="{{URL::to('/myCart')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span id="cart-count" class="cart_visible" data-count-unseen="0">0</span></a></li>
-
-              
-               <li>
-              <div class="search-bar">
+              <li>
+                <a href="{{URL::to('/myCart')}}">
+                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                  <span id="cart-count" class="cart_visible" data-count-unseen="0">0</span>
+                </a>
+              </li>
+              <li>
+                <div class="search-bar">
                   <div class="search-sec">
                   {{Form::open(array('id'=>'formdata','action' => 'HomeController@searchProduct', 'method'=>'POST', 'enctype'=>"multipart/form-data"))}}
                     <input class="search-cont" type="text" name="searchItem" value="" placeholder="Search..."> 
                     <a class="search-icon"><i class="fa fa-search" aria-hidden="true"></i></a>
                   {{Form::close()}}
                   </div>
-                  </div>
-                </li>
+                </div>
+              </li>
             </ul>
             <span class="header-right-toggle"><i class="fa fa-bars" aria-hidden="true"></i></span>
 
@@ -127,7 +131,7 @@
         <div class="row">
           <div class="col-lg-4 col-md-3 col-sm-2 footer-respos">
             <div class="footer-top-block">
-              <h2>About Us</h2>
+              <h2> About Us</h2>
               <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur.</p>
             </div>
           </div>
@@ -135,21 +139,20 @@
             <div class="footer-top-block">
               <h2>Useful Links</h2>
               <ul>
-                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> How it works?</a></li>
-                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Terms & Conditions</a></li>
-                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Stores</a></li>
-                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Shortcodes</a></li>
-                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Contact</a></li>
+                <li><a href="{{ URL::to('/how_it_workes') }}"><i class="fa fa-angle-double-right" aria-hidden="true"></i> How it works?</a></li>
+                <li><a href="{{ URL::to('/terms_conditions') }}"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Terms & Conditions</a></li>
+                <li><a href="{{ URL::to('/about_us') }}"><i class="fa fa-angle-double-right" aria-hidden="true"></i> About Us </a></li>
+                <li><a href="{{ URL::to('/contact_us') }}"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Contact</a></li>
               </ul>
             </div>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-5">
             <div class="footer-top-block">
-              <h2>Coupop Categories</h2>
+              <h2>Coupon Categories</h2>
               <ul>
-                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Salon Deals</a></li>
-                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Cafe Deals</a></li>
-                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Gym Deals</a></li>
+              	@foreach($categories as $cat)
+                  <li><a href="/category/{{urlencode(str_replace('/', '&#47;',$cat->cat_name))}}/{{Crypt::encrypt($cat->id)}}"><i class="fa fa-angle-double-right" aria-hidden="true"></i> {{$cat->cat_name}}</a></li>
+                @endforeach
               </ul>
             </div>
           </div>
@@ -279,7 +282,7 @@
 {!!HTML::script('kuwpons/js/slick.js')!!}
 {!!HTML::script('kuwpons/js/bootstrap.js')!!}
 {!!HTML::script('kuwpons/source/jquery.fancybox.js')!!}
-
+{!!HTML::script('kuwpons/js/easyResponsiveTabs.js')!!}
 
 
 {!! HTML::script('admintheme/vendor/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js') !!}

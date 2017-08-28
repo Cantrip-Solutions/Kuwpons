@@ -34,7 +34,12 @@
                   </a>
                   {{-- <img src="images/product-list-1.jpg" alt="" class=""/>  --}}
                   </figure>
-                   <span>20% OFF</span>
+                    @php
+                      $off = Helper::discountOff($product->original_price,$product->saling_price);
+                    @endphp
+                     @if($off != '0')
+                      <span>{{$off}}% Off</span>
+                     @endif
                  </div>
                   <div class="product-list-text">
                     <h3>{{$product->name}}</h3>
@@ -47,7 +52,6 @@
                      </div>
                      <div class="loc-cart">
                         <div class="map-loc"> 
-                        <span><i class="fa fa-map-marker" aria-hidden="true"></i> Sydney </span>
                         </div>
                        <div class="cart-icon coupons-cart" proID="{{Crypt::encrypt($product->id)}}" style="cursor: pointer;"> <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span> </div>
                       </div>

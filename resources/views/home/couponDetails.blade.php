@@ -117,9 +117,17 @@
                   @foreach ($relatedProducts as $key => $product)
                     <div class="col-lg-3 col-md-3 col-sm-6">
                       <div class="product-list-border">
-                        <figure>
-                          {!!HTML::image(config('global.productPath').$product->defaultImage->image)!!}
-                        </figure>
+                        <div class="discount-product">
+                          <figure>
+                            {!!HTML::image(config('global.productPath').$product->defaultImage->image)!!}
+                          </figure>
+                          @php
+                            $off = Helper::discountOff($product->original_price,$product->saling_price);
+                          @endphp
+                           @if($off != '0')
+                            <span>{{$off}}% Off</span>
+                           @endif
+                        </div>
                         <div class="product-list-text">
                           <h3>{{ $product->name }}</h3>
                           <p>{{ substr($product->shortDescription, 0,130) }}</p>
@@ -129,7 +137,7 @@
                             <h2>Deals sold <span> 1 </span> </h2>
                             <span> Expiry Date {{ date('d.m.Y',strtotime($product->expire_on)) }} </span> </div>
                           <div class="loc-cart">
-                            <div class="map-loc"> <span><i class="fa fa-map-marker" aria-hidden="true"></i> Sydney </span> </div>
+                            <div class="map-loc">  </div>
 
                             <div class="cart-icon coupons-cart" proID="{{Crypt::encrypt($product->id)}}" style="cursor: pointer;"> <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span> </div>
                           </div>

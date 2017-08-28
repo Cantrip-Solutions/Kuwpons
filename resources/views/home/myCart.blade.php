@@ -71,7 +71,7 @@
                     </tr>
                   </tbody>
                 </table>
-                <button class="defaultbtn checkout-btn">Proceed to checkout</button>
+                <a href="/myAccount/checkout"><button class="defaultbtn checkout-btn">Proceed to checkout</button></a>
               </div>
             </div>
           </div>

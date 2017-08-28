@@ -229,6 +229,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Helper' => App\Helpers\Helper::class,
 
     ],
 

@@ -91,12 +91,17 @@ Route::group(['middleware' => 'auth'], function () {
 
 		// Menu Management
 		Route::get('/settings/menuManagement', 'SettingsController@menuManagement');
-
+		Route::post('updateProfile', 'HomeController@updateProfile');
 
 	});
 
 	//-------------------------Vendor Panel-----------------------
+	Route::group(['middleware' => 'role:S'], function () {
 
+		Route::get('/vendor/chartCompanyProducts', 'CompanyController@chartCompanyProducts');
+		Route::post('/vendor/updateCoupon', 'CompanyController@updateCoupon');
+
+	});
 
 	// ------------------------Settings---------------------------
 
@@ -104,6 +109,17 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('passwordChange', 'SettingsController@passwordChange');
 	Route::post('updatePassword', 'SettingsController@updatePassword');
 
+	// -------------------- frontend Myaccount ------------------------//
+		
+	Route::get('/myAccount', 'HomeController@myAccount');
+	Route::post('updateProfile', 'HomeController@updateProfile');	
+	Route::post('updateUserPassword', 'HomeController@updateUserPassword');	
+
+
+	// ------------------------Place Order-----------------------------
+	Route::post('/placeOrder', 'OrdersController@placeOrder');
+	Route::get('/orderHistory', 'OrdersController@orderHistory');
+	
 });
 
 
@@ -119,7 +135,15 @@ Route::post('/addToCart/{id}/{quantity}', 'OrdersController@addToCart');
 Route::get('/cartValue', 'OrdersController@cartValue');
 Route::get('/cartSync', 'OrdersController@cartSync');
 Route::get('/myCart', 'OrdersController@myCart');
-Route::get('/myOrder', 'OrdersController@myOrder');
 Route::post('/updateCartQuantity', 'OrdersController@updateCartQuantity');
 Route::post('/deleteProductFromCart', 'OrdersController@deleteProductFromCart');
+Route::get('/myAccount/checkout', 'OrdersController@checkout');
+
+//Static Page
+Route::get('/contact_us', 'HomeController@contact_us');
+Route::get('/about_us', 'HomeController@about_us');
+Route::get('/terms_conditions', 'HomeController@termsConditions');
+Route::get('/how_it_workes', 'HomeController@howItWorkes');
+
+
 

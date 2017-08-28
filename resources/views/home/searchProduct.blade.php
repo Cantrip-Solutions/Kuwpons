@@ -43,9 +43,9 @@
                      <span> Expiry Date {{date('d.m.Y',strtotime($product->expire_on))}} </span>
                      </div>
                      <div class="loc-cart">
-                        <div class="map-loc"> 
+                        {{-- <div class="map-loc"> 
                         <span><i class="fa fa-map-marker" aria-hidden="true"></i> Sydney </span>
-                        </div>
+                        </div> --}}
                        <div class="cart-icon coupons-cart" proID="{{Crypt::encrypt($product->id)}}" style="cursor: pointer;"> <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span> </div>
                       </div>
                   </div>

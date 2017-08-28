@@ -693,6 +693,11 @@ a.recover-pass:hover{
     display: inline-block;
     vertical-align: middle;
     margin-right: 5px;
+	border: none!important;
+    background-color: transparent;
+    appearance: radio;
+   -moz-appearance: radio;
+   -webkit-appearance: radio;
 }
 
 .gend label{
@@ -814,7 +819,10 @@ a.recover-pass:hover{
 .product-list-sec .product-list-border img {
     border-radius: 10px;
     min-height: 190px;
-    width:100%;
+    width: auto;
+    display: block;
+    height: 190px;
+    margin: 0 auto;
 }
 .product-list-sec .product-list .product-list-text {
     padding: 8px 10px;
@@ -908,7 +916,7 @@ a.recover-pass:hover{
     right: 0;
     z-index: 99;
     font-weight: 700;
-    width: 60px;
+    width: 49px;
     text-align: center;
     padding-top: 10px;
 }
@@ -1103,6 +1111,8 @@ a.recover-pass:hover{
     line-height: 40px;
     text-align: center;
     margin-left: -4px;
+	-moz-appearance: textfield;
+	appearance:textfield;
 }
 
 .qty-sec input[type=number]::-webkit-inner-spin-button, 
@@ -1110,7 +1120,6 @@ a.recover-pass:hover{
   -webkit-appearance: none; 
   margin: 0; 
 }
-
 
 .addcard{
     border-radius: 6px;
@@ -1973,8 +1982,11 @@ a.recover-pass:hover{
 .address-block a {
     padding: 6px 12px;
     margin: 0 0 15px;
+    display: block;
+    width: 50px;
 }
 .address-block address-content {
+	display:block;
 }
 .address-block address-content span {
     display: block;
@@ -2011,6 +2023,51 @@ a.recover-pass:hover{
     color: #333333;
     margin: 0 0 22px;
     text-transform: uppercase;
+}
+
+.my-account-form .address-block .field-row {
+    border-bottom:0;
+}
+
+.my-account-form .address-block .input-group {
+    position: relative;
+    display: inline-block;
+    width: 94%;
+}
+
+.my-account-form .address-block .input-group .input-group-addon {
+    width: 46px;
+    height: 40px;
+    display: inline-block;
+    position: absolute;
+}
+.my-account-form .address-block .input-group .input-group-addon .fa {
+	line-height:24px;
+}
+.my-account-form .address-block .form-control {
+	width: 100%;
+	height: 40px;
+	padding: 4px 10px;
+	outline: 0;
+	border: 1px solid #a9b0b2 !important;
+	margin: 0 0 12px;
+}
+
+.my-account-form .address-block input[type="submit"] {
+    background: #7ac142;
+    font-size: 18px;
+    color: #fff;
+    display: block;
+    outline: 0;
+    border: 0;
+    width: 200px;
+    padding: 9px 0;
+    text-transform: uppercase;
+	margin:0 auto;
+}
+
+.my-account-form .address-block input[type="submit"]:hover {
+    background: rgb(136, 220, 69);
 }
 
 /*My Account End*/
@@ -2192,3 +2249,346 @@ part-field{
     padding:30px 0 0;
 }
 
+/*End contact Us*/
+
+
+/* ############################### cheackout-details Start ##########################  */
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 19-08-17 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+.checkout-details-sec {
+    padding:32px 0;
+}
+.billing-form {
+    padding: 10px 0 52px;
+    border-bottom: 1px solid #e8e8e8;
+}
+.checkout-details-sec .checkout-main h1 {
+    font-size:40px;
+    font-weight:700;
+    padding: 10px 0 10px;
+}
+.checkout-details-sec .payment-info {
+    border-right: 1px solid #e8e8e8;
+}
+.checkout-details-sec .shipping-form {
+    border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 52px;
+    padding-right: 30px;
+}
+.payment-info .form-group {
+    margin-bottom:6px;
+    margin-top:14px;
+}
+.payment-info .form-group label {
+    font-size:14px;
+    color:#8b8b8b;
+    padding: 4px 0;
+}
+.checkout-details-sec .checkout-main .form-control {
+    border: 1px solid #bfbfbf;
+    color: #000;
+    padding: 0 8px 0 10px;
+    margin: 0;
+    background-color: #fff;
+    height: 40px;
+    border-radius:0;
+    outline: none;
+    -webkit-appearance: none;
+    outline: 0;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    font-size:14px;
+}
+.checkout-details-sec .payment-info .zipcode {
+    width:40%;
+    float: left;
+}
+.checkout-details-sec .payment-info .city {
+    width: 60%;
+    float: left;
+}
+.checkout-details-sec .payment-info p {
+ padding-left:.9375rem;
+    font-size:12px;
+    padding-bottom: 8px;
+}
+.checkout-details-sec .payment-info .form-group select {
+    background-position-x: 244px;
+    background-image:url(../images/arrow-down.png);
+    background-repeat: no-repeat;
+    background-position: 96% center;
+    color: #999;
+    appearance:none;
+    -webkit-appearancee:none;
+    -moz-appearance: none;
+}
+.checkout-details-sec .payment-info h3 {
+    font-size:12px;
+    font-weight:700;
+    padding: 2px 0 30px;
+}
+.checkout-details-sec .payment-info h4 {
+    font-size:11px;
+    padding: 2px 0 30px;
+}
+.checkout-details-sec .payment-info h4 span {
+    color:#7ac142;
+}
+.shipping-checkbox {
+    position: relative;
+    font-size: 12px;
+}
+.shipping-checkbox label {
+    cursor: pointer;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 0;
+    border-radius: 3px;
+    left:0;
+    background: #7ac142;
+}
+.shipping-checkbox label:after {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 6px;
+    background: transparent;
+    top: 3px;
+    left: 3px;
+    border: 2.5px solid #fff;
+    border-top: none;
+    border-right: none;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+ .shipping-checkbox label:hover::after {
+ -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+ filter: alpha(opacity=30);
+ opacity: 0.8;
+}
+.shipping-checkbox input[type=checkbox]:checked + label:after {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    opacity: 1;
+}
+.checkout-details-sec .payment-info input[type="checkbox"] {
+    margin-right: 20px;
+}
+.checkout-details-sec .payment-type {
+    width: 26%;
+    float: left;
+    background: #f2f2f2;
+    margin-right: 29px;
+    height: 426px;
+}
+.checkout-details-sec .payment-options .payment-mode-main {
+    border-top: 1px solid #000;
+    margin-top: 14px;
+}
+.checkout-details-sec .payment-type ul {
+    margin-top: 4px;
+}
+.checkout-details-sec .payment-type ul li {
+    padding: 23px 23px !important;
+    font-size: 12px !important;
+    color: #000 !important;
+    display:block !important;
+    border-left: 6px solid #f2f2f2 !important;
+    border-bottom: 1px solid #e5e5e5 !important;
+    border-top:0 !important;
+    margin: 0 !important;
+}
+.checkout-details-sec .payment-type ul li:hover, .checkout-details-sec .payment-type ul li.resp-tab-active {
+    background:#fff !important;
+    border-left: 6px solid #7ac142 !important;
+}
+.checkout-details-sec .payment-form {
+    width:70%;
+    float:left;
+}
+.checkout-details-sec .payment-form .form-group {
+    margin-bottom:6px;
+    margin-top:6px;
+}
+ .checkout-details-sec .payment-form .form-group:nth-child(1) {
+ width: 55%;
+ display: inline-block;
+}
+ .checkout-details-sec .payment-form .form-group:nth-child(2) {
+ width: 44%;
+ display: inline-block;
+}
+ .checkout-details-sec .payment-form .form-group:nth-child(3) {
+ margin:20px 0 12px;
+}
+ .checkout-details-sec .payment-form .form-group:nth-child(4) {
+ width: 55%;
+ display: block;
+ float: left;
+ margin-right: 5px;
+}
+ .checkout-details-sec .payment-form .form-group:nth-child(5) {
+ width: 44%;
+ display: inline-block;
+}
+.checkout-details-sec .payment-form .form-group label {
+    font-size:14px;
+    color:#8b8b8b;
+    padding: 4px 0;
+    display: block;
+}
+.checkout-details-sec .payment-form .form-control {
+    border: 1px solid #bfbfbf;
+    color: #000;
+    padding: 0 8px 0 10px;
+    margin: 0;
+    background-color: #fff;
+    height: 40px;
+    border-radius:0;
+    outline: none;
+    -webkit-appearance: none;
+    outline: 0;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    font-size:14px;
+}
+.checkout-details-sec .payment-form .form-group select {
+    background-position-x: 244px;
+    background-image:url(../images/arrow-down.png);
+    background-repeat: no-repeat;
+    background-position: 96% center;
+    color: #999;
+    appearance:none;
+    -webkit-appearancee:none;
+    -moz-appearance: none;
+    width: 49%;
+    display: inline-block;
+}
+ .checkout-details-sec .payment-form .form-group:nth-child(5) .form-control {
+ width: 49%;
+ display: inline-block;
+}
+.checkout-details-sec .payment-form option {
+    border: 0;
+    color: #000;
+    padding: 0 6px 0 5px;
+    margin: 0;
+    font-size: 14px;
+}
+.payment-form p {
+    font-size:14px;
+    color:#7ac142;
+    padding: 8px 0 6px;
+}
+.checkout-details-sec .payment-form input[type="checkbox"] {
+    margin-right: 20px;
+}
+.checkout-details-sec .payment-form .place-order {
+    margin: 30px 0 10px;
+    border-top: 1px solid #e9e9e9;
+    padding: 24px 0;
+}
+.checkout-details-sec .payment-form .place-order-btn {
+    background: #7ac142;
+    font-size: 17px;
+    font-weight: 400;
+    border-radius: 0;
+    width: 168px;
+    color: #fff;
+}
+.checkout-details-sec .payment-form .place-order-btn:hover {
+    background: rgb(136, 220, 69);
+    border: 1px solid rgb(136, 220, 69);
+}
+.checkout-details-sec #cart {
+    border-collapse: collapse;
+    margin: 0;
+    font-size: 20px;
+    color: #8d8d8d;
+}
+.checkout-details-sec #cart thead {
+    border-top: 1px solid #eaeaea;
+}
+.checkout-details-sec #cart thead th {
+    padding: 28px 0 6px;
+    color: #000;
+    font-size: 12px;
+    width: 100%;
+}
+.checkout-details-sec #cart tbody {
+    border-bottom: 1px solid #eaeaea;
+}
+.checkout-details-sec #cart tbody td {
+    padding: 10px 0;
+    color: #000;
+    font-size: 12px;
+    width: 100%;
+}
+.checkout-details-sec #cart tbody td span {
+    color:#7ac142;
+}
+.checkout-details-sec #cart tbody td:last-child span {
+    color:#1fd995;
+}
+.checkout-details-sec #cart tbody td:last-child {
+    text-align:right;
+}
+.checkout-details-sec td.total-payable {
+    padding:12px 0;
+    color: #000;
+}
+.checkout-details-sec .order-summary .delivery-address {
+    padding: 20px 0;
+}
+.checkout-details-sec .order-summary .delivery-address h3 {
+    color:#929292;
+    font-size:15px;
+    padding:6px 0 12px;
+}
+.checkout-details-sec .order-summary .delivery-address name {
+    color:#000;
+    font-size:15px;
+    padding:6px 0 0;
+    font-weight:700;
+    display:block;
+}
+.checkout-details-sec .order-summary .delivery-address address {
+    color: #929292;
+    font-size: 13px;
+    padding: 6px 0 0px;
+    width: 60%;
+    line-height: 20px;
+    display:block;
+}
+.checkout-details-sec .order-summary .delivery-address phone {
+    color:#929292;
+    font-size:13px;
+    padding:0 0 12px;
+    display:block;
+}
+.checkout-details-sec .order-summary .delivery-address a {
+    color:#7ac142;
+    font-size:13px;
+    padding:10px 0 12px;
+    display:block;
+}
+/* ############################### cheackout-details End ##########################  */
+
+/* Register  25-08-17 */
+
+.log-field-wrap .input-group-addon {
+	border:none;
+	border-radius:0;
+}

@@ -6,9 +6,9 @@
         <h1>NEW COUPONS</h1>
         <div class="coupons-box">
           <div class="row">
-          @if (Cookie::get('bucket') !== false) {
+          {{-- @if (Cookie::get('bucket') !== false) {
              <div class="alert alert-info"><i class="pe-7s-gleam"></i>{{Cookie::get('bucket')}}</div>
-          @endif
+          @endif --}}
           {{-- {{$newCoupons}} --}}
             @foreach($newCoupons as $newCoupon)
             <div class="col-lg-4 col-md-6 col-sm-6">
@@ -19,7 +19,12 @@
                       {!!HTML::image(config('global.productPath').$newCoupon->defaultImage->image, 'Loading...')!!}
                     </a>
                    </figure>
-                   <span>20% OFF</span>
+                   @php
+                     $off = Helper::discountOff($newCoupon->original_price,$newCoupon->saling_price);
+                   @endphp
+                   @if($off != '0')
+                    <span>{{$off}}% Off</span>
+                   @endif
                   </div>
                   <div class="coupons-box-text">
                     <p>{{$newCoupon->shortDescription}}</p>
@@ -39,7 +44,7 @@
         </div>
       </div>
     </section>
-    <section class="discounts-sec">
+    {{-- <section class="discounts-sec">
       <div class="container">
         <div class="row">
           <div class="col-lg-6 col-md-6">
@@ -122,75 +127,34 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> --}}
     <section class="popular-coupons-sec">
       <div class="container">
         <h1>POPULAR COUPONS</h1>
         <div class="coupons-box">
           <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-6">
-              <div class="coupons-box-border">
-                <figure>
+            @foreach($popularProduct as $key => $product)
 
-                  {!!HTML::image('kuwpons/images/coupons-img-1.jpg', 'Loading...')!!}
-                <!-- <img src="images/coupons-img-2.jpg" alt="" class=""/>  -->
-                </figure>
-                <!-- <figure> <img src="images/coupons-img-1.jpg" alt="" class=""/> </figure> -->
-                <div class="coupons-box-text">
-                  <p>Lorem Ipsum has been the industry's standard dummy text ever sincunknown printer scrambled a type specimen book.</p>
-                  <div class="row">
-                    <div class="col-lg-8 col-md-8 col-xs-10">
-                      <div class="defaultbtn btn-green coupons-price-btn"> <span class="old-price">$250.00</span> <span class="new-price">$200.00</span> </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-xs-2">
-                      <div class="coupons-cart btn-green"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
+              <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="coupons-box-border">
+                  <figure>
+                    {!!HTML::image(config('global.productPath').$product->img, 'Loading...')!!}
+                  </figure>
+                  <div class="coupons-box-text">
+                    <p>{{ substr($product->shortDescription,0,160) }}</p>
+                    <div class="row">
+                      <div class="col-lg-8 col-md-8 col-xs-10">
+                        <div class="defaultbtn btn-green coupons-price-btn"> <span class="old-price">KD {{ $product->original_price }}</span> <span class="new-price">KD {{ $product->saling_price }}</span> </div>
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-xs-2">
+                        <div class="coupons-cart btn-green" proID="{{Crypt::encrypt($product->id)}}" style="cursor: pointer;"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6">
-              <div class="coupons-box-border">
-                <figure>
 
-                  {!!HTML::image('kuwpons/images/coupons-img-2.jpg', 'Loading...')!!}
-                <!-- <img src="images/coupons-img-2.jpg" alt="" class=""/>  -->
-                </figure>
-                <!-- <figure> <img src="images/coupons-img-2.jpg" alt="" class=""/> </figure> -->
-                <div class="coupons-box-text">
-                  <p>Lorem Ipsum has been the industry's standard dummy text ever sincunknown printer scrambled a type specimen book.</p>
-                  <div class="row">
-                    <div class="col-lg-8 col-md-8 col-xs-10">
-                      <div class="defaultbtn btn-green coupons-price-btn"> <span class="old-price">$250.00</span> <span class="new-price">$200.00</span> </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-xs-2">
-                      <div class="coupons-cart btn-green"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6">
-              <div class="coupons-box-border">
-                <figure>
-
-                  {!!HTML::image('kuwpons/images/coupons-img-3.jpg', 'Loading...')!!}
-                <!-- <img src="images/coupons-img-2.jpg" alt="" class=""/>  -->
-                </figure>
-                <!-- <figure> <img src="images/coupons-img-3.jpg" alt="" class=""/> </figure> -->
-                <div class="coupons-box-text">
-                  <p>Lorem Ipsum has been the industry's standard dummy text ever sincunknown printer scrambled a type specimen book.</p>
-                  <div class="row">
-                    <div class="col-lg-8 col-md-8 col-xs-10">
-                      <div class="defaultbtn btn-green coupons-price-btn"> <span class="old-price">$250.00</span> <span class="new-price">$200.00</span> </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-xs-2">
-                      <div class="coupons-cart btn-green"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            @endforeach
           </div>
         </div>
       </div>

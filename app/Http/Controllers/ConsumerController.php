@@ -22,6 +22,7 @@ class ConsumerController extends Controller
     	$users = User::where('u_role','=','U')->get();
     	return view('admin.chartConsumer', compact('live','users'));
     }
+    
     public function viewConsumer($name, $id)
     {
 		$uID      = Crypt::decrypt($id);

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use \App\User;
 use \App\Model\UserInfo;
 use \App\Model\Product;
+use \App\Model\Redeems;
 use Validator;
 use Hash;
 use File;
@@ -14,6 +15,7 @@ use Mail;
 use Session;
 use DB;
 use Crypt;
+use Auth;
 
 class CompanyController extends Controller
 {
@@ -280,5 +282,34 @@ class CompanyController extends Controller
 		$state    = DB::table('states')->find($userInfo->state);
 		$city     = DB::table('cities')->find($userInfo->city);
     	return view('admin.viewUser', compact('live','country','user','userInfo','state','city'));
+    }
+
+    public function chartCompanyProducts()
+    {
+		$live  = array('menu'=>'43','parent'=>'3');
+		$products = Product::where('isdelete','=','0')->where('u_id_fk','=',Auth::id())->get();
+    	return view('vendor.chartCompanyProducts', compact('live','products'));
+    	
+    }
+
+    public function updateCoupon(Request $req)
+    {
+    	$couponCode = $req->couponCode;
+    	// echo $couponCode;
+    	$couponFind = Redeems::where('coupon_code','=',$couponCode)->first();
+    	if (count($couponFind) == 0) {
+            $message = json_encode(array('type'=>'error','message'=>'Invalid Code'));
+    	} else{
+	    	if ($couponFind->status == '1') {
+	            $message = json_encode(array('type'=>'error','message'=>'Already Redeemed by '.$couponFind->getUserInfo->name));
+	    	} else{
+	    		$couponUpdate = Redeems::where('coupon_code','=',$couponCode)->update([
+	    			'status' => '1'
+	    			]);
+	            $message = json_encode(array('type'=>'success','message'=>'Redeemed by '.$couponFind->getUserInfo->name));
+
+	    	}
+	    }
+        return $message;
     }
 }

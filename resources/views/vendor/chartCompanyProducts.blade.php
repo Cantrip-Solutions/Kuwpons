@@ -6,13 +6,13 @@
         <div class="panel-body">
             <div class="pull-right" id="hbreadcrumb">
                 <ol class="hbreadcrumb breadcrumb">
-                    <li> Coupons Management </li>
+                    <li> Coupon Management </li>
                     <li class="active">
-                        <span> Coupons </span>
+                        <span> Coupon Details</span>
                     </li>
                 </ol>
             </div>
-            <h2 class="font-light m-b-xs"> Coupons </h2>
+            <h2 class="font-light m-b-xs"> Coupon Details </h2>
         </div>
     </div>
 </div>
@@ -23,9 +23,6 @@
             <div class="hpanel">
 
                 <div class="panel-body">
-                    <p align="right">
-                        {{link_to_route('addProduct', $title = 'Add Coupon', $parameters = array(), $attributes = array('type'=>'button', 'class'=>'btn w-xs btn-info'))}}
-                    </p>                
                     @if (Session::has('message'))
                        <div class="alert alert-info"><i class="pe-7s-gleam"></i>{{ Session::get('message') }}</div>
                     @endif
@@ -41,10 +38,10 @@
                             <th>Quantity Remaining</th>
                             <th>Quantity Sold</th>
                             <th>Quantity Redeemed</th>
-                            <th>Company</th>
+                            {{-- <th>Company</th> --}}
                             <th>Category</th>
                             <th>Expire on</th>
-                            <th>Action</th>
+                            {{-- <th>Action</th> --}}
                         </tr>
                         </thead>
                         <tbody>
@@ -69,7 +66,7 @@
                                 {{-- <td> --}}
                                 {{-- {{array_sum(empty($product->soldCoupon->pluck('quantity')) ? empty($product->soldCoupon->pluck('quantity')) : [0])}} --}}
                                 {{-- </td> --}}
-                                <td>{{$product->getUser->name}}</td>
+                                {{-- <td>{{$product->getUser->name}}</td> --}}
                                 <td>{{$product->getCategory->cat_name}}</td>
                                 <td>
                                     {{ date('Y-m-d',strtotime($product->expire_on)) }}
@@ -79,17 +76,16 @@
                                         ( Valid )
                                     @endif
                                 </td>
-                                <td>
-                                    <a style="font-size: medium;" title="Image Gallery" class="pe pe-7s-cloud-upload" href="/tab/product/imageGallery/{{urlencode($product->name)}}/{{Crypt::encrypt($product->id)}}"></a>
+                                {{-- <td> --}}
+                                    {{-- <a style="font-size: medium;" title="Image Gallery" class="pe pe-7s-cloud-upload" href="/tab/product/imageGallery/{{urlencode($product->name)}}/{{Crypt::encrypt($product->id)}}"></a> --}}
                                     {{-- <a style="font-size: medium;" title="Stock History" class="pe pe-7s-server" href="/tab/product/stockHistory/{{urlencode($product->name)}}/{{Crypt::encrypt($product->id)}}"></a> --}}
-                                    <a style="font-size: medium;" title="Edit Product" class="fa fa-pencil-square-o" href="/tab/product/edit/{{urlencode($product->name)}}/{{Crypt::encrypt($product->id)}}"></a>
-                                    <a style="font-size: medium;" title="Delete Product" class="fa fa-trash-o" id="{{Crypt::encrypt($product->id)}}"></a>
-                                </td>
+                                    {{-- <a style="font-size: medium;" title="Edit Product" class="fa fa-pencil-square-o" href="/tab/product/edit/{{urlencode($product->name)}}/{{Crypt::encrypt($product->id)}}"></a> --}}
+                                    {{-- <a style="font-size: medium;" title="Delete Product" class="fa fa-trash-o" id="{{Crypt::encrypt($product->id)}}"></a> --}}
+                                {{-- </td> --}}
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
@@ -104,18 +100,16 @@
 {!! HTML::script('admintheme/vendor/datatables_plugins_homer/integration/bootstrap/3/dataTables.bootstrap.min.js') !!}
 
 <script type="text/javascript">
-    var dataTable = $('#example1').dataTable({
-        responsive: true,
-    });
-    $('.fa-trash-o').on('click', function(){
-            var id = $(this).attr('id');
-            bootbox.confirm("Are you sure to delete this Product?", function(result) {
-                if (result == true) {
-                    window.location.href = "/tab/product/delete/"+id;
-                } else {
-                }
-            });
-        });
+    var dataTable = $('#example1').dataTable();
+    // $('.fa-trash-o').on('click', function(){
+    //         var id = $(this).attr('id');
+    //         bootbox.confirm("Are you sure to delete this User?", function(result) {
+    //             if (result == true) {
+    //                 window.location.href = "/tab/company/delete/"+id;
+    //             } else {
+    //             }
+    //         });
+    //     });
 </script>
 @endpush
 @endsection

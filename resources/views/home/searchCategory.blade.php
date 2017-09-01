@@ -4,28 +4,28 @@
     <section class="category-sec">
       <div class="container">
        <div class="row">
-         <div class="col-lg-3 col-md-3 col-sm-12">
-         <div class="category-list">
-           <h3>Categories</h3>
-          <ul>
-          @foreach($categories as $category)
-            @if($category->id == $catID)
-              <li><a class="active" href="/category/{{urlencode(str_replace('/', '&#47;',$category->cat_name))}}/{{Crypt::encrypt($category->id)}}"><i class="fa fa-chevron-right" aria-hidden="true"></i> {{$category->cat_name}}</a></li>
-            @else
-              <li><a href="/category/{{urlencode(str_replace('/', '&#47;',$category->cat_name))}}/{{Crypt::encrypt($category->id)}}"><i class="fa fa-chevron-right" aria-hidden="true"></i> {{$category->cat_name}}</a></li>
-            @endif
-          @endforeach
-          </ul>
-          </div>
+        <div class="col-lg-3 col-md-4 col-sm-12">
+           <div class="category-list">
+             <h3>Categories</h3>
+            <ul>
+            @foreach($categories as $category)
+              @if($category->id == $catID)
+                <li><a class="active" href="/category/{{urlencode(str_replace('/', '&#47;',$category->cat_name))}}/{{Crypt::encrypt($category->id)}}"><i class="fa fa-chevron-right" aria-hidden="true"></i> {{$category->cat_name}} {!!HTML::image(config('global.categoryPath').$category->cat_icon, 'Loading...')!!}</a></li>
+              @else
+                <li><a href="/category/{{urlencode(str_replace('/', '&#47;',$category->cat_name))}}/{{Crypt::encrypt($category->id)}}"><i class="fa fa-chevron-right" aria-hidden="true"></i> {{$category->cat_name}} {!!HTML::image(config('global.categoryPath').$category->cat_icon, 'Loading...')!!}</a></li>
+              @endif
+            @endforeach
+            </ul>
+            </div>
          </div>
          
-         <div class="col-lg-9 col-md-9 col-sm-12">
+         <div class="col-lg-9 col-md-8 col-sm-12">
          <div class="product-list-sec">
            <h1>Products</h1>
           <div class="product-list">
             <div class="row">
               @foreach($products as $product)
-              <div class="col-lg-4 col-md-4 col-sm-6">
+              <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="product-list-border">
                   <div class="discount-product">
                   <figure> 

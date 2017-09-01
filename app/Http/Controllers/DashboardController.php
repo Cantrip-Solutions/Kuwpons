@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use \App\Model\Product;
 
 class DashboardController extends Controller
 {
@@ -13,7 +14,8 @@ class DashboardController extends Controller
     	if (Auth::user()->u_role == 'A') {
     		return view('admin.adminDashboard',compact('live'));	//Go to Super Admin Dashboard 
     	} else if(Auth::user()->u_role == 'S'){
-    		return view('vendor.vendorDashboard',compact('live'));	//Go to Super Admin Dashboard 
+			$products = Product::where('isdelete','=','0')->where('u_id_fk','=',Auth::id())->get();
+    		return view('vendor.vendorDashboard',compact('live','products'));	//Go to Super Admin Dashboard 
     	}
     }
 }

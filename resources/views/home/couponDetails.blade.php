@@ -1,6 +1,12 @@
 @extends('layouts.frontEnd')
 @section('content')
 
+<style type="text/css">
+a.disabled {
+   pointer-events: none;
+   cursor: default;
+}
+</style>
 <div class="body_content">
   	<section class="product-dt-holder">
 	    <div class="container">
@@ -45,6 +51,11 @@
 			                   <h2>Price <span class="old-price"> KD {{ $productDetails->original_price }} </span> <span > KD {{ $productDetails->saling_price }} </span>  </h2>
 			                   {{-- <h2>Discount Price <span> $ 200.00 </span> </h2> --}}
 			                </div>
+                      <div class="p-details-price">
+                      
+                         <h2>Expire On <span >{{ date('d.m.Y',strtotime($productDetails->expire_on)) }} </span>  </h2>
+                         {{-- <h2>Discount Price <span> $ 200.00 </span> </h2> --}}
+                      </div>
 			                <div class="qty-wrap">
 			                  <h3>Quantity</h3>
 			                  <div class="qty-sec">
@@ -52,7 +63,9 @@
 			                    <input id="num" type="number" value="1" min="1" class="pro_quantity">
 			                    <button id="plus"><i class="fa fa-chevron-up" aria-hidden="true"></i> </button>
 			                  </div>
-			                  <a href="#" class="addcard" proID="{{Crypt::encrypt($productDetails->id)}}" >Add To Cart</a> </div>
+			                  <a href="#" class="addcard cartAdded" proID="{{Crypt::encrypt($productDetails->id)}}" >Add To Cart</a>
+                        <a href="{{URL::to('/myAccount/checkout')}}" class="addcard gotoCheckOut disabled" proID="{{Crypt::encrypt($productDetails->id)}}" >Proceed To Checkout</a> </div>
+                        </div>
 			            </div>
 		            </div>
 		        </div>
@@ -232,7 +245,7 @@ $(document).ready(function(){
         // instead of a settings object
       ]
     }); 
-  $('.addcard').on('click', function () {
+  $('.cartAdded').on('click', function () {
       var id = $(this).attr('proID');
       var token = $('input[name=_token]').val();
       var pro_quantity=$('.pro_quantity').val();
@@ -247,6 +260,8 @@ $(document).ready(function(){
         'success':function(resp){
           swal({title: resp.type, text: resp.message, type: resp.type});
           cartValue();
+          $('.gotoCheckOut').removeClass('disabled');
+          $('.cartAdded').addClass('disabled');
         }
       });
     });

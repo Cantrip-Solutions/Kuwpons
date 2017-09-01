@@ -38,8 +38,10 @@ class HomeController extends Controller
         $newCoupons = Product::where('isdelete', '=', '0')->orderBy('created_at')->limit(6)->get();
 
         $popularProduct=DB::select('SELECT `product_images`.`image` as img , `product_images`.`default_image` , temp.*  FROM (SELECT `orders`.`pro_id_fk`, sum(`orders`.`quantity`) AS total,`products`.* FROM `orders` INNER JOIN `products` ON `products`.`id` = `orders`.`pro_id_fk` WHERE `status` = "1" AND `products`.`expire_on` > NOW()  GROUP BY `pro_id_fk` ORDER BY total DESC LIMIT 3) as temp INNER JOIN `product_images` ON `product_images`.`pro_id_fk` = temp.`id` WHERE  `product_images`.`default_image` = "1"');
-       
-        return view('home.index', compact('newCoupons','popularProduct'));
+
+        $categories = Category::where('id','!=','1')->get();
+        //echo "<pre>"; print_r($categories);die;
+        return view('home.index', compact('newCoupons','popularProduct','categories'));
     }
 
     public function searchCategory($name, $id)

@@ -3,7 +3,19 @@
   <div class="body_content">
     <section class="new-coupons-sec">
       <div class="container">
-        <h1>NEW COUPONS</h1>
+<div class="row">
+         <div class="col-lg-3 col-md-4 col-sm-12">
+           <div class="category-list">
+             <h3>Categories</h3>
+            <ul>
+            @foreach($categories as $category)
+                <li><a href="/category/{{urlencode(str_replace('/', '&#47;',$category->cat_name))}}/{{Crypt::encrypt($category->id)}}"><i class="fa fa-chevron-right" aria-hidden="true"></i> {{$category->cat_name}} {!!HTML::image(config('global.categoryPath').$category->cat_icon, 'Loading...')!!}</a></li>
+            @endforeach
+            </ul>
+            </div>
+         </div>
+         <div class="col-lg-9 col-md-8 col-sm-12">
+           <h1>NEW COUPONS</h1>
         <div class="coupons-box">
           <div class="row">
           {{-- @if (Cookie::get('bucket') !== false) {
@@ -29,11 +41,12 @@
                   <div class="coupons-box-text">
                     <p>{{$newCoupon->shortDescription}}</p>
                     <div class="row">
-                    <div class="col-lg-8 col-md-8 col-xs-10">
-                        <div class="defaultbtn btn-green coupons-price-btn"> <span class="old-price">KD {{$newCoupon->original_price}}</span> <span class="new-price">KD {{$newCoupon->saling_price}}</span> </div>
+                    <div class="col-lg-10 col-md-10 col-xs-10">
+                        <div class="defaultbtn btn-green coupons-price-btn"><a href="/coupon/{{urlencode($newCoupon->name)}}/{{Crypt::encrypt($newCoupon->id)}}"> <span class="old-price">KD {{$newCoupon->original_price}}</span> <span class="new-price">KD {{$newCoupon->saling_price}}</span></a> </div>
                       </div>
-                    <div class="col-lg-4 col-md-4 col-xs-2">
-                        <div class="coupons-cart btn-green" proID="{{Crypt::encrypt($newCoupon->id)}}" style="cursor: pointer;"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
+                    <div class="col-lg-2 col-md-2 col-xs-2">
+                      {{--   <div class="coupons-cart btn-green" proID="{{Crypt::encrypt($newCoupon->id)}}" style="cursor: pointer;"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div> --}}
+                        <div class="coupons-cart-home btn-green" proID="{{Crypt::encrypt($newCoupon->id)}}" style="cursor: pointer;"> <a href="/coupon/{{urlencode($newCoupon->name)}}/{{Crypt::encrypt($newCoupon->id)}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> </a></div> 
                       </div>
                     </div>
                   </div>
@@ -42,6 +55,11 @@
             @endforeach
           </div>
         </div>
+
+</div>
+         </div>
+
+      
       </div>
     </section>
     {{-- <section class="discounts-sec">

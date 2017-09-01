@@ -56,6 +56,25 @@
     padding: 0px 0 5px;
 }
 
+.category-list li a {
+    font-size: 12px;
+}
+
+.coupons-box-border img {
+    height: 200px;
+    max-height: 200px;
+}
+.old-price {
+    margin-right: 8px;
+}
+.btn-green {
+    font-size: 12px;
+}
+.coupons-cart-home {
+    height: 36px;
+    width: 36px;
+}
+
 }
  @media only screen and (max-width: 1024px) {
  .banner-contain .banner-text {
@@ -271,6 +290,22 @@ padding: 2px 0;
  margin-bottom: 16px;
  margin-top: 0px;
 }
+
+.category-list {
+    padding: 24px 6px 5px;
+}
+.category-list li a {
+    font-size: 11px;
+}
+.category-list li a img {
+    top: -5px;
+    width: 25px;
+    height: 25px;
+}
+.category-list .fa {
+    padding-right: 0px;
+}
+
 }
  @media only screen and (max-width: 767px) {
  .main-header-top-left ul li::after {
@@ -453,6 +488,12 @@ header-menu nav ul li:hover a {
 	width: 85% !important;
 	background: #fff;
 	display:inline-block;
+}
+.category-list {
+    padding: 24px 18px 5px;
+}
+.category-list li a {
+    font-size: 14px;
 }
 
 }

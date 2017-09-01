@@ -14,20 +14,19 @@
         </div>
         </div>
         <div class="about-img">
-        <div class="row">
+          <div class="row">
             <div class="col-lg-6 col-md-6 col-xs-6">
               <figure> 
-                <img src="images/about-1.jpg" alt=""/>
+                <img src="http://18.220.22.75/images/html/about-1.jpg" alt=""/>
               </figure>
             </div>
             
             <div class="col-lg-6 col-md-6 col-xs-6">
               <figure> 
-                <img src="images/about-2.jpg" alt=""/>
+                <img src="http://18.220.22.75/images/html/about-2.jpg" alt=""/>
               </figure>
             </div>
-
-        </div>
+          </div>
         </div>
       </div>
     </section>

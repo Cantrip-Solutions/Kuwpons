@@ -284,11 +284,11 @@ class CompanyController extends Controller
     	return view('admin.viewUser', compact('live','country','user','userInfo','state','city'));
     }
 
-    public function chartCompanyProducts()
+    public function redeemCoupons()
     {
 		$live  = array('menu'=>'43','parent'=>'3');
-		$products = Product::where('isdelete','=','0')->where('u_id_fk','=',Auth::id())->get();
-    	return view('vendor.chartCompanyProducts', compact('live','products'));
+		// $products = Product::where('isdelete','=','0')->where('u_id_fk','=',Auth::id())->get();
+    	return view('vendor.redeemCoupon', compact('live'));
     	
     }
 

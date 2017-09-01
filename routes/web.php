@@ -98,7 +98,7 @@ Route::group(['middleware' => 'auth'], function () {
 	//-------------------------Vendor Panel-----------------------
 	Route::group(['middleware' => 'role:S'], function () {
 
-		Route::get('/vendor/chartCompanyProducts', 'CompanyController@chartCompanyProducts');
+		Route::get('/vendor/redeemCoupons', 'CompanyController@redeemCoupons');
 		Route::post('/vendor/updateCoupon', 'CompanyController@updateCoupon');
 
 	});
@@ -117,7 +117,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 	// ------------------------Place Order-----------------------------
-	Route::post('/placeOrder', 'OrdersController@placeOrder');
 	Route::get('/orderHistory', 'OrdersController@orderHistory');
 	
 });
@@ -138,6 +137,10 @@ Route::get('/myCart', 'OrdersController@myCart');
 Route::post('/updateCartQuantity', 'OrdersController@updateCartQuantity');
 Route::post('/deleteProductFromCart', 'OrdersController@deleteProductFromCart');
 Route::get('/myAccount/checkout', 'OrdersController@checkout');
+
+// Place Order
+Route::post('/placeOrder', 'OrdersController@placeOrder');
+
 
 //Static Page
 Route::get('/contact_us', 'HomeController@contact_us');

@@ -28,7 +28,11 @@
     {!!HTML::style('kuwpons/css/bootstrap.css')!!}
     {!!HTML::style('kuwpons/css/style.css')!!}
     {!!HTML::style('kuwpons/css/responsive.css')!!}
-
+<style type="text/css">
+.closeText:before {
+    content: "Close";
+}
+</style>
 </head>
 <body>
 <div class="wrapper">
@@ -55,7 +59,7 @@
                 <li><a href="{{ URL::to('/myAccount') }}">My Profile</a></li>
                 <li><a href="{{ URL::to('/orderHistory') }}">Order History</a></li>
                 <li>
-                  <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="pe-7s-upload pe-rotate-90"></i>Logout</a>
+                  <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
@@ -104,9 +108,13 @@
 
 
                 ?>
-                @foreach($categories as $cat)
+                {{-- @foreach($categories as $cat)
                   <li><a href="/category/{{urlencode(str_replace('/', '&#47;',$cat->cat_name))}}/{{Crypt::encrypt($cat->id)}}">{{$cat->cat_name}}</a></li>
-                @endforeach
+                @endforeach --}}
+                <li><a href="{{ URL::to('/about_us') }}">About Us</a></li>
+                <li><a href="{{ URL::to('/how_it_workes') }}">How it Works?</a></li>
+                <li><a href="{{ URL::to('/terms_conditions') }}">Terms & Conditions</a></li>
+                <li><a href="{{ URL::to('/contact_us') }}">Contact Us</a></li>
                
               </ul>
             </nav>
@@ -337,6 +345,11 @@ $(document).ready(function(){
         $('.input-group.date').datepicker({ 
             // setDate: new Date(),
             // startDate: new Date(),
+            autoclose: true,
+            // showClose: true,
+            // icons: {
+	            // close: 'closeText'
+	        // }
         });
         $("#formdata").validate({
           rules: {

@@ -1,156 +1,236 @@
 @extends('layouts.frontEnd')
 @section('content')
   <div class="body_content">
-    <section class="checkout-details-sec">
+   <section class="checkout-details-sec">
       <div class="container">
-        <div class="checkout-main">
+        	<div class="checkout-main">
           <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-8 shipping-respon">
-              @if(!Auth::check())
-              <div class="payment-info">
-                {{-- <h1>Payment Information</h1> --}}
-                  <h2>To complete checkout please <a href="#login" class="fancybox"><i class="fa fa-user" aria-hidden="true"></i> Login</a> or <a href="#register" class="fancybox">Register</a></h2>
-                   
+            	<div class="col-lg-8 col-md-8 col-sm-8 shipping-respon">
+		            @if(!Auth::check())
+		            
+		            @else
+		            	@php
+		            		$user = Auth::user();
+		            		// print_r($user);
+		            	@endphp
+		            @endif
+            		{{-- @else --}}
+            		<div class="payment-info">
+            		{{Form::open(array('class'=>'clears','action' => 'OrdersController@placeOrder', 'method'=>'POST', 'enctype'=>"multipart/form-data"))}}
 
-              </div>
-              @else
-              <div class="payment-options">
-                <h1>Choose Payment Mode</h1>
-                <div id="parentVerticalTab" class="payment-mode-main">
-                  <div class="payment-type clears">
-                    <ul class="resp-tabs-list">
-                      <li class="active"> CREDIT / DEBIT CARD </li>
-                      <li>PAYPAL</li>
-                    </ul>
-                  </div>
-                    <div class="resp-tabs-container payment-form">
-                    <div>
-                    	{{Form::open(array('class'=>'clears','action' => 'OrdersController@placeOrder', 'method'=>'POST', 'enctype'=>"multipart/form-data"))}}
-                  		{{-- <form action="" method="post" enctype="multipart/form-data" class="clears"> --}}
+            			
 
-	                        <div class="form-group">
-	                          <label for="">Card Number</label>
-	                          <input class="form-control" type="text" placeholder="" >
-	                        </div>
-	                        <div class="form-group">
-	                          <label>Expires1</label>
-	                          <select class="form-control">
-	                            <option selected value='0'>Month</option>
-	                            <option value='1'>Janaury</option>
-	                            <option value='2'>February</option>
-	                            <option value='3'>March</option>
-	                            <option value='4'>April</option>
-	                            <option value='5'>May</option>
-	                            <option value='6'>June</option>
-	                            <option value='7'>July</option>
-	                            <option value='8'>August</option>
-	                            <option value='9'>September</option>
-	                            <option value='10'>October</option>
-	                            <option value='11'>November</option>
-	                            <option value='12'>December</option>
-	                          </select>
-	                          <select class="form-control">
-	                            <option selected value="0">Year</option>
-	                            <option value="1">2017</option>
-	                            <option value="2">2018</option>
-	                            <option value="3">2019</option>
-	                            <option value="4">2020</option>
-	                            <option value="5">2021</option>
-	                            <option value="6">2022</option>
-	                            <option value="7">2023</option>
-	                            <option value="8">2024</option>
-	                            <option value="9">2025</option>
-	                          </select>
-	                        </div>
-	                        <div class="form-group">{!!HTML::image('kuwpons/images/payment-icon.png','')!!}</div>
-	                        <div class="form-group">
-	                          <label for="">Name on Card</label>
-	                          <input class="form-control" type="text" placeholder="" >
-	                        </div>
-	                        <div class="form-group">
-	                          <label>Security Code </label>
-	                          <input class="form-control" type="text" placeholder="" >
-	                          <p>What's this?</p>
-	                        </div>
-	                        <div class="form-group">
-	                          <div class="shipping-checkbox">
-	                            <input type="checkbox" value="None" id="credit-checkbox" name="check" checked />
-	                            Do not save credit card
-	                            <label for="credit-checkbox"></label>
-	                          </div>
-	                        </div>
-	                        <div class="place-order">
-	                        	<input type="submit" name="submit" value="Place Order" class="defaultbtn place-order-btn">
-	                          {{-- <button class="defaultbtn place-order-btn">Place Order</button> --}}
-	                        </div>
-                        </form>
-                    </div>
-                    <div>
-                    	{{Form::open(array('class'=>'clears','action' => 'OrdersController@placeOrder', 'method'=>'POST', 'enctype'=>"multipart/form-data"))}}
-                  		{{-- <form action="" method="post" enctype="multipart/form-data" class="clears"> --}}
-	                        <div class="form-group">
-	                          <label for="">Card Number</label>
-	                          <input class="form-control" type="text" placeholder="" >
-	                        </div>
-	                        <div class="form-group">
-	                          <label>Expires</label>
-	                          <select class="form-control">
-	                            <option selected value='0'>Month</option>
-	                            <option value='1'>Janaury</option>
-	                            <option value='2'>February</option>
-	                            <option value='3'>March</option>
-	                            <option value='4'>April</option>
-	                            <option value='5'>May</option>
-	                            <option value='6'>June</option>
-	                            <option value='7'>July</option>
-	                            <option value='8'>August</option>
-	                            <option value='9'>September</option>
-	                            <option value='10'>October</option>
-	                            <option value='11'>November</option>
-	                            <option value='12'>December</option>
-	                          </select>
-	                          <select class="form-control">
-	                            <option selected value="0">Year</option>
-	                            <option value="1">2017</option>
-	                            <option value="2">2018</option>
-	                            <option value="3">2019</option>
-	                            <option value="4">2020</option>
-	                            <option value="5">2021</option>
-	                            <option value="6">2022</option>
-	                            <option value="7">2023</option>
-	                            <option value="8">2024</option>
-	                            <option value="9">2025</option>
-	                          </select>
-	                        </div>
-	                        <div class="form-group">{!!HTML::image('kuwpons/images/payment-icon.png','')!!}</div>
-	                        <div class="form-group">
-	                          <label for="">Name on Card</label>
-	                          <input class="form-control" type="text" placeholder="" >
-	                        </div>
-	                        <div class="form-group">
-	                          <label>Security Code </label>
-	                          <input class="form-control" type="text" placeholder="" >
-	                          <p>What's this?</p>
-	                        </div>
-	                        <div class="form-group">
-	                          <div class="shipping-checkbox">
-	                            <input type="checkbox" value="None" id="shipping-checkbox" name="check" checked />
-	                            Do not save credit card
-	                            <label for="shipping-checkbox"></label>
-	                          </div>
-	                        </div>
-	                        <div class="place-order">
-	                        	<input type="submit" name="submit" value="Place Order" class="defaultbtn place-order-btn">
-	                          {{-- <button class="defaultbtn place-order-btn">Place Order</button> --}}
-	                        </div>
-                        </form>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            @endif
-            </div>
+              			<div class="payment-options">
+            				<h1>Billing Address</h1>
+
+	            				<div class="form-group">
+	                         <label for="email" class="col-sm-2 control-label">Email ID*:</label>
+	                         <div class="col-sm-10">
+	                             <input type="text" class="form-control" name="email" value="{{$user->email or ''}}" required>
+	                             @if ($errors->has('email'))
+	                                 <span class="help-block">
+	                                     <strong>{{ $errors->first('email') }}</strong>
+	                                 </span>
+	                             @endif
+	                         </div>
+	                     </div>
+
+	                     <div class="form-group">
+	                         <label for="name" class="col-sm-2 control-label">Name*:</label>
+	                         <div class="col-sm-10">
+	                             <input type="text" name="name" class="form-control" value="{{$user->name or ''}}" required>
+	                             @if ($errors->has('name'))
+	                                 <span class="help-block">
+	                                     <strong>{{ $errors->first('name') }}</strong>
+	                                 </span>
+	                             @endif
+	                         </div>
+	                     </div>
+
+	                     <div class="form-group">
+	                         <label for="address1" class="col-sm-2 control-label">Address 1*:</label>
+	                         <div class="col-sm-10">
+	                             <input type="text" name="address1" class="form-control" value="{{$user->getdefaultUserInfo->address1 or ''}}" required>
+	                             @if ($errors->has('address1'))
+	                                 <span class="help-block">
+	                                     <strong>{{ $errors->first('address1') }}</strong>
+	                                 </span>
+	                             @endif
+	                         </div>
+	                     </div>
+
+	                     <div class="form-group">
+	                         <label for="address2" class="col-sm-2 control-label">Address 2:</label>
+	                         <div class="col-sm-10">
+	                             <input type="text" name="address2" class="form-control" value="{{$user->getdefaultUserInfo->address2 or ''}}">
+	                             @if ($errors->has('address2'))
+	                                 <span class="help-block">
+	                                     <strong>{{ $errors->first('address2') }}</strong>
+	                                 </span>
+	                             @endif
+	                         </div>
+	                     </div>
+	            			<div class="form-group">
+	                         <label for="company_country" class="col-sm-2 control-label">Country *:</label>
+	                         <div class="col-sm-10">
+	                             <select class='form-control country' name="country" required>
+	                                 @foreach($countries as $country)
+	                                     @if(isset($user->getdefaultUserInfo->country) &&  $user->getdefaultUserInfo->country == $country->id)
+	                                         <option value="{{$country->name}}" ccode="{{$country->phonecode}}" selected>{{$country->name}}</option>
+	                                     @else
+	                                         <option value="{{$country->name}}" ccode="{{$country->phonecode}}">{{$country->name}}</option>
+	                                     @endif
+	                                 @endforeach
+	                             </select>
+	                             @if ($errors->has('country'))
+	                                 <span class="help-block">
+	                                     <strong>{{ $errors->first('country') }}</strong>
+	                                 </span>
+	                             @endif
+	                         </div>
+	                     </div>
+	            			
+	                     <div class="form-group">
+	                         <label for="company_city" class="col-sm-2 control-label">City:</label>
+	                         <div class="col-sm-10">
+	                             <input list="cities" name="city" class="form-control cities" value="{{$user->getdefaultUserInfo->city or ''}}" required>
+	                             @if ($errors->has('city'))
+	                                 <span class="help-block">
+	                                     <strong>{{ $errors->first('city') }}</strong>
+	                                 </span>
+	                             @endif
+	                         </div>
+	                     </div>
+
+	            			<div class="form-group">
+	                         <label for="company_phone" class="col-sm-2 control-label">Mobile *:</label>
+	                         <div class="col-sm-10">
+	                             <div class="input-group m-b">
+	                             <span class="input-group-addon country_code"></span>
+	                             <input type="text" name="phone" value="{{$user->getdefaultUserInfo->phone or ''}}" class="form-control" placeholder="0123456789" required>
+	                             <input type="hidden" id="countryCode" name="countryCode">
+	                             {{-- {!! Form::text('phone', $user->getdefaultUserInfo->phone or '',array('placeholder'=>'0123456789', 'class'=>'form-control')) !!} --}}
+	                             </div>
+	                             @if ($errors->has('phone'))
+	                                 <span class="help-block">
+	                                     <strong>{{ $errors->first('phone') }}</strong>
+	                                 </span>
+	                             @endif
+	                         </div>
+	                     </div>
+
+	                     <div class="form-group">
+	                         <label for="company_postal_code" class="col-sm-2 control-label">Pin Code *:</label>
+	                         <div class="col-sm-10">
+	                         <input type="text" name="postal_code" value="{{$user->getdefaultUserInfo->postal_code or ''}}" class="form-control" placeholder="0123456789" required>
+
+	                         {{-- {!! Form::text('postal_code', $user->getdefaultUserInfo->postal_code or '',array('placeholder'=>'', 'class'=>'form-control')) !!} --}}
+	                         @if ($errors->has('postal_code'))
+	                             <span class="help-block">
+	                                 <strong>{{ $errors->first('postal_code') }}</strong>
+	                             </span>
+	                         @endif
+	                         </div>
+	                     </div>
+	                     <!-- <div class="form-group"> -->
+	                         <label for="sms_service" class="control-label">Do you like get coupon codes via SMS ?</label>
+	                         	<input type="checkbox" name="sms_service" value="sms" class="form-control" checked>
+	                     <!-- </div> -->
+
+                			<h1>Choose Payment Mode</h1>
+                			<div id="parentVerticalTab" class="payment-mode-main">
+				                  <div class="payment-type clears">
+				                    <ul class="resp-tabs-list">
+				                      <li class="active"> CREDIT / DEBIT CARD </li>
+				                      <li>PAYPAL</li>
+				                    </ul>
+				                  </div>
+			                    <div class="resp-tabs-container payment-form">
+				                    	<div>
+
+					                        <div class="form-group">
+					                          <label for="">Card Number</label>
+					                          <input class="form-control" type="text" name="cardNumber" placeholder="" >
+					                          	@if ($errors->has('cardNumber'))
+					                             <span class="help-block">
+					                                 <strong>{{ $errors->first('cardNumber') }}</strong>
+					                             </span>
+					                        	@endif
+					                        </div>
+					                        <div class="form-group">
+					                          <label>Expires On</label>
+					                          <select class="form-control" name="expire_on_month">
+					                            <option selected value=''>Month</option>
+					                            <option value='1'>Janaury</option>
+					                            <option value='2'>February</option>
+					                            <option value='3'>March</option>
+					                            <option value='4'>April</option>
+					                            <option value='5'>May</option>
+					                            <option value='6'>June</option>
+					                            <option value='7'>July</option>
+					                            <option value='8'>August</option>
+					                            <option value='9'>September</option>
+					                            <option value='10'>October</option>
+					                            <option value='11'>November</option>
+					                            <option value='12'>December</option>
+					                          </select>
+					                          @if ($errors->has('expire_on_month'))
+					                             <span class="help-block">
+					                                 <strong>{{ $errors->first('expire_on_month') }}</strong>
+					                             </span>
+					                        	@endif
+					                          <select class="form-control" name="expire_on_year">
+					                            <option selected value="">Year</option>
+					                            <option value="1">2017</option>
+					                            <option value="2">2018</option>
+					                            <option value="3">2019</option>
+					                            <option value="4">2020</option>
+					                            <option value="5">2021</option>
+					                            <option value="6">2022</option>
+					                            <option value="7">2023</option>
+					                            <option value="8">2024</option>
+					                            <option value="9">2025</option>
+					                          </select>
+					                          @if ($errors->has('expire_on_year'))
+					                             <span class="help-block">
+					                                 <strong>{{ $errors->first('expire_on_year') }}</strong>
+					                             </span>
+					                        	@endif
+					                        </div>
+					                        <div class="form-group">{!!HTML::image('kuwpons/images/payment-icon.png','')!!}</div>
+					                        <div class="form-group">
+					                          <label for="">Name on Card</label>
+					                          <input class="form-control" type="text" placeholder="" name="cardName">
+					                          @if ($errors->has('cardName'))
+					                             <span class="help-block">
+					                                 <strong>{{ $errors->first('cardName') }}</strong>
+					                             </span>
+					                        	@endif
+					                        </div>
+					                        <div class="form-group">
+					                          <label>Security Code </label>
+					                          <input class="form-control" type="text" placeholder="" name="cvv">
+					                          <p>What's this?</p>
+					                          @if ($errors->has('cvv'))
+					                             <span class="help-block">
+					                                 <strong>{{ $errors->first('cvv') }}</strong>
+					                             </span>
+					                        	@endif
+					                        </div>
+					                        <div class="place-order">
+					                        	<input type="submit" name="submit" value="Place Order" class="defaultbtn place-order-btn">
+					                        </div>
+				                    	</div>
+				                    	<div>
+					                        
+					                        
+				                     </div>
+			                    </div>
+			               </div>
+			     			</div>
+			   		{{Form::close()}}
+			   		</div>
+            	</div>
             <div class="col-lg-4 col-md-4 col-sm-4 order-summary-respon">
               <div class="order-summary">
                 <h1>Order Summary</h1>
@@ -163,8 +243,8 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td>Order Total <span><a href="{{URL::to('/myCart')}}">View Details</a></span></td>
-                        <td>KD {{$totalPrice}}</td>
+                        <td class="total-payables">Order Total <span><a href="{{URL::to('/myCart')}}">View Details</a></span></td>
+                        <td class="total-payables">KD {{$totalPrice}}</td>
                       </tr>
                     </tbody>
                     <thead>
@@ -186,9 +266,10 @@
               </div> --}}
             </div>
           </div>
-        </div>
+          </div>
+        	</div>
       </div>
-    </section>
+   </section>
     
     @if(!\Auth::check())
      {{-- <section class="newslatter-sec">
@@ -231,6 +312,20 @@
             }
         });
     });
+
+   $('.cities').on('click',function () {
+    $('.cities').attr('autocomplete','on');
+});
+
+$('#countryCode').val($('.country').find('option:selected').attr('ccode'));
+$('.country_code').text($('.country').find('option:selected').attr('ccode'));
+$('.country').on('change',function () {
+    var country = $('.country').val();
+    var ccode = $(this).find('option:selected').attr('ccode');
+    $('.country_code').text(ccode);
+	 $('#countryCode').val(ccode);
+
+})
 </script>
 @endpush
 @endsection

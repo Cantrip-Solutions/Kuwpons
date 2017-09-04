@@ -133,9 +133,16 @@
 	                         </div>
 	                     </div>
 	                     <!-- <div class="form-group"> -->
-	                         <label for="sms_service" class="control-label">Do you like get coupon codes via SMS ?</label>
-	                         	<input type="checkbox" name="sms_service" value="sms" class="form-control" checked>
+	                         <!-- <label for="sms_service" class="control-label">Do you like get coupon codes via SMS ?</label> -->
+	                         	<!-- <input type="checkbox" name="sms_service" value="sms" class="form-control" checked> -->
 	                     <!-- </div> -->
+
+	                        <div class="shipping-checkbox">
+	                         	<input type="checkbox" name="sms_service" id="sms_service" value="sms" checked>
+	                          <!-- <input type="checkbox" value="None" id="shipping-checkbox" name="check" checked /> -->
+	                          Do you like get coupon codes via SMS ?
+	                          <label for="sms_service"></label>
+	                        </div>
 
                 			<h1>Choose Payment Mode</h1>
                 			<div id="parentVerticalTab" class="payment-mode-main">

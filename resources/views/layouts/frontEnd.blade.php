@@ -17,7 +17,7 @@
 <!-- website custom css -->
    
     {!!HTML::style('kuwpons/source/jquery.fancybox.css')!!}
-    {!!HTML::style('kuwpons/css/cloud-zoom.css')!!}
+    {!!HTML::style('kuwpons/css/xzoom.css')!!}
     {!!HTML::style('kuwpons/css/slick.css')!!}
     {!!HTML::style('kuwpons/css/easy-responsive-tabs.css')!!}
     {!!HTML::style('admintheme/vendor/sweetalert/lib/sweet-alert.css')!!}
@@ -59,7 +59,7 @@
                 <li><a href="{{ URL::to('/myAccount') }}">My Profile</a></li>
                 <li><a href="{{ URL::to('/orderHistory') }}">Order History</a></li>
                 <li>
-                  <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+                  <a href="{{ route('logout') }}" onClick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
@@ -300,6 +300,8 @@
 {!! HTML::script('plugins/jquery-validation-1.15.0/dist/additional-methods.min.js') !!}
 
 {!!HTML::script('kuwpons/js/custom.js')!!}
+{!!HTML::script('kuwpons/js/setup.js')!!}
+
 @stack('scripts')
 
 @if (Session::has('message'))

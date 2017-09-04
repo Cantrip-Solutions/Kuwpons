@@ -161,11 +161,11 @@ header-menu nav li:hover a:after, header-menu nav li.active a:after {
 }
 
 .banner-contain .banner-text {
-	text-align:center;
-	position:absolute;
-	left:50%;
-	top:50%;
-	transform: translate(-50%, 90%);
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 0%);
 }
 
 .banner-contain .banner-text h4 {
@@ -209,6 +209,19 @@ header-menu nav li:hover a:after, header-menu nav li.active a:after {
     background-color: inherit;
     outline: none;
     text-decoration: none;
+}
+
+.banner-pic .banner-contain{ 
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	background:rgba(125, 125, 125, 0.44);
+	-ms-transition: all 0.4s linear 0s;
+	-moz-transition: all 0.4s linear 0s;
+	-webkit-transition: all 0.4s linear 0s;
+	transition: all 0.4s linear 0s;
 }
 
 /*=======Header-end======*/
@@ -1360,6 +1373,21 @@ a.recover-pass:hover{
 
 .product-dt-holder .zoom-wrap .slick-next {
     left:95%;
+}
+
+.product-dt-holder .xzoom-thumbs {
+    width: 430px;
+    margin-left: 5px;
+}
+.product-dt-holder .xzoom-container {
+	width:100%;
+}
+.product-dt-holder .xzoom {
+	width:100%;
+}
+.product-dt-holder .slick-slide img {
+    width: 100px;
+	height:100px;
 }
 
 /* ############################### product-details End ##########################  */

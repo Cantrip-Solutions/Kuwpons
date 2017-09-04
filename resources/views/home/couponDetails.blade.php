@@ -13,26 +13,24 @@ a.disabled {
 	        <div class="prod-top-dt">
 	        	<h1>Products Details</h1>
 		        <div class="row">
-		            <div class="col-lg-6 col-md-6 col-sm-12">
+		            <div class="col-lg-5 col-md-6 col-sm-12">
 			            <div class="prod-top-dt-left">
-			              <div class="zoom-wrap">
-                        <div class="zoom-small-image">
+			              <div class="zoom-wrap xzoom-container">
                           <a href='{{URL('/').'/'.config('global.productPath').$productDetails->defaultImage->image}}' class = 'cloud-zoom' id='zoom1' rel="adjustX:10, adjustY:-4">
-                            {!!HTML::image(config('global.productPath').$productDetails->defaultImage->image)!!}
+                            {!!HTML::image(config('global.productPath').$productDetails->defaultImage->image,'',array('class'=>'xzoom', 'id'=>'xzoom-default','xoriginal'=>URL('/').'/'.config('global.productPath').$productDetails->defaultImage->image))!!}
                           </a>
-                        </div>
-                        <div class="zoom-desc">
-                             <ul class="responsive-zoom slider">
-                              <li class="thumbAc sdasdsdsad">
-                                <a href='{{URL('/').'/'.config('global.productPath').$productDetails->defaultImage->image}}' class='cloud-zoom-gallery' title='Red' rel="useZoom: 'zoom1', smallImage: '{{URL('/').'/'.config('global.productPath').$productDetails->defaultImage->image}}' ">
-                                  {!!HTML::image(config('global.productPath').$productDetails->defaultImage->image, '', array('class'=>"zoom-tiny-image",'width'=>"", 'height'=>"" ))!!}
+                        <div class="xzoom-thumbs">
+                            <ul class="responsive-zoom slider">
+                              <li>
+                                <a href='{{URL('/').'/'.config('global.productPath').$productDetails->defaultImage->image}}'>
+                                  {!!HTML::image(config('global.productPath').$productDetails->defaultImage->image, '', array('class'=>"xzoom-gallery",'width'=>"", 'height'=>"", 'xpreview'=>URL('/').'/'.config('global.productPath').$productDetails->defaultImage->image))!!}
                                   {{-- <img class="zoom-tiny-image" src="images/Product-dtl-zoom.jpg" width="" height="" alt = "Thumbnail 1"/> --}}
                                 </a>
                               </li>
                               @foreach($productDetails->getImages as $productImage)
-                                <li class="thumbAc">
-                                <a href='{{URL('/').'/'.config('global.productPath').$productImage->image}}' class='cloud-zoom-gallery' title='Red' rel="useZoom: 'zoom1', smallImage: '{{URL('/').'/'.config('global.productPath').$productImage->image}}' ">
-                                  {!!HTML::image(config('global.productPath').$productImage->image, '', array('class'=>"zoom-tiny-image",'width'=>"", 'height'=>"" ))!!}
+                                <li>
+                                <a href='{{URL('/').'/'.config('global.productPath').$productImage->image}}'>
+                                  {!!HTML::image(config('global.productPath').$productImage->image, '', array('class'=>"xzoom-gallery",'width'=>"", 'height'=>"" ))!!}
                                   {{-- <img class="zoom-tiny-image" src="images/Product-dtl-zoom.jpg" width="" height="" alt = "Thumbnail 1"/> --}}
                                 </a> </li>
                               @endforeach
@@ -42,7 +40,7 @@ a.disabled {
 			            </div>
 		            </div>
 		            
-		            <div class="col-lg-6 col-md-6 col-sm-12">
+		            <div class="col-lg-7 col-md-6 col-sm-12">
 			            <div class="prod-top-dt-right">
 			                <h3>{{ $productDetails->name }}</h3>
 			                <p>{{ $productDetails->shortDescription }} <a href="#description_tab" style="color:red;">more...</a></p>   
@@ -189,7 +187,7 @@ a.disabled {
 
 @endpush
 @push('scripts')
-{!!HTML::script('kuwpons/js/cloud-zoom.js')!!}
+{!!HTML::script('kuwpons/js/xzoom.min.js')!!}
 
 <script>
 function registrationtab(evt, cityName) {

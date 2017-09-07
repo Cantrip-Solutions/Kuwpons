@@ -226,8 +226,9 @@ class OrdersController extends Controller
         } 
 
         $countries = DB::table('countries')->get();
+        $itemQuantity = array_sum($bucketProducts);
 
-        return view('home.checkout', compact('productDetails','bucketProducts','totalPrice','countries'));
+        return view('home.checkout', compact('productDetails','bucketProducts','itemQuantity','totalPrice','countries'));
         
     }
 

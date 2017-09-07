@@ -269,7 +269,8 @@
                   <table id="cart">
                     <thead>
                       <tr>
-                        <th>{{count($productDetails)}} ITEMS</th>
+                        <th>{{$itemQuantity}} ITEMS</th>
+                        {{-- <th>{{count($productDetails)}} ITEMS</th> --}}
                       </tr>
                     </thead>
                     <tbody>

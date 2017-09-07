@@ -77,7 +77,7 @@ a.disabled {
 		            </div>
 		            <div class="tab-content-wrap">
 		                <div id="Description" class="tabcontent">
-		                  <p>{{ $productDetails->description }}</p>
+		                  <p>{!! $productDetails->description !!}</p>
 		                </div>
 		                <div id="Enquiry" class="tabcontent">
   		                  <div class="row">

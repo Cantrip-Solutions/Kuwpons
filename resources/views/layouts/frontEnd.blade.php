@@ -221,6 +221,15 @@
                                 <label for="test1">Female</label>
                             </div>
                         </div>
+                        <div class="field-row">
+                            <div class="deliveryType">
+                                <span>Method of KUWPON Delivery </span>
+                                <input name="deliveryType" type="radio" value="M" checked>
+                                <label for="test">Email</label>
+                                <input name="deliveryType" type="radio" value="S">
+                                <label for="test1">SMS</label>
+                            </div>
+                        </div>
                     </div>
                     
                     <input type="submit" name="" value="Register">
@@ -305,10 +314,10 @@
 
 @if (Session::has('message'))
   <script type="text/javascript">
-  var message = '{{ Session::get('message') }}';
-    $(document).ready(function(){
+  $(document).ready(function(){
+  var message = {!! Session::get('message') !!};
       setTimeout(function () {
-          swal({title: 'Error!', text: message, type: 'error'});
+          swal({title: message.type, text: message.message, type: message.type});
       }, 1000);
     });
   </script>

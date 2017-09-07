@@ -28,6 +28,17 @@ body *{
   font-family: 'Calibri';
 }
 /*=======Style-start======*/
+input[type=radio] {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    border: none!important;
+    background-color: transparent;
+    appearance: radio;
+    -moz-appearance: radio;
+    -webkit-appearance: radio;
+}
+
 a:focus {
     outline:none;
     outline:none;
@@ -762,6 +773,11 @@ a.recover-pass:hover{
     padding: 9px 0;
     text-align: center;
 }
+.deliveryType {
+    padding: 9px 0;
+    text-align: center;
+
+}
 
 .gend span{
     display: inline-block;
@@ -771,6 +787,16 @@ a.recover-pass:hover{
     vertical-align: middle;
     font-weight: bold;
 }
+
+.deliveryType span{
+    display: inline-block;
+    font-size: 14px;
+    color: #312a2a;
+    margin-right: 10px;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
 
 .gend input[type=radio]{
     display: inline-block;

@@ -23,6 +23,8 @@ Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallba
 Route::get('login/google', 'Auth\LoginController@redirectToProviderGoogle');
 Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallbackGoogle');
 
+// Activation Link
+Route::get('/activateuser/{name}/{id}/{rememberToken}', 'ConsumerController@activateUser');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/userRegister','ConsumerController@userRegister');

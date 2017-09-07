@@ -148,13 +148,15 @@
 	                         <!-- <label for="sms_service" class="control-label">Do you like get coupon codes via SMS ?</label> -->
 	                         	<!-- <input type="checkbox" name="sms_service" value="sms" class="form-control" checked> -->
 	                     <!-- </div> -->
+	                     @if(!Auth::check())
 	                     <div class="form-group">
 	                       	<label class="col-sm-2 control-label">Get coupon codes via</label>
 	                         <div class="col-sm-10">
-			                    <input type="radio" name="deliveryType" value="email" checked> Email or
-			                    <input type="radio" name="deliveryType" value="sms"> SMS
+			                    <input type="radio" name="deliveryType" value="M" checked> Email or
+			                    <input type="radio" name="deliveryType" value="S"> SMS
 		                    </div>
 	                     </div>
+	                     @endif
 
 
 

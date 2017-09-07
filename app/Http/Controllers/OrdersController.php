@@ -330,6 +330,7 @@ class OrdersController extends Controller
 
             if (!Auth::check()) {
                 
+                $deliveryType = $req->deliveryType;
 
                 $users = User::where('email','=',$email)->first();
                 if (count($users) != 0) {
@@ -385,6 +386,8 @@ class OrdersController extends Controller
                 }
             } else{
                 $user = User::find(Auth::id());
+                $deliveryType = $user->deliveryType;
+
                 // $address1 = $user->address1;
                 // $address2 = $user->address2;
                 // $city = $user->city;
@@ -468,7 +471,7 @@ class OrdersController extends Controller
                             $text = 'Your purchased coupon code '.$productName.' for '.$companyName.' is '.$newCouponCode.' valid till '.$expireOn;
 
 
-                            if ($req->deliveryType == 'sms') {
+                            if ($deliveryType == 'S') {
                                 $sendSMS = Helper::sendSMS($phoneSMS, $text);
                             }
                             $couponDetails = array(
@@ -504,7 +507,7 @@ class OrdersController extends Controller
                  'couponArray' => $couponArray
                 ];
                 
-                if ($req->deliveryType == 'email') { 
+                if ($deliveryType == 'M') { 
                     Mail::send($data['view'], $data, function($message) use ($data){
                         $message->to($data['to'], $data['name'])->subject($data['subject']);
                     });                

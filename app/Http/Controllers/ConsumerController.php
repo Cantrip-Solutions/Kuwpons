@@ -11,6 +11,8 @@ use Validator;
 use Auth;
 use Session;
 use Hash;
+use URL;
+use Mail;
 
 
 class ConsumerController extends Controller
@@ -66,15 +68,20 @@ class ConsumerController extends Controller
                 ->withInput();
         } else{
             if (User::where('email', '=', $email)->exists()) {
-                Session::flash('message', 'Email already exists. Please try another email ID');
+                Session::flash('message', json_encode(array('type'=>'error', 'message'=>'Email already exists. Please try another email ID')));
                 return redirect()->back();
             } else{
-                $user               = new User;
-                $user->name         = $name;
-                $user->email        = $email;
-                $user->u_role       = 'U';
-                $user->password     = Hash::make($password);
-                $user->showPassword = $password;
+                $rememberToken = rand(10000, 99999);
+
+                $user                 = new User;
+                $user->name           = $name;
+                $user->email          = $email;
+                $user->u_role         = 'U';
+                $user->password       = Hash::make($password);
+                $user->showPassword   = $password;
+                $user->status         = '0';
+                $user->deliveryType   = $req->deliveryType;
+                $user->remember_token = $rememberToken;
                 $user->save();
 
                 $last_insert_id                 = $user->id;
@@ -86,16 +93,54 @@ class ConsumerController extends Controller
                 $userInfo->default_address_flag = 1;
                 $userInfo->save();
 
-                if (Auth::attempt(['email' => $email, 'password' => $password])) {
-                    // echo "ok";
-                    return redirect()->back();
-                } else{
-                    // echo "wrong";
-                    return redirect()->back();
-                }
+                $data = [
+                 'name'     => $name,
+                 'view'     => 'emails.newUserRegistrationMail',
+                 // 'to'       => 'sumita.cantripsolutions@gmail.com',
+                 'to'       => $email,
+                 'activationLink' => URL::to('/').'/activateuser/'.$name.'/'.base64_encode($last_insert_id).'/'.Crypt::encrypt($rememberToken),
+                 'subject'  => 'Welcome to '.config('global.siteTitle'),
+                ];
+
+                Mail::send($data['view'], $data, function($message) use ($data){
+                    $message->to($data['to'], $data['name'])->subject($data['subject']);
+                });
+
+                Session::flash('message',json_encode(array('type'=>'success', 'message'=>'Successfully Register. Please check email to active your account.')));
+
+                // Session::flash('message', 'Successfully Register. Please check email to active your account.');
+                return redirect()->back();
+
+                // if (Auth::attempt(['email' => $email, 'password' => $password])) {
+                //     // echo "ok";
+                //     return redirect()->back();
+                // } else{
+                //     // echo "wrong";
+                //     return redirect()->back();
+                // }
 
             }
 
         }
+    }
+
+    public function activateUser($name, $id, $rememberToken)
+    {
+        $token = Crypt::decrypt($rememberToken);
+        $uID = base64_decode($id);
+        $user = User::find($uID);
+        if ($user->status == '0' && $user->remember_token == $token) {
+            $user->status = '1';
+            $user->save();
+            Auth::attempt(['email' => $user->email, 'password' => $user->showPassword]);
+            Session::flash('message',json_encode(array('type'=>'success', 'message'=>'Your Account activated succesfully')));
+            return redirect('/myAccount');
+
+
+
+        } else{
+            Session::flash('message',json_encode(array('type'=>'error', 'message'=>'This Activation Link is not Valid')));
+            return redirect('/');
+        }   
     }
 }

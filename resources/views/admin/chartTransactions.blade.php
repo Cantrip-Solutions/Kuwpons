@@ -29,7 +29,6 @@
                     @if (Session::has('message'))
                        <div class="alert alert-info"><i class="pe-7s-gleam"></i>{{ Session::get('message') }}</div>
                     @endif
-
                     <table id="example1" class="table table-striped table-bordered table-hover">
                         <thead>
                         <tr>
@@ -69,7 +68,7 @@
                             @endforeach
                         </tbody>
                     </table>
-
+                    
                 </div>
             </div>
         </div>

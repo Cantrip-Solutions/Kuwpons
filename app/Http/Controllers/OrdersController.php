@@ -58,7 +58,7 @@ class OrdersController extends Controller
             }
             else{
                 $updateBucket = Bucket::where('pro_id_fk','=',$proID)->where('u_id_fk','=',$uID)->update([
-                'quantity' => $checkBucket->quantity + 1
+                'quantity' => $checkBucket->quantity + $quantity
                 ]);
                 $message = json_encode(array('type'=>'success','message'=>'Quantity upgraded to cart'));
             }
@@ -79,7 +79,7 @@ class OrdersController extends Controller
             } else{
                 $cookieBag = json_decode(Cookie::get('bucket'),true);
                 $bucketProducts=(array)$cookieBag;
-                $bucketProducts[$proID] = $bucketProducts[$proID] + 1;
+                $bucketProducts[$proID] = $bucketProducts[$proID] + $quantity;
                 $bucketProducts = json_encode($bucketProducts);
                 Cookie::queue('bucket', $bucketProducts, 1440);
                 $message = json_encode(array('type'=>'success','message'=>'Quantity upgraded to cart'));
@@ -112,7 +112,6 @@ class OrdersController extends Controller
             $cookieBag = json_decode(Cookie::get('bucket'), true);
             $uID = Auth::id();
             foreach ($cookieBag as $key => $item) {
-                echo $key;
                 $checkBucket = Bucket::where('u_id_fk','=',$uID)->where('pro_id_fk','=',$key)->get();
                 if (count($checkBucket) == 0) {
                     $productDetails = Product::find($key);
@@ -125,8 +124,6 @@ class OrdersController extends Controller
                 }
             }
             Cookie::queue('bucket', null, 1440);
-
-            echo "string";
         }
     }
     public function myCart()
@@ -334,11 +331,14 @@ class OrdersController extends Controller
             if (!Auth::check()) {
                 
 
-                $users = User::where('email','=',$email)->get();
+                $users = User::where('email','=',$email)->first();
                 if (count($users) != 0) {
-                    Session::flash('message', 'Email already exists. Please try another email ID');
-                    return redirect()->back();
-                    exit;
+                    if (Auth::attempt(['email' => $email, 'password' => $users->showPassword])) {
+
+                    }
+                    // Session::flash('message', 'Email already exists. Please try another email ID');
+                    // return redirect()->back();
+                    // exit;
 
                 } else{
                     $password = rand(100000, 999999);
@@ -365,6 +365,18 @@ class OrdersController extends Controller
                     $userInfo->save();
 
                     if (Auth::attempt(['email' => $email, 'password' => $password])) {
+                        // // Mail send to user of coupon code
+                        // $data = [
+                        //  'name'     => $name,
+                        //  'view'     => 'emails.generateCouponMailToUser',
+                        //  'to'       => $email,
+                        //  'subject'  => 'Your New Purchased Coupon Code',
+                        //  'password' => $password,
+                        // ];
+
+                        // Mail::send($data['view'], $data, function($message) use ($data){
+                        //     $message->to($data['to'], $data['name'])->subject($data['subject']);
+                        // });
 
                     } else{
                         // echo "wrong";
@@ -449,7 +461,23 @@ class OrdersController extends Controller
                             $newRedeem->coupon_code = $newCouponCode;
                             $newRedeem->save();
 
-                            array_push($couponArray, $newCouponCode);
+                            $productName = $product->name;
+                            $expireOn = $product->expire_on;
+                            $companyName = $product->getUser->name;
+                            $phoneSMS = $countryCode.$phone;
+                            $text = 'Your purchased coupon code '.$productName.' for '.$companyName.' is '.$newCouponCode.' valid till '.$expireOn;
+
+
+                            if ($req->deliveryType == 'sms') {
+                                $sendSMS = Helper::sendSMS($phoneSMS, $text);
+                            }
+                            $couponDetails = array(
+                                'code'        =>$newCouponCode,
+                                'expireOn'    =>$expireOn,
+                                'productName' =>$productName,
+                                'companyName' =>$companyName,
+                                );
+                            array_push($couponArray, $couponDetails);
                         }
 
                         // Delete Record from Bucket
@@ -468,18 +496,20 @@ class OrdersController extends Controller
 
                 // Mail send to user of coupon code
                 $data = [
-                 'name'     => Auth::user()->name,
+                 'name'     => $name,
                  'view'     => 'emails.generateCouponMailToUser',
-                 'to'       => Auth::user()->email,
+                 // 'to'       => 'sumita.cantripsolutions@gmail.com',
+                 'to'       => $email,
                  'subject'  => 'Your New Purchased Coupon Code',
-                 'couponArray' => $couponArray,
+                 'couponArray' => $couponArray
                 ];
-
-                Mail::send($data['view'], $data, function($message) use ($data){
-                    $message->to($data['to'], $data['name'])->subject($data['subject']);
-                });
-
                 
+                if ($req->deliveryType == 'email') { 
+                    Mail::send($data['view'], $data, function($message) use ($data){
+                        $message->to($data['to'], $data['name'])->subject($data['subject']);
+                    });                
+                }
+
 
                 // check for failures
                 // if (Mail::failures()) {
@@ -487,12 +517,12 @@ class OrdersController extends Controller
                 // } else{
                 $orderupdate = Orders::where('trans_id_fk','=',$transactionsID)->update(['status'=>'1']);
                 // }
-                if ($req->sms_service == 'sms') {
-                    # code...
-                    $couponsSMS = implode(',', $couponArray);
-                    $phoneSMS = $countryCode.$phone;
-                    $sendSMS = Helper::sendSMS($phoneSMS, $couponsSMS);
-                }
+                // if ($req->sms_service == 'sms') {
+                //     # code...
+                //     $couponsSMS = implode(',', $couponArray);
+                //     $phoneSMS = $countryCode.$phone;
+                //     $sendSMS = Helper::sendSMS($phoneSMS, $couponsSMS);
+                // }
                 return redirect('orderHistory');
             } else{
                 // $message = json_encode(array('type'=>'success','message'=>'Quantity upgraded to cart'));

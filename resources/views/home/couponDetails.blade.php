@@ -42,12 +42,12 @@ a.disabled {
 		            
 		            <div class="col-lg-7 col-md-6 col-sm-12">
 			            <div class="prod-top-dt-right">
-			                <h3>{{ $productDetails->name }}</h3>
+			                <h3 style="color:#888282;">{{ $productDetails->name }}</h3>
 			                <p>{{ $productDetails->shortDescription }} <a href="#description_tab" style="color:red;">more...</a></p>   
 			                <div class="p-details-price">
                       
-			                   <h2>Price <span class="old-price"> KD {{ $productDetails->original_price }} </span> <span > KD {{ $productDetails->saling_price }} </span>  </h2>
-			                   {{-- <h2>Discount Price <span> $ 200.00 </span> </h2> --}}
+			                   <h2>Deal <span class="old-price"> {{ $productDetails->original_price }} KD </span> to <span > {{ $productDetails->discounted_price }} KD </span>  </h2>
+			                   <h2>KUWPON Price <span class="kuwpon-price-color"> {{ $productDetails->saling_price }} KD </span> </h2>
 			                </div>
                       <div class="p-details-price">
                       
@@ -61,8 +61,8 @@ a.disabled {
 			                    <input id="num" type="number" value="1" min="1" class="pro_quantity">
 			                    <button id="plus"><i class="fa fa-chevron-up" aria-hidden="true"></i> </button>
 			                  </div>
-			                  <a href="#" class="addcard cartAdded" proID="{{Crypt::encrypt($productDetails->id)}}" >Add To Cart</a>
-                        <a href="{{URL::to('/myAccount/checkout')}}" class="addcard gotoCheckOut disabled" proID="{{Crypt::encrypt($productDetails->id)}}" >Proceed To Checkout</a> </div>
+			                  <a href="#" class="addcard cartAdded" proID="{{Crypt::encrypt($productDetails->id)}}" >BUY KUWPON</a>
+                        <a href="{{URL::to('/myAccount/checkout')}}" class="addcard gotoCheckOut greyButton disabled" proID="{{Crypt::encrypt($productDetails->id)}}" >PROCEED TO CHECKOUT</a> </div>
                         </div>
 			            </div>
 		            </div>
@@ -130,28 +130,24 @@ a.disabled {
                       <div class="product-list-border">
                         <div class="discount-product">
                           <figure>
+                          <a href="/coupon/{{urlencode($product->name)}}/{{Crypt::encrypt($product->id)}}">
                             {!!HTML::image(config('global.productPath').$product->defaultImage->image)!!}
+                          </a>
                           </figure>
                           @php
-                            $off = Helper::discountOff($product->original_price,$product->saling_price);
+                            $off = Helper::discountOff($product->original_price,$product->discounted_price);
                           @endphp
                            @if($off != '0')
                             <span>{{$off}}% Off</span>
                            @endif
                         </div>
                         <div class="product-list-text">
-                          <h3>{{ $product->name }}</h3>
-                          <p>{{ substr($product->shortDescription, 0,130) }}</p>
-                          <h2>Price <span class="old-price"> KD {{ $product->original_price }} </span> <span > KD {{ $product->saling_price }} </span>  </h2>
-                          {{-- <h2>Discount Price <span> $ 200.00 </span> </h2> --}}
-                          <div class="mid-deals">
-                            <h2>Deals sold <span> 1 </span> </h2>
-                            <span> Expiry Date {{ date('d.m.Y',strtotime($product->expire_on)) }} </span> </div>
-                          <div class="loc-cart">
-                            <div class="map-loc">  </div>
-
-                            <div class="cart-icon coupons-cart" proID="{{Crypt::encrypt($product->id)}}" style="cursor: pointer;"> <span class="btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span> </div>
-                          </div>
+                            <h3><a href="/coupon/{{urlencode($product->name)}}/{{Crypt::encrypt($product->id)}}">{{$product->name}}</a></h3>
+                            <h2>Deal  <span class="old-price"> {{ $product->original_price }}  KD </span> to <span> {{$product->discounted_price}} KD </span></h2>
+                            <h2>Kuwpon Price <span class="kuwpon-price-color"> {{$product->saling_price}} KD </span></h2>
+                            <div class="mid-deals">
+                            <div class="defaultbtn btn-green coupons-price-btn coupons-cart" proID="{{Crypt::encrypt($product->id)}}" style="cursor: pointer;" ><a href="/coupon/{{urlencode($product->name)}}/{{Crypt::encrypt($product->id)}}"> <span class="new-price">BUY KUWPON</span></a></div>
+                            </div>
                         </div>
                       </div>
                     </div>
@@ -187,6 +183,7 @@ a.disabled {
 
 @endpush
 @push('scripts')
+{!!HTML::script('kuwpons/js/setup.js')!!}
 {!!HTML::script('kuwpons/js/xzoom.min.js')!!}
 
 <script>
@@ -258,8 +255,8 @@ $(document).ready(function(){
         'success':function(resp){
           swal({title: resp.type, text: resp.message, type: resp.type});
           cartValue();
-          $('.gotoCheckOut').removeClass('disabled');
-          $('.cartAdded').addClass('disabled');
+          $('.gotoCheckOut').removeClass('disabled greyButton');
+          $('.cartAdded').addClass('disabled greyButton');
         }
       });
     });

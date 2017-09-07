@@ -40,7 +40,9 @@
                       <td class="proEachPrice">{{$product->saling_price}}</td>
                       <td><input type="number" value="{{$bucketProducts[$product->id]}}" proPrice="{{$product->saling_price}}" proID="{{$product->id}}" min="1" max="99" class="qtyinput"></td>
                       <td class="proTotalPrice">{{ (int)$product->saling_price*(int)$bucketProducts[$product->id] }}</td>
-                      <td><a class="deleteProductFromCart" proID="{{Crypt::encrypt($product->id)}}"><img src="/kuwpons/images/remove.png" alt="X"></a></td>
+                      <td><a href="javascript:void(0)" class="deleteProductFromCart" proID="{{Crypt::encrypt($product->id)}}">
+                      {{-- <img src="/kuwpons/images/remove.png"> --}}
+                      Remove</a></td>
                     </tr>
                     @endforeach
                   </tbody>
@@ -63,11 +65,11 @@
                   <tbody>
                     <tr>
                       <td>Subtotal</td>
-                      <td>KD <span id="sub_total_price"></span></td>
+                      <td><span id="sub_total_price"></span> KD</td>
                     </tr>
                     <tr>
                       <td>Total</td>
-                      <td>KD <span id="total_price"></span></td>
+                      <td><span id="total_price"></span> KD</td>
                     </tr>
                   </tbody>
                 </table>

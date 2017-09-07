@@ -15,8 +15,9 @@
             </div>
          </div>
          <div class="col-lg-9 col-md-8 col-sm-12">
-           <h1>NEW COUPONS</h1>
-        <div class="coupons-box">
+         <div class="product-list-sec">
+           <h1>NEW KUWPONS</h1>
+        <div class="product-list">
           <div class="row">
           {{-- @if (Cookie::get('bucket') !== false) {
              <div class="alert alert-info"><i class="pe-7s-gleam"></i>{{Cookie::get('bucket')}}</div>
@@ -24,7 +25,7 @@
           {{-- {{$newCoupons}} --}}
             @foreach($newCoupons as $newCoupon)
             <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="coupons-box-border">
+                <div class="product-list-border">
                   <div class="discount-product">
                    <figure>
                     <a href="/coupon/{{urlencode($newCoupon->name)}}/{{Crypt::encrypt($newCoupon->id)}}">
@@ -32,30 +33,30 @@
                     </a>
                    </figure>
                    @php
-                     $off = Helper::discountOff($newCoupon->original_price,$newCoupon->saling_price);
+                     $off = Helper::discountOff($newCoupon->original_price,$newCoupon->discounted_price);
                    @endphp
                    @if($off != '0')
                     <span>{{$off}}% Off</span>
                    @endif
                   </div>
-                  <div class="coupons-box-text">
-                    <p>{{$newCoupon->shortDescription}}</p>
-                    <div class="row">
-                    <div class="col-lg-10 col-md-10 col-xs-10">
-                        <div class="defaultbtn btn-green coupons-price-btn"><a href="/coupon/{{urlencode($newCoupon->name)}}/{{Crypt::encrypt($newCoupon->id)}}"> <span class="old-price">KD {{$newCoupon->original_price}}</span> <span class="new-price">KD {{$newCoupon->saling_price}}</span></a> </div>
-                      </div>
-                    <div class="col-lg-2 col-md-2 col-xs-2">
-                      {{--   <div class="coupons-cart btn-green" proID="{{Crypt::encrypt($newCoupon->id)}}" style="cursor: pointer;"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div> --}}
-                        <div class="coupons-cart-home btn-green" proID="{{Crypt::encrypt($newCoupon->id)}}" style="cursor: pointer;"> <a href="/coupon/{{urlencode($newCoupon->name)}}/{{Crypt::encrypt($newCoupon->id)}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> </a></div> 
-                      </div>
-                    </div>
+                  <div class="product-list-text">
+                     <h3 style="color:#636161;">
+                        <a href="/coupon/{{urlencode($newCoupon->name)}}/{{Crypt::encrypt($newCoupon->id)}}">
+                          {{$newCoupon->name}}
+                        </a>
+                     </h3>
+                     <h2>Deal  <span class="old-price"> {{ $newCoupon->original_price }} KD </span> to <span>  {{$newCoupon->discounted_price}} KD </span></h2>
+                     <h2>Kuwpon Price <span class="kuwpon-price-color"> {{$newCoupon->saling_price}} KD</span></h2>
+                     <div class="mid-deals">
+                     <div class="defaultbtn btn-green coupons-price-btn" proID="{{Crypt::encrypt($newCoupon->id)}}" style="cursor: pointer;" ><a href="/coupon/{{urlencode($newCoupon->name)}}/{{Crypt::encrypt($newCoupon->id)}}"> <span class="new-price">BUY KUWPON</span></a></div>
+                     </div>
                   </div>
                 </div>
               </div>
             @endforeach
           </div>
         </div>
-
+</div>
 </div>
          </div>
 
@@ -148,26 +149,37 @@
     </section> --}}
     <section class="popular-coupons-sec">
       <div class="container">
-        <h1>POPULAR COUPONS</h1>
-        <div class="coupons-box">
+       <div class="product-list-sec">
+        <h1>FEATURED KUWPONS</h1>
+        <div class="product-list">
           <div class="row">
-            @foreach($popularProduct as $key => $product)
+            @foreach($featureProduct as $key => $product)
 
               <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="coupons-box-border">
-                  <figure>
+                <div class="coupons-box-border product-lists">
+                  {{-- <figure>
                     {!!HTML::image(config('global.productPath').$product->img, 'Loading...')!!}
-                  </figure>
-                  <div class="coupons-box-text">
-                    <p>{{ substr($product->shortDescription,0,160) }}</p>
-                    <div class="row">
-                      <div class="col-lg-8 col-md-8 col-xs-10">
-                        <div class="defaultbtn btn-green coupons-price-btn"> <span class="old-price">KD {{ $product->original_price }}</span> <span class="new-price">KD {{ $product->saling_price }}</span> </div>
-                      </div>
-                      <div class="col-lg-4 col-md-4 col-xs-2">
-                        <div class="coupons-cart btn-green" proID="{{Crypt::encrypt($product->id)}}" style="cursor: pointer;"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> </div>
-                      </div>
-                    </div>
+                  </figure> --}}
+                   <div class="discount-product">
+                   <figure>
+                    <a href="/coupon/{{urlencode($product->name)}}/{{Crypt::encrypt($product->id)}}">
+                      {!!HTML::image(config('global.productPath').$product->defaultImage->image, 'Loading...')!!}
+                    </a>
+                   </figure>
+                   @php
+                     $off = Helper::discountOff($product->original_price,$product->discounted_price);
+                   @endphp
+                   @if($off != '0')
+                    <span>{{$off}}% Off</span>
+                   @endif
+                  </div>
+                  <div class="product-list-text">
+                    <h3 ><a href="/coupon/{{urlencode($product->name)}}/{{Crypt::encrypt($product->id)}}">{{$product->name}}</a></h3>
+                     <h2>Deal  <span class="old-price">   {{ $product->original_price }} KD </span> to <span>  {{$product->discounted_price}} KD </span></h2>
+                     <h2>Kuwpon Price <span class="kuwpon-price-color"> {{$product->saling_price}} KD </span></h2>
+                     <div class="mid-deals">
+                     <div class="defaultbtn btn-green coupons-price-btn" proID="{{Crypt::encrypt($product->id)}}" style="cursor: pointer;" ><a href="/coupon/{{urlencode($product->name)}}/{{Crypt::encrypt($product->id)}}"><span class="new-price">BUY KUWPON</span></a></div>
+                     </div>
                   </div>
                 </div>
               </div>
@@ -176,6 +188,7 @@
           </div>
         </div>
       </div>
+     </div>
     </section>
     
     @if(!\Auth::check())

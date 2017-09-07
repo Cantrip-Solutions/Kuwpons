@@ -29,29 +29,30 @@
                     @if (Session::has('message'))
                        <div class="alert alert-info"><i class="pe-7s-gleam"></i>{{ Session::get('message') }}</div>
                     @endif
-                    <table id="example1" class="table table-striped table-bordered table-hover">
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Cat ID</th>
-                            <th>Attributes</th>
-                            <th>Created At</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($specifications as $specification)
+                    <div class="table-responsive"> 
+                        <table id="example1" class="table table-striped table-bordered table-hover">
+                            <thead>
                             <tr>
-                                <td>{{$specification->id}}</td>
-                                <td>{{$specification->getCategoryInfo->name}}</td>
-                                <td>{{$specification->attributes}}</td>
-                                <td>{{$specification->created_at}}</td>
-                                <td></td>
+                                <th>Id</th>
+                                <th>Cat ID</th>
+                                <th>Attributes</th>
+                                <th>Created At</th>
+                                <th>Action</th>
                             </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
+                            </thead>
+                            <tbody>
+                                @foreach($specifications as $specification)
+                                <tr>
+                                    <td>{{$specification->id}}</td>
+                                    <td>{{$specification->getCategoryInfo->name}}</td>
+                                    <td>{{$specification->attributes}}</td>
+                                    <td>{{$specification->created_at}}</td>
+                                    <td></td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

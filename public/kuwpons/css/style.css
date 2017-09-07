@@ -5,6 +5,12 @@
 
 /* all fonts start*/
 @font-face {
+  font-family: 'Calibri';
+  src: url('../fonts/Calibri.eot?#iefix') format('embedded-opentype'),  url('../fonts/Calibri.woff') format('woff'), url('../fonts/Calibri.ttf')  format('truetype'), url('../fonts/Calibri.svg#Calibri') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
 	font-family: 'CenturyGothicRegular';
 	src: url('../fonts/CenturyGothicRegular.ttf');
 	/*src: local('CenturyGothicRegular'), url('../fonts/CenturyGothicRegular.ttf') format('ttf'), url('../fonts/CenturyGothicRegular') format('truetype');*/
@@ -19,7 +25,7 @@
 /* general*/
 
 body *{
-	font-family: 'CenturyGothicRegular';
+  font-family: 'Calibri';
 }
 /*=======Style-start======*/
 a:focus {
@@ -240,7 +246,8 @@ header-menu nav li:hover a:after, header-menu nav li.active a:after {
 
 .popular-coupons-sec {
 	padding:38px 0;
-}
+/*	background: rgba(136, 220, 69, 0.95);
+*/}
 
 .popular-coupons-sec h1 {
 	font-size:40px;
@@ -256,6 +263,7 @@ header-menu nav li:hover a:after, header-menu nav li.active a:after {
     padding: 6px;
     margin-bottom: 26px;
     box-shadow: 0 0 6px #666;
+    background:#fff;
 }
 
 /*.coupons-box-border img {
@@ -290,13 +298,16 @@ header-menu nav li:hover a:after, header-menu nav li.active a:after {
 }
 
 .coupons-price-btn {
-	padding:8px 15px;
+    padding: 8px 4px;
+    width: 74%;
+    display: block;
+    margin: 0 auto;
 }
 
 .old-price {
-	color:#ff0000 !important;
+	color:#c1afaf !important;
     text-decoration:line-through;
-	margin-right: 16px;
+	margin-right: 8px;
 }
 
 .new-price {
@@ -304,14 +315,14 @@ header-menu nav li:hover a:after, header-menu nav li.active a:after {
 */	color:#fff;
 }
 
-.coupons-cart {
+/*.coupons-cart {
     border-radius: 50%;
     float: right;
     height: 34px;
     margin-top: 0;
     text-align: center;
     width: 34px;
-}
+}*/
 
 .coupons-cart-home {
     border-radius: 50%;
@@ -330,7 +341,6 @@ header-menu nav li:hover a:after, header-menu nav li.active a:after {
 
 .coupons-cart:hover {
     background: rgb(136, 220, 69);
-    border:0 !important;
 }
 
 .coupons-cart .fa-shopping-cart {
@@ -341,6 +351,11 @@ header-menu nav li:hover a:after, header-menu nav li.active a:after {
 .coupons-cart-home .fa-shopping-cart {
     color:#fff;
     margin-top:8px;
+}
+
+.complete h2 {
+    font-size: 18px;
+    padding-bottom: 6px;
 }
 
 /*=======New coupons & popular coupons sec end======*/
@@ -786,6 +801,15 @@ a.recover-pass:hover{
 
 
 /*dropdown*/
+.payment-options input[type=radio]{
+    border: none!important;
+    background-color: transparent;
+    appearance: radio;
+   -moz-appearance: radio;
+   -webkit-appearance: radio;
+}
+
+
 
 
 .main-header-top-right ul li{
@@ -897,6 +921,14 @@ a.recover-pass:hover{
     margin-bottom: 26px;
     box-shadow: 0 0 5px #666;
 }
+.product-lists {
+    border:2px solid #fff;
+    border-radius: 10px;
+    padding:6px;
+    margin-bottom: 26px;
+    box-shadow: 0 0 5px #666;
+    background: #fff;
+}
 .product-list-sec .product-list-border img {
     border-radius: 10px;
     min-height: 190px;
@@ -913,6 +945,7 @@ a.recover-pass:hover{
     color:#8d8d8d;
     font-weight:600;
 	text-transform: lowercase;
+	padding-bottom: 20px;
 }
 .product-list-sec .product-list .product-list-text p {
     font-size:14px;
@@ -923,14 +956,14 @@ a.recover-pass:hover{
 .product-list-sec .product-list .product-list-text h2 {
     font-size:14px;
     color:#8d8d8d;
-    font-weight:600;
+    font-weight:700;
     padding-bottom: 8px;
     padding-left: 2px;
 }
 .product-list-sec .product-list .product-list-text h2 span {
-    font-size:14px;
-    color:#7ac142;
-    font-weight:300;
+    font-size:100%;
+    color:#ff0000;
+    font-weight:700;
     padding-left: 4px;
 }
 .product-list-sec .product-list .mid-deals {
@@ -941,8 +974,8 @@ a.recover-pass:hover{
 }
 .product-list-sec .product-list .mid-deals span {
     font-size:14px;
-    color:#7ac142;
-    font-weight:300;
+    color:#fff;
+    font-weight:700;
     padding-left: 3px;
 }
 .product-list-sec .product-list .loc-cart {
@@ -1094,9 +1127,10 @@ a.recover-pass:hover{
 /*zoom*/
 
 .product-dt-holder .prod-top-dt-right h3{
-    font-size: 25px;
+    font-size: 30px;
     color: #000;
     margin: 0 0 16px;
+    font-weight: 700;
 }
 
 .product-dt-holder .prod-top-dt-right .p-details-price {
@@ -1104,16 +1138,16 @@ a.recover-pass:hover{
 }
 
 .product-dt-holder .prod-top-dt-right .p-details-price h2 {
-	font-size:20px;
-	color:#000;
+	font-size:17px;
+	color:#888282;
 	font-weight:600;
 	padding-bottom: 16px;
     padding-left: 2px;
 }
 
 .product-dt-holder .prod-top-dt-right .p-details-price h2 span {
-	font-size:20px;
-	color:#7ac142;
+	font-size:16px;
+	color:#ff0000;
 	font-weight:700;
 	padding-left: 4px;
 }
@@ -1205,6 +1239,10 @@ a.recover-pass:hover{
 .qty-sec input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
+}
+
+.greyButton {
+	background: rgba(128, 128, 128, 0.65) !important;
 }
 
 .addcard{
@@ -2353,9 +2391,13 @@ part-field{
     border-bottom: 1px solid #e8e8e8;
 }
 .checkout-details-sec .checkout-main h1 {
-    font-size:40px;
+    font-size:32px;
     font-weight:700;
     padding: 10px 0 10px;
+}
+.checkout-details-sec .checkout-main h1 span {
+    font-size: 24px;
+    font-weight: 700;
 }
 .checkout-details-sec .payment-info {
     border-right: 1px solid #e8e8e8;
@@ -2701,4 +2743,12 @@ part-field{
 .log-field-wrap .input-group-addon {
 	border:none;
 	border-radius:0;
+}
+
+/* 06-09-17*/
+.product-list-text h3 a {
+ color: #676163;
+}
+.kuwpon-price-color{
+    color: #008000 !important;
 }

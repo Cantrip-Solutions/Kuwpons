@@ -101,11 +101,27 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="saling_price" class="col-sm-2 control-label">Selling Price*:</label>
+                            <label for="discounted_price" class="col-sm-2 control-label">Discounted Price*:</label>
                             <div class="col-sm-10">
                                 <div class="input-group m-b">
                                 <span class="input-group-addon">KD</span>
-                                {!! Form::number('saling_price', $productInfo->saling_price,array('placeholder'=>'Selling Price','class'=>'form-control')) !!}
+                                {!! Form::number('discounted_price', $productInfo->discounted_price,array('placeholder'=>'Selling Price','class'=>'form-control')) !!}
+                                </div>
+                                @if ($errors->has('discounted_price'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('discounted_price') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="saling_price" class="col-sm-2 control-label">Kuwpon Price*:</label>
+                            <div class="col-sm-10">
+                                <div class="input-group m-b">
+                                <span class="input-group-addon">KD</span>
+                                {!! Form::number('saling_price', $productInfo->saling_price,array('placeholder'=>'Kuwpon Price','class'=>'form-control')) !!}
                                 </div>
                                 @if ($errors->has('saling_price'))
                                     <span class="help-block">
@@ -118,7 +134,7 @@
                         <div class="form-group">
                             <label for="quantity" class="col-sm-2 control-label">Stock Adjustment*:</label>
                             <div class="col-sm-10">
-                                {!! Form::number('quantity', $productInfo->quantity,array('placeholder'=>'Quantity','class'=>'form-control')) !!}
+                                {!! Form::number('quantity', $productInfo->quantity,array('placeholder'=>'Quantity','class'=>'form-control','min'=>1)) !!}
                                 @if ($errors->has('quantity'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('quantity') }}</strong>
@@ -258,6 +274,9 @@ $(document).ready(function(){
             number:true
         },
         'original_price': {
+            required: true
+        },
+        'discounted_price': {
             required: true
         },
         'saling_price': {

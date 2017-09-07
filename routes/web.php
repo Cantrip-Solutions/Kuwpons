@@ -15,6 +15,15 @@ Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
+// Facebook Scocialite
+Route::get('login/facebook', 'Auth\LoginController@redirectToProviderFB');
+Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallbackFB');
+
+// Google Scocialite
+Route::get('login/google', 'Auth\LoginController@redirectToProviderGoogle');
+Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallbackGoogle');
+
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/userRegister','ConsumerController@userRegister');
 
@@ -70,6 +79,11 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/addToImageGallery', 'ProductController@addToImageGallery');
 		Route::get('/tab/product/stockHistory/{name}/{id}', 'ProductController@stockHistory');
 		Route::post('/tab/image/delete', 'ProductController@deleteImage');
+		Route::get('/tab/featuredCoupons', 'ProductController@featuredCoupons');
+		Route::post('/addFeaturedCoupons', 'ProductController@addFeaturedCoupons');
+		Route::post('/tab/featuredProduct/delete/{id}', 'ProductController@deletefeaturedProduct');
+
+		
 
 		// Specification Management
 		Route::get('/tab/chartSpecification',  'SpecificationController@chartSpecification');

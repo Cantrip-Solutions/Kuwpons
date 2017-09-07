@@ -7,7 +7,11 @@
           <div class="row">
             	<div class="col-lg-8 col-md-8 col-sm-8 shipping-respon">
 		            @if(!Auth::check())
-		            
+		            <div class="payment-info complete">
+		                {{-- <h1>Payment Information</h1> --}}
+		                  <h2>To complete checkout please <a href="#login" class="fancybox"><i class="fa fa-user" aria-hidden="true"></i> Login</a> or <a href="javascript:void(0)" class="guestCheckOut">CheckOut As Guest</a> {{-- <a href="#register" class="fancybox">Register</a> --}}</h2>
+		                
+		              </div> 
 		            @else
 		            	@php
 		            		$user = Auth::user();
@@ -15,18 +19,26 @@
 		            	@endphp
 		            @endif
             		{{-- @else --}}
-            		<div class="payment-info">
+            		@if(!Auth::check())
+            			<div class="payment-info form-data" style="display: none;">
+            		@else
+            			<div class="payment-info form-data">
+            		@endif
             		{{Form::open(array('class'=>'clears','action' => 'OrdersController@placeOrder', 'method'=>'POST', 'enctype'=>"multipart/form-data"))}}
 
             			
 
               			<div class="payment-options">
-            				<h1>Billing Address</h1>
-
+            				<h1>Billing Address
+            				@if(!Auth::check())
+								<span>(Checkout as Guest)</span>
+	            			@endif
+	            			</h1>
 	            				<div class="form-group">
 	                         <label for="email" class="col-sm-2 control-label">Email ID*:</label>
 	                         <div class="col-sm-10">
 	                             <input type="text" class="form-control" name="email" value="{{$user->email or ''}}" required>
+	                             <span style="color: green; font-size: 12px;"> Note : Coupon Code will be sent to your emial ID</span>
 	                             @if ($errors->has('email'))
 	                                 <span class="help-block">
 	                                     <strong>{{ $errors->first('email') }}</strong>
@@ -136,13 +148,23 @@
 	                         <!-- <label for="sms_service" class="control-label">Do you like get coupon codes via SMS ?</label> -->
 	                         	<!-- <input type="checkbox" name="sms_service" value="sms" class="form-control" checked> -->
 	                     <!-- </div> -->
+	                     <div class="form-group">
+	                       	<label class="col-sm-2 control-label">Get coupon codes via</label>
+	                         <div class="col-sm-10">
+			                    <input type="radio" name="deliveryType" value="email" checked> Email or
+			                    <input type="radio" name="deliveryType" value="sms"> SMS
+		                    </div>
+	                     </div>
 
-	                        <div class="shipping-checkbox">
-	                         	<input type="checkbox" name="sms_service" id="sms_service" value="sms" checked>
+
+
+
+	                        {{-- <div class="shipping-checkbox"> --}}
+	                         	{{-- <input type="checkbox" name="sms_service" id="sms_service" value="sms" checked> --}}
 	                          <!-- <input type="checkbox" value="None" id="shipping-checkbox" name="check" checked /> -->
-	                          Do you like get coupon codes via SMS ?
-	                          <label for="sms_service"></label>
-	                        </div>
+	                          {{-- Do you like get coupon codes via SMS ? --}}
+	                          {{-- <label for="sms_service"></label> --}}
+	                        {{-- </div> --}}
 
                 			<h1>Choose Payment Mode</h1>
                 			<div id="parentVerticalTab" class="payment-mode-main">
@@ -251,13 +273,13 @@
                     <tbody>
                       <tr>
                         <td class="total-payables">Order Total <span><a href="{{URL::to('/myCart')}}">View Details</a></span></td>
-                        <td class="total-payables">KD {{$totalPrice}}</td>
+                        <td class="total-payables">{{$totalPrice}} KD</td>
                       </tr>
                     </tbody>
                     <thead>
                       <tr>
                         <td class="total-payable">Total Payable</td>
-                        <td class="total-payable">KD {{$totalPrice}}</td>
+                        <td class="total-payable">{{$totalPrice}} KD</td>
                       </tr>
                     </thead>
                   </table>
@@ -302,6 +324,10 @@
 @push('scripts')
 <script type="text/javascript">
     $(document).ready(function() {
+
+    	$('.guestCheckOut').on('click', function () {
+    		$(".form-data").toggle();
+    	})
 
         //Vertical Tab
         $('#parentVerticalTab').easyResponsiveTabs({

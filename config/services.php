@@ -35,4 +35,20 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'facebook' => [
+        'client_id' => '1725207344448202',
+        'client_secret' => 'bfdeb731a67a637aac402413b2ffb8db',
+        'redirect' => URL::to('login/facebook/callback'),
+    ],
+
+    'google' => [
+        // 'client_id' => 'kuwpons',
+        'client_id' => '605313409748-3i0jbv4gg6lhrlrfnfp4tl4t0ovv57fs.apps.googleusercontent.com',
+        'client_secret' => 'uye0V8Rtz537jiNbhdTqmBzi',
+        // 'client_secret' => 'AIzaSyAfiImMTa9QjKSM94UcYx5ctzl3uA364qs',
+        // 'redirect' => URL::to('login/google/callback'),
+        'redirect' => 'http://ec2-18-220-22-75.us-east-2.compute.amazonaws.com/login/google/callback',
+        // 'redirect' => 'http://18.220.22.75/login/google/callback',
+    ],
+
 ];

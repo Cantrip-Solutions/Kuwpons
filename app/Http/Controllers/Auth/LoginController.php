@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Route;
+use Socialite;
 class LoginController extends Controller
 {
     /*
@@ -44,5 +45,50 @@ class LoginController extends Controller
     {
         $this->performLogout($request);
         return redirect('/');
+    }
+
+    /**
+     * Redirect the user to the Facebook authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProviderFB()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return Response
+     */
+    public function handleProviderCallbackFB()
+    {
+        $user = Socialite::driver('facebook')->user();
+
+        $user->token;
+    }
+
+
+    /**
+     * Redirect the user to the Facebook authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProviderGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return Response
+     */
+    public function handleProviderCallbackGoogle()
+    {
+        $user = Socialite::driver('google')->user();
+
+        $user->token;
     }
 }

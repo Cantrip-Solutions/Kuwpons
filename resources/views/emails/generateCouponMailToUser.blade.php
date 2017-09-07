@@ -1,7 +1,9 @@
 <h1>Hi,</h1>
 <br>
-Your coupon codes =>
-
+Your purchased 
 @foreach($couponArray as $coupon)
-	{{$coupon}}<br>
+	Coupon Name: {{$coupon['productName']}},<br>
+	Company Name: {{$coupon['companyName']}},<br> 
+	Coupon Code: {{$coupon['code']}},<br>
+	Expire On: {{$coupon['expireOn']}},<br><br><br>
 @endforeach

@@ -27,6 +27,54 @@ class ProductController extends Controller
     	return view('admin.chartProduct', compact('live','products'));
     }
 
+    /*************featured coupons **************/
+
+    public function featuredCoupons()
+    {
+        $live  = array('menu'=>'35','parent'=>'3');
+        $products = Product::where('featured','<>','1')->where('isdelete','=','0')->get();
+        $featuredProducts = Product::where('featured','=','1')->where('isdelete','=','0')->get();
+        /*echo "<pre>";
+        print_r($featuredProducts);die;*/
+        return view('admin.chartFeaturedProduct', compact('live','products','featuredProducts'));
+    }
+
+
+    public function addFeaturedCoupons(){
+
+        $data=Input::except('_token','submit');
+        $pro_id=$data['featured'];
+        $featureCount=Product::where('featured','=','1')->count();
+        
+        if($featureCount < 3){
+
+            $updatefeature=Product::where('id','=',$pro_id)->update(['featured'=>'1']);
+            Session::flash('message', 'Featured Coupon Added.');
+
+        }else{
+
+            Session::flash('message', 'Featured Coupon Not Added .Maximum Featured Coupon already added.');
+
+        }
+
+        return redirect('/tab/featuredCoupons');
+    }
+
+    
+    public function deletefeaturedProduct($pro_id){
+
+        $pro_id=Crypt::decrypt($pro_id);
+        $updatefeature=Product::where('id','=',$pro_id)->update(['featured'=>'0']);
+        
+        if($updatefeature){
+            echo json_encode(array('status'=>1));
+        }else{
+            echo json_encode(array('status'=>0));
+        } 
+    }
+
+    /*************featured coupons **************/
+
     public function addProduct()
     {
     	$live  = array('menu'=>'35','parent'=>'3');
@@ -46,6 +94,7 @@ class ProductController extends Controller
         $u_id_fk          = $data['u_id_fk'];
         $cat_id_fk        = $data['cat_id_fk'];
         $original_price   = $data['original_price'];
+        $discounted_price = $data['discounted_price'];
         $saling_price     = $data['saling_price'];
         $quantity         = $data['quantity'];
         $tag              = $data['tag'];
@@ -59,6 +108,7 @@ class ProductController extends Controller
             'u_id_fk'          => 'required',
             'cat_id_fk'        => 'required',
             'original_price'   => 'required',
+            'discounted_price'   => 'required',
             'saling_price'     => 'required',
             'quantity'         => 'required',
             'tag'              => 'required',
@@ -71,6 +121,7 @@ class ProductController extends Controller
             'u_id_fk'          => $u_id_fk,
             'cat_id_fk'        => $cat_id_fk,
             'original_price'   => $original_price,
+            'discounted_price' => $discounted_price,
             'saling_price'     => $saling_price,
             'quantity'         => $quantity,
             'tag'              => $tag,
@@ -101,6 +152,7 @@ class ProductController extends Controller
                 $product->u_id_fk          = $u_id_fk;
                 $product->cat_id_fk        = $cat_id_fk;
                 $product->original_price   = $original_price;
+                $product->discounted_price   = $discounted_price;
                 $product->saling_price     = $saling_price;
                 $product->quantity         = $quantity;
                 $product->expire_on        = date("Y-m-d", strtotime($expire_on));
@@ -188,44 +240,47 @@ class ProductController extends Controller
         $data=Input::except('_token','submit');
         // print_r($data);
         // exit;
-        $pdID           = Crypt::decrypt($data['id']);
-        $name           = $data['name'];
-        $u_id_fk        = $data['u_id_fk'];
-        $cat_id_fk      = $data['cat_id_fk'];
-        $original_price = $data['original_price'];
-        $saling_price   = $data['saling_price'];
-        $quantity       = $data['quantity'];
-        $tag            = $data['tag'];
-        $expire_on      = $data['expire_on'];
-        $description    = $data['description'];
-        $shortDescription    = $data['shortDescription'];
+        $pdID             = Crypt::decrypt($data['id']);
+        $name             = $data['name'];
+        $u_id_fk          = $data['u_id_fk'];
+        $cat_id_fk        = $data['cat_id_fk'];
+        $original_price   = $data['original_price'];
+        $discounted_price = $data['discounted_price'];
+        $saling_price     = $data['saling_price'];
+        $quantity         = $data['quantity'];
+        $tag              = $data['tag'];
+        $expire_on        = $data['expire_on'];
+        $description      = $data['description'];
+        $shortDescription = $data['shortDescription'];
         
 
         $rules = array(
             // 'file' => 'required|mimes:png,gif,jpeg,jpg',
-            'name'           => 'required',
-            'u_id_fk'        => 'required',
-            'cat_id_fk'      => 'required',
-            'original_price' => 'required',
-            'saling_price'   => 'required',
-            'quantity'       => 'required',
-            'tag'            => 'required',
-            'expire_on'      => 'required',
-            'description'    => 'required',
-            'shortDescription'    => 'required'
+            'name'             => 'required',
+            'u_id_fk'          => 'required',
+            'cat_id_fk'        => 'required',
+            'original_price'   => 'required',
+            'discounted_price' => 'required',
+            'saling_price'     => 'required',
+            'quantity'         => 'required',
+            'tag'              => 'required',
+            'expire_on'        => 'required',
+            'description'      => 'required',
+            'shortDescription' => 'required'
             
         );
         $validator = Validator::make(array(
-            'name'           => $name,
-            'u_id_fk'        => $u_id_fk,
-            'cat_id_fk'      => $cat_id_fk,
-            'original_price' => $original_price,
-            'saling_price'   => $saling_price,
-            'quantity'       => $quantity,
-            'tag'            => $tag,
-            'expire_on'      => $expire_on,
-            'description'    => $description,
-            'shortDescription'    => $shortDescription
+            'name'             => $name,
+            'u_id_fk'          => $u_id_fk,
+            'cat_id_fk'        => $cat_id_fk,
+            'original_price'   => $original_price,
+            'discounted_price' => $discounted_price,
+            'saling_price'     => $saling_price,
+            'quantity'         => $quantity,
+            'tag'              => $tag,
+            'expire_on'        => $expire_on,
+            'description'      => $description,
+            'shortDescription' => $shortDescription
         ), $rules);
         if ($validator->fails()) {
 
@@ -235,16 +290,17 @@ class ProductController extends Controller
 
         } else{
             $productUpdate = Product::where('id','=',$pdID)->update([
-                'name'           => $name,
-                'u_id_fk'        => $u_id_fk,
-                'cat_id_fk'      => $cat_id_fk,
-                'original_price' => $original_price,
-                'saling_price'   => $saling_price,
-                'quantity'       => $quantity,
-                'tag'            => $tag,
-                'expire_on'      => $expire_on,
-                'description'    => $description,
-                'shortDescription'    => $shortDescription
+                'name'             => $name,
+                'u_id_fk'          => $u_id_fk,
+                'cat_id_fk'        => $cat_id_fk,
+                'original_price'   => $original_price,
+                'discounted_price' => $discounted_price,
+                'saling_price'     => $saling_price,
+                'quantity'         => $quantity,
+                'tag'              => $tag,
+                'expire_on'        => $expire_on,
+                'description'      => $description,
+                'shortDescription' => $shortDescription
             ]);
 
             if (Input::hasfile('image')) {

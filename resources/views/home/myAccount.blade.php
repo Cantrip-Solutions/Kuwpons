@@ -105,7 +105,7 @@
 	                              </div>
 	                           </div>
 	                           <div class="field-row">
-	                             <input name="" value="Register" type="submit">
+	                             <input name="" value="Save" type="submit">
 	                           </div>
 	                       </div>
 	                     </div>

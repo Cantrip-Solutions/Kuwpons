@@ -95,7 +95,7 @@
   <section class="banner-sec">
     <div class="banner-pic">
       <figure>
-        {!!HTML::image('kuwpons/images/banner-2.jpg', 'Loading...')!!}
+        {!!HTML::image('kuwpons/images/banner-2.png', 'Loading...')!!}
          <!-- <img src="images/banner-2.jpg" alt=""/>  -->
       </figure>
       <div class="banner-contain">
@@ -120,7 +120,7 @@
             </nav>
           </header-menu>
           <div class="banner-text">
-            <h4>KUW PONS is the best of the best.</h4>
+            {{-- <h4>KUW PONS is the best of the best.</h4> --}}
             <h1>#1 Coupon Deal Site In Kuwait</h1>
             @if(!\Auth::check())
             <div class="sign-button"> <a class="defaultbtn btn-green fancybox" href="#register">SIGN UP</a> </div>
@@ -193,8 +193,8 @@
            
            <div class="login-media">
                 <ul>
-                    <li><a href="#"><icon>{!!HTML::image('kuwpons/images/fb-icon.png', 'Loading...')!!}</icon><small>Facebook</small></a></li>
-                    <li><a href="#"><icon>{!!HTML::image('kuwpons/images/gplus-icon.png', 'Loading...')!!}</icon><small>Google Plus</small></a></li>
+                    <li><a href="login/facebook"><icon>{!!HTML::image('kuwpons/images/fb-icon.png', 'Loading...')!!}</icon><small>Facebook</small></a></li>
+                    <li><a href="login/google"><icon>{!!HTML::image('kuwpons/images/gplus-icon.png', 'Loading...')!!}</icon><small>Google Plus</small></a></li>
                 </ul>
            </div>
            
@@ -208,7 +208,7 @@
                         <div class="field-row"><input type="password" name="password" id="password" placeholder="Enter Password"></div>
                         <div class="field-row"><input type="password" name="re_password" placeholder="Re-Enter Password"></div>
                         <div class="field-row"><input type="text" name="phone" placeholder="Mobile Number"></div>
-                        <div class="field-row input-group date">
+                        <div class="field-row input-group date registrationDOB">
                             <input type="text" name="dob" class="form-control" placeholder="Date of Birth"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                         </div>
                         {{-- <div class="field-row"><input type="text" name="dob" placeholder="Date of Birth"></div> --}}
@@ -248,8 +248,8 @@
            
            <div class="login-media">
                 <ul>
-                    <li><a href="#"><icon>{!!HTML::image('kuwpons/images/fb-icon.png', 'Loading...')!!}</icon><small>Facebook</small></a></li>
-                    <li><a href="#"><icon>{!!HTML::image('kuwpons/images/gplus-icon.png', 'Loading...')!!}</icon><small>Google Plus</small></a></li>
+                    <li><a href="login/facebook"><icon>{!!HTML::image('kuwpons/images/fb-icon.png', 'Loading...')!!}</icon><small>Facebook</small></a></li>
+                    <li><a href="login/google"><icon>{!!HTML::image('kuwpons/images/gplus-icon.png', 'Loading...')!!}</icon><small>Google Plus</small></a></li>
                 </ul>
            </div>
            
@@ -300,7 +300,6 @@
 {!! HTML::script('plugins/jquery-validation-1.15.0/dist/additional-methods.min.js') !!}
 
 {!!HTML::script('kuwpons/js/custom.js')!!}
-{!!HTML::script('kuwpons/js/setup.js')!!}
 
 @stack('scripts')
 
@@ -344,7 +343,7 @@ $(document).ready(function(){
         });
         
         $('.fancybox').fancybox();
-        $('.input-group.date').datepicker({ 
+        $('.registrationDOB').datepicker({ 
             // setDate: new Date(),
             // startDate: new Date(),
             autoclose: true,

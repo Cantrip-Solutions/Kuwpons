@@ -12,10 +12,10 @@ class Helper
     	return round($percentOff);
     }
 
-    public static function sendSMS($phoneSMS, $couponsSMS)
+    public static function sendSMS($phoneSMS, $text)
     {
-    	$username = 'dipankar_bulksms';
-        $password = 'sumita@123';
+    	$username = 'kuwpons';
+        $password = 'test1234';
         
         $msisdn = $phoneSMS;
         /*
@@ -23,7 +23,7 @@ class Helper
         */
         $url = 'https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0';
 
-        $seven_bit_msg = "Your Coupon Codes are ".$couponsSMS;
+        $seven_bit_msg = $text;
 
         $post_body = self::seven_bit_sms( $username, $password, $seven_bit_msg, $msisdn );
         $result = self::send_message( $post_body, $url );

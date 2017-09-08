@@ -35,7 +35,9 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        $newCoupons = Product::where('isdelete', '=', '0')->orderBy('created_at')->limit(6)->get();
+        // $newCoupons = Product::where('isdelete', '=', '0')->orderBy('created_at')->limit(6)->get();
+        $newCoupons = Product::where('isdelete', '=', '0')->where('expire_on','>=',DB::raw('NOW()'))->orderBy('created_at')->limit(6)->get();
+
         /*$newCoupons=(array)$newCoupons;
         shuffle($newCoupons);
         $newCoupons=(object)$newCoupons;*/
@@ -43,7 +45,7 @@ class HomeController extends Controller
         print_r($newCoupons);die;*/
         /*$popularProduct=DB::select('SELECT `product_images`.`image` as img , `product_images`.`default_image` , temp.*  FROM (SELECT `orders`.`pro_id_fk`, sum(`orders`.`quantity`) AS total,`products`.* FROM `orders` INNER JOIN `products` ON `products`.`id` = `orders`.`pro_id_fk` WHERE `status` = "1" AND `products`.`expire_on` > NOW()  GROUP BY `pro_id_fk` ORDER BY total DESC LIMIT 3) as temp INNER JOIN `product_images` ON `product_images`.`pro_id_fk` = temp.`id` WHERE  `product_images`.`default_image` = "1"');*/
 
-        $featureProduct=Product::where('featured','=','1')->get();
+        $featureProduct=Product::where('featured','=','1')->where('expire_on','>=',DB::raw('NOW()'))->get();
 
         $categories = Category::where('id','!=','1')->get();
         //echo "<pre>"; print_r($categories);die;
@@ -54,7 +56,7 @@ class HomeController extends Controller
     {
         $catID = Crypt::decrypt($id);
         $categories = Category::where('id','!=','1')->get();
-        $products = Product::where('cat_id_fk','=',$catID)->where('isdelete','=','0')->get();
+        $products = Product::where('cat_id_fk','=',$catID)->where('expire_on','>=',DB::raw('NOW()'))->where('isdelete','=','0')->get();
         return view('home.searchCategory',compact('name','catID','categories','products'));
     }
     public function couponDetails($name, $id)
@@ -62,13 +64,13 @@ class HomeController extends Controller
         $pdID = Crypt::decrypt($id);
         $productDetails = Product::find($pdID);
         $catID=$productDetails->cat_id_fk;
-        $relatedProducts = Product::where('cat_id_fk','=',$catID)->where('id','<>',$pdID)->where('isdelete','=','0')->limit(4)->inRandomOrder()->get();
+        $relatedProducts = Product::where('cat_id_fk','=',$catID)->where('expire_on','>=',DB::raw('NOW()'))->where('id','<>',$pdID)->where('isdelete','=','0')->limit(4)->inRandomOrder()->get();
         return view('home.couponDetails',compact('productDetails','relatedProducts'));
     }
     public function searchProduct(Request $req)
     {
         $reqSearch = $req->searchItem;
-        $searchedProducts = Product::where('name', 'like', '%' . $reqSearch . '%')
+        $searchedProducts = Product::where('expire_on','>=',DB::raw('NOW()'))->where('name', 'like', '%' . $reqSearch . '%')
                 ->orWhere('tag', 'like', '%' . $reqSearch . '%')
                 ->get();
         $categories = Category::where('id','!=','1')->get();

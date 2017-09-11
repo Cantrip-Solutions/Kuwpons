@@ -35,14 +35,11 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        // $newCoupons = Product::where('isdelete', '=', '0')->orderBy('created_at')->limit(6)->get();
-        $newCoupons = Product::where('isdelete', '=', '0')->where('expire_on','>=',DB::raw('NOW()'))->orderBy('created_at')->limit(6)->get();
+        $newCouponsSorted = Product::where('isdelete', '=', '0')->where('expire_on','>=',DB::raw('NOW()'))->orderBy('created_at')->limit(6)->get();
 
-        /*$newCoupons=(array)$newCoupons;
-        shuffle($newCoupons);
-        $newCoupons=(object)$newCoupons;*/
-       /* echo "<pre>";
-        print_r($newCoupons);die;*/
+
+        $newCoupons = $newCouponsSorted->shuffle();
+
         /*$popularProduct=DB::select('SELECT `product_images`.`image` as img , `product_images`.`default_image` , temp.*  FROM (SELECT `orders`.`pro_id_fk`, sum(`orders`.`quantity`) AS total,`products`.* FROM `orders` INNER JOIN `products` ON `products`.`id` = `orders`.`pro_id_fk` WHERE `status` = "1" AND `products`.`expire_on` > NOW()  GROUP BY `pro_id_fk` ORDER BY total DESC LIMIT 3) as temp INNER JOIN `product_images` ON `product_images`.`pro_id_fk` = temp.`id` WHERE  `product_images`.`default_image` = "1"');*/
 
         $featureProduct=Product::where('featured','=','1')->where('expire_on','>=',DB::raw('NOW()'))->get();
